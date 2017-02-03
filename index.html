@@ -5,11 +5,38 @@
     <meta charset="UTF-8">
     <title>Testing getUserMedia</title>
 
-<style>
+    <style>
 
-    #video{
-        width:720px;
-        height: 360px;
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main{
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+    }
+
+    article{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    video{
+
+        width:640px;
+        height: 320px;
+    
+    }
+
+    #recBu{
+    
+        background-color: red;
+        color:white;
+    
     }
 
 
@@ -19,63 +46,27 @@
 
 <body>
     <h1>Getting user's webcam content</h1>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    <script src="wRecorder.js" type="text/javascript"></script>
+    <main>
+        <article id="camera">
+            <h1>Live Media</h1>
+            <video id="video">The stream is not ready</video>
+            <section class="buttons">
+                <button id="vidBu">Start/Stop</button>
+                <button id="recBu">Stop Recording</button>
+            </section>
 
-            const player = document.querySelector('#video');
-            const vidBu = document.querySelector('#vidBu');
+        </article>
+        <article>
+            <h1>Recorded Footage</h1>
+            <video id="record">
 
-            //Simple control button
-            vidBu.addEventListener('click',function(){togglePlayer(player);});
-
-            //This promise, give us back the avaible Media Generating devices avaible on the user device.
-            var uMediaDevices = navigator.mediaDevices.enumerateDevices();
-            console.log(uMediaDevices);
-           
-            //The getUserMedia is a promise, if it goes forward, we'll get a MediaStream object.
-            navigator.mediaDevices.getUserMedia({
-                //Just asking wich type of media I'm requiering to the user.
-                audio: true,
-                video: { //Video may take several properties:
-                    width: { ideal: 1920, min: 1280, max:1920 },
-                    height: { ideal: 1080, min: 720, max:1080 }
-                }
-            })
-                .then(function (stream) {
-                    //If the promise is succesful i'll display the stream on the user browser
-                    player.srcObject = stream;
-                    player.play();
-                })
-                .catch(function (error) {
-                    //If not, i'll cry ashamed
-                    console.error('Crap! ' + error);
-                });
-
-        });
-
-        function togglePlayer(p){
-
-            console.log('togglePlayer');
-
-            if(p.paused == true){
-
-                console.log('not playing');
-                p.play();
-            }else{
-                console.log('playing');
-                console.log(p.currentTime);
-                p.pause();
-            }
-
-        }
-
-    </script>
-
-<article id="camera">
-    <video id="video">The stream is not ready</video>
-    <button id="vidBu">Start/Stop</button>
-</article>
-
+            </video>
+            <section class="buttons">
+                <a id="dwnBu">Download</a>
+            </section>
+        </article>
+    </main>
 </body>
 
 </html>
