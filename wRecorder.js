@@ -1,9 +1,9 @@
-//DOS PROBLEMES: NO ES VEU EN FIREFOX, NO RECONEIX EL CAPTURESTREAM.
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
     //Getting DOM elements;
+    const main = document.querySelector('#wrapper');
+    const preview = document.querySelector('#camera');
     const player = document.querySelector('#video');
     const record = document.querySelector('#record');
     const vidBu = document.querySelector('#vidBu');
@@ -13,8 +13,17 @@ document.addEventListener('DOMContentLoaded', function () {
     //Some button listeners
     vidBu.addEventListener('click', function () { togglePlayer(player); });
 
+    //Will store all avaible media devies
+    const mediaSources = [];
+
     //This promise, give us back the avaible Media Generating devices avaible on the user device.
-    const uMediaDevices = navigator.mediaDevices.enumerateDevices();
+    const uMediaDevices = navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+            devices.forEach(function (s) {
+                mediaSources.push(s);
+            }, this);
+            console.log(mediaSources);
+        });
     console.log(uMediaDevices);
 
     //The getUserMedia is a promise, if it's succesful, we'll get a MediaStream object.
@@ -35,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
             //If the promise is acomplished i'll display the stream on the user browser
             player.srcObject = stream;
             player.play();
+            player.muted;
+
             //Saving user generated stream into MediaRecorder
             recordVid(stream);
 
@@ -46,66 +57,74 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 
-    
- //   recBu.addEventListener('click', function () { stop(player.srcObject) });
 
-});
-
-//This function puts a video stream into a file (a Blob, actually)
-function recordVid(stream) {
-
-    //A MediaRecorder Object records media streams.
-    const mr = new MediaRecorder(stream,{mimeType:'video/webm'});
-
-    //This array will safe the media stream in chunks
-    const data = [];
-
-    //Start recording
-    mr.start();
-
-    //Adding a listener to the MR that saves media chunks into data Array
-    mr.addEventListener('dataavailable', function (e) {
-        console.log('saving video');
-        data.push(e.data);
-
-    });
+    //   recBu.addEventListener('click', function () { stop(player.srcObject) });
 
 
-    //Listening the toggle recording video that will toggle the recording state
-    recBu.addEventListener('click', function () {
+    //This function puts a video stream into a file (a Blob, actually)
+    function recordVid(stream) {
 
-        console.log(mr.state);
-        mr.stop();
-        toFile(data);
-        console.log(mr.state);
-    });
+        //A MediaRecorder Object records media streams.
+        const mr = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
-}
+        //This array will safe the media stream in chunks
+        const data = [];
+
+        //Start recording
+        mr.start();
+
+        //Adding a listener to the MR that saves media chunks into data Array
+        mr.addEventListener('dataavailable', function (e) {
+
+            console.log('saving video');
+            data.push(e.data);
+
+        });
 
 
-//This function toggles the player state play/pause
-function togglePlayer(p) {
+        //Listening the toggle recording video that will toggle the recording state
+        recBu.addEventListener('click', function () {
 
-    if (p.paused == true) {
+            console.log(mr.state);
+            mr.stop();
 
-        p.play();
-
-    } else {
-
-        p.pause();
+            //This removes the preview section. Just trying, this is not supposed to be done here.
+            main.removeChild(preview);
+            toFile(data);
+            console.log(mr.state);
+        });
 
     }
 
-}
+
+    //This function toggles the player state play/pause
+    function togglePlayer(p) {
+
+        if (p.paused == true) {
+
+            p.play();
+
+        } else {
+
+            p.pause();
+
+        }
+
+    }
 
 
 
-//Turns a Blob into a video file
-function toFile(b) {
+    //Turns a Blob into a video file
+    function toFile(b) {
 
-    const blob = new Blob(b, { type: 'video/webm' });
-    const obj = URL.createObjectURL(blob);
-    dwnBu.href = obj;
-    dwnBu.download = "test.webm";
+        const blob = new Blob(b, { type: 'video/webm' });
+        const obj = URL.createObjectURL(blob);
+        record.src = obj;
+        dwnBu.href = obj;
+        dwnBu.download = "clip.webm";
 
-}
+    }
+
+
+});
+
