@@ -2,8 +2,10 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     //Getting DOM elements;
-    const main = document.querySelector('#wrapper');
-    const preview = document.querySelector('#camera');
+    const main = document.querySelector('#main');
+    const preview = document.querySelector('#preview');
+    const review = document.querySelector("#review");
+    const question = document.querySelector('#question');
     const player = document.querySelector('#video');
     const record = document.querySelector('#record');
     const vidBu = document.querySelector('#vidBu');
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, this);
             console.log(mediaSources);
         });
+
     console.log(uMediaDevices);
 
     //The getUserMedia is a promise, if it's succesful, we'll get a MediaStream object.
@@ -57,10 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 
-
-    //   recBu.addEventListener('click', function () { stop(player.srcObject) });
-
-
     //This function puts a video stream into a file (a Blob, actually)
     function recordVid(stream) {
 
@@ -90,8 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //This removes the preview section. Just trying, this is not supposed to be done here.
             main.removeChild(preview);
+            review.classList.toggle('invisible');
             toFile(data);
             console.log(mr.state);
+
         });
 
     }
@@ -111,8 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
     }
-
-
 
     //Turns a Blob into a video file
     function toFile(b) {

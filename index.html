@@ -4,62 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Testing getUserMedia</title>
-
-    <style>
-
-    body{
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    main{
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        
-    }
-
-    article{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    video{
-
-        width:640px;
-        height: 320px;
-    
-    }
-
-    #recBu{
-    
-        background-color: red;
-        color:white;
-    
-    }
-
-    #dwnBu{
-        text-decoration: none;
-        background-color: green;
-        color: white;
-        width: 100%;
-        text-align: center;
-        line-height: 2em;
-        padding: 0.2em 2em;
-        border-radius: 3px;
-               
-    }
-
-</style>
+    <link rel="stylesheet" href="./estil.css"/>
+ 
 
 </head>
 
 <body>
     <h1>Getting user's webcam content</h1>
     <script src="wRecorder.js" type="text/javascript"></script>
-    <main id="wrapper">
-        <article id="camera">
+    <main id="main">
+        <article id="preview">
             <h1>Live Media</h1>
             <video id="video">The stream is not ready</video>
             <section class="buttons">
@@ -68,7 +22,12 @@
             </section>
 
         </article>
-        <article>
+        <article id="question">
+            <h2>Question #</h2>
+            <h1>What are ninjas to you?</h1>
+            <p>timmer</p>
+        </article>
+        <article id="review" class="invisible">
             <h1>Recorded Footage</h1>
             <video id="record" controls>
 
