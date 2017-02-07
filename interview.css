@@ -19,9 +19,10 @@ body{
     article{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         width: 50%;
         margin-left: 1em;
+        margin-right: 1em;
     }
 
     video{
@@ -29,6 +30,12 @@ body{
         width:640px;
         height: 320px;
     
+    }
+
+    footer{
+        position: absolute;
+        bottom:0px;
+        font-size: 0.8em;
     }
 
     #recBu{
@@ -52,4 +59,24 @@ body{
 
     .invisible{
         display: none;
+    }
+
+    .question_tittle{
+        font-size: 0.8em;
+        position: relative;
+        margin-top:0px;
+    }
+
+    .question_type{
+        color:green;
+    }
+
+    .timmer{
+        background-color: black;
+        color:white;
+        line-height: 2em;
+        padding:0.2em 2em;
+        text-align: center;
+        width: 50%;
+        margin-bottom: 0px;
     }
