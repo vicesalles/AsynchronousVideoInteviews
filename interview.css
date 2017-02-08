@@ -25,6 +25,10 @@ body{
         margin-right: 1em;
     }
 
+    #question{
+        justify-content: flex-start;
+    }
+
     video{
 
         width:640px;
@@ -38,10 +42,20 @@ body{
         font-size: 0.8em;
     }
 
+    .buttons{
+        padding-top: 0.2em;
+    }
+
     #recBu{
-    
+        border:none;
         background-color: red;
         color:white;
+        width: 100%;
+        text-align: center;
+        line-height: 2em;
+        padding: 0.2em 2em;
+        border-radius: 3px;
+        cursor:pointer;
     
     }
 
@@ -54,6 +68,7 @@ body{
         line-height: 2em;
         padding: 0.2em 2em;
         border-radius: 3px;
+        cursor: pointer;
                
     }
 
@@ -71,6 +86,10 @@ body{
         color:green;
     }
 
+    #questions li{
+        list-style: none;
+    }
+
     .timmer{
         background-color: black;
         color:white;
@@ -79,4 +98,26 @@ body{
         text-align: center;
         width: 50%;
         margin-bottom: 0px;
+    }
+
+    #nextQuestion{
+        border:none;
+        background-color: green;
+        color:white;
+        cursor:pointer;
+        text-align: center;
+        line-height: 2em;
+        padding: 0.2em 2em;
+        border-radius: 3px;
+    }
+    #skipQuestion{
+        border:none;
+        background-color: red;
+        color:white;
+        width: 100%;
+        text-align: center;
+        line-height: 2em;
+        padding: 0.2em 2em;
+        border-radius: 3px;
+        cursor:pointer;
     }

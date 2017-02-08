@@ -1,3 +1,4 @@
+//FIREFOX RECORDING IS BROKEN el blob que es genera pesa 0kb. No s'està generant correctament....
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -6,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const preview = document.querySelector('#preview');
     const review = document.querySelector("#review");
     const question = document.querySelector('#question');
+    const nextQuestion = document.querySelector('#nextQuestion');
     const player = document.querySelector('#video');
     const record = document.querySelector('#record');
     const vidBu = document.querySelector('#vidBu');
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Some button listeners
     vidBu.addEventListener('click', function () { togglePlayer(player); });
-
+    nextQuestion.addEventListener('click',function(){confirm('Do you want skip the current question?')});
     //Will store all avaible media devies
     const mediaSources = [];
 
@@ -64,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function recordVid(stream) {
 
         //A MediaRecorder Object records media streams.
-        const mr = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        const mr = new MediaRecorder(stream, { mimeType: 'video/webm', bitsPerSecond:128000});
+        //bitrate may be passed , bitsPerSecond: 128000 is maximum value avaible 
 
         //This array will safe the media stream in chunks
         const data = [];
@@ -116,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Turns a Blob into a video file
     function toFile(b) {
 
-        const blob = new Blob(b, { type: 'video/webm' });
+        const blob = new Blob(b, { type: 'video/webm; codecs="vp9"' });
         const obj = URL.createObjectURL(blob);
         record.src = obj;
         dwnBu.href = obj;

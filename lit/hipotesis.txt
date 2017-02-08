@@ -1,0 +1,27 @@
+-Programadors JS arreu del món: Una realitat global?
+
+Entrevistar programadors d'arreu del món explicant la seva realitat laboral/quotidiana.
+
+Introduce yourself: Name, current living place and occupation.
+
+Origins: 
+Where you grew up? Tell us a bit about you childhood environment.
+Who you were at high school? (Rockstar, geek, heart-breaker, nerd, random-guy, sports hero)
+When where and why did you code for first time?
+Do you remember your first web site? Tell us about it. It is still online? Can you provide us an url?
+
+Formation:
+Tell us about your academical formation... Which studies did you had and where...
+What do you think about official education (degrees universities phds....)
+Currently, you study by yourself or you are joining study groups or online courses/academies?
+
+Job:
+Your current job: self-employee, owner, employed... and your responsabilities
+Do you have an schedule? Can you stick to it?
+How many hours do you work on an average week?
+Do your company provide you medical insurance?
+Does your company fund your continuous formation?
+Which was the last course/event your company paid for you?
+
+Last one:
+which should be the title for a documentary about JS developers around the World?
