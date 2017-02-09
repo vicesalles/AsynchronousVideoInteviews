@@ -10,7 +10,8 @@ body{
         width: 100%;
         flex-direction: row;
         justify-content: space-around;
-
+        height: 80vh;
+        background-color: paleturquoise;
         margin-top: 0px;
         margin-left: 0px;
         
@@ -26,8 +27,8 @@ body{
     }
 
     #question{
-        justify-content: flex-start;
-    }
+        justify-content:space-around
+            }
 
     video{
 
@@ -50,7 +51,7 @@ body{
         border:none;
         background-color: red;
         color:white;
-        width: 100%;
+       /* width: 100%;*/
         text-align: center;
         line-height: 2em;
         padding: 0.2em 2em;
@@ -114,7 +115,6 @@ body{
         border:none;
         background-color: red;
         color:white;
-        width: 100%;
         text-align: center;
         line-height: 2em;
         padding: 0.2em 2em;
