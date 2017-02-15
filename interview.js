@@ -1,3 +1,4 @@
+//I need to define frames per second somewhere (!important)
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const record = document.querySelector('#record');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
+    const volumeView = document.querySelector('#volumeView');
 
     //Some button listeners
     skipQuestion.addEventListener('click', function () { confirm('Do you want skip the current question?') });
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     console.log(uMediaDevices);
-    
+
     //Getting Media Devices supported constrains
     const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
     console.log(mdConstraints);
@@ -62,6 +64,10 @@ document.addEventListener('DOMContentLoaded', function () {
             player.play();
             player.muted = true; //Avoiding the audio feedback is the reason why
 
+            //Getting Timecode
+            player.addEventListener('timeupdate', function () {
+                // console.log(player.currentTime);
+            });
 
             //Saving user generated stream into MediaRecorder
             recordVid(stream);
@@ -77,8 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
     //This function puts a video stream into a file (a Blob, actually)
     function recordVid(stream) {
 
+
+
         //A MediaRecorder Object records media streams.
         const mr = new MediaRecorder(stream, { mimeType: 'video/webm', videoBitsPerSecond: 2500000, audioBitsPerSecond: 128000 });
+
+        //Getting audio signal
+        getAudio(stream);
 
         //This array will safe the media stream in chunks
         const data = [];
@@ -97,11 +108,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Listening the toggle recording video that will toggle the recording state
         recBu.addEventListener('click', function () {
-            
+
             //Stopping the media recorder;
             mr.stop();
             //This removes the preview section. Just trying, this is not supposed to be done here.
-            main.removeChild(preview);            
+            main.removeChild(preview);
             //Saving media Blob into file for up/downloading
             toFile(data);
             //Updating UI state
@@ -125,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Skip to next 
-    function questionControlToggle(){
+    function questionControlToggle() {
 
         skipQuestion.classList.toggle('invisible');
         nextQuestion.classList.toggle('invisible');
@@ -133,6 +144,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
+    //Audio signal analizer
+    function getAudio(stream) {
+
+        //Getting audio channel info
+        const audioTrack = stream.getAudioTracks()[0];
+        console.log(audioTrack);
+
+        //Creating audio context
+        const context = new AudioContext();
+
+        //Adding stream to the Audio Context
+        const audio = context.createMediaStreamSource(stream);
+
+        //Creating an Analyzer node.
+        const analyzer = context.createAnalyser();
+        //Setting up the Analyzer
+        analyzer.fftSize = 1024;
+        analyzer.smoothingTimeConstant = 0.3;
+        //Setting up processor node
+        const node = context.createScriptProcessor(2048, 1, 1);
+        //Listener 
+        node.onaudioprocess = function () {
+            
+            let chunks = new Uint8Array(analyzer.frequencyBinCount);
+            analyzer.getByteFrequencyData(chunks);            
+            updateVolumeView(Math.floor(Math.average(chunks)));
+        };
+
+        //Plugging elements among them
+
+        audio.connect(analyzer);
+        audio.connect(context.destination);
+        node.connect(context.destination);
+        analyzer.connect(node);
+
+        //Math.average method
+        Math.average = function (array) {
+
+            var average = 0;
+            var total = 0;
+
+            for (i = 0; i < array.length; i++) {
+
+                total += array[i];
+
+            }
+
+            average = total / array.length;
+            return average;
+
+        }
+
+    }
+
+    //Updates Volume View
+    function updateVolumeView(vol) {
+        volumeView.innerHTML = vol;
+    }
 
 });
 
