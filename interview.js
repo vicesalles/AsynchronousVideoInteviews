@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
     //Getting positon.
     navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
 
+    //Creating audio context (VUmeter will use this for monitoring audio)
+    const context = new AudioContext();
+
     //Will store all avaible media devices
     const mediaSources = [];
 
@@ -111,6 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //Stopping the media recorder;
             mr.stop();
+
+            //Closing audio Context
+            context.close();            
+
             //This removes the preview section. Just trying, this is not supposed to be done here.
             main.removeChild(preview);
             //Saving media Blob into file for up/downloading
@@ -143,6 +150,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     }
+    
+//---------------------------------- VUMETER here until react version ------------------------------------------//    
 
     //Audio signal analizer
     function getAudio(stream) {
@@ -150,9 +159,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //Getting audio channel info
         const audioTrack = stream.getAudioTracks()[0];
         console.log(audioTrack);
-
-        //Creating audio context
-        const context = new AudioContext();
 
         //Adding stream to the Audio Context
         const audio = context.createMediaStreamSource(stream);
@@ -170,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let chunks = new Uint8Array(analyzer.frequencyBinCount);
             analyzer.getByteFrequencyData(chunks);            
             updateVolumeView(Math.floor(Math.average(chunks)));
+            
         };
 
         //Plugging elements among them

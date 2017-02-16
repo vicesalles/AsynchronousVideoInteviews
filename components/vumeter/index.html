@@ -1,0 +1,62 @@
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VUMETER UI</title>
+    <style>
+        #vumeter {
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 2em;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const canvas = document.querySelector('#vumeter');
+            const context = canvas.getContext("2d");
+            const cHg = canvas.height;
+            const cWd = canvas.width;
+
+            wd = setWidth(cWd, 50);
+
+            context.beginPath();
+            context.lineWidth = "1";
+            context.strokeStyle = "green";
+            context.fillStyle = "green";
+            context.fillRect(0, 1, wd, cHg);
+
+            function setWidth(cWd, pcent) {
+
+                let wd = Math.floor(cWd * pcent / 100);
+                return wd;
+
+            }
+
+            function clearBar(){
+              context.clearRect(0,1,cWd,cHg);
+            }
+
+
+            function updateBar(pct){
+                clearBar();
+                let wd = setWidth(cWd, pct);
+                context.fillRect(0, 1, wd, cHg);
+            }
+
+        });
+    </script>
+
+    <canvas id="vumeter"></canvas>
+
+
+
+</body>
+
+</html>
