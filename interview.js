@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const record = document.querySelector('#record');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
-    const volumeView = document.querySelector('#volumeView');
+    //const volumeView = document.querySelector('#volumeView');
 
     //Some button listeners
     skipQuestion.addEventListener('click', function () { confirm('Do you want skip the current question?') });
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
 
     //Creating audio context (VUmeter will use this for monitoring audio)
-    const context = new AudioContext();
+    const audioContext = new AudioContext();
 
     //Will store all avaible media devices
     const mediaSources = [];
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mr.stop();
 
             //Closing audio Context
-            context.close();            
+            audioContext.close();            
 
             //This removes the preview section. Just trying, this is not supposed to be done here.
             main.removeChild(preview);
@@ -161,29 +161,29 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(audioTrack);
 
         //Adding stream to the Audio Context
-        const audio = context.createMediaStreamSource(stream);
+        const audio = audioContext.createMediaStreamSource(stream);
 
         //Creating an Analyzer node.
-        const analyzer = context.createAnalyser();
+        const analyzer = audioContext.createAnalyser();
         //Setting up the Analyzer
         analyzer.fftSize = 1024;
         analyzer.smoothingTimeConstant = 0.3;
         //Setting up processor node
-        const node = context.createScriptProcessor(2048, 1, 1);
+        const node = audioContext.createScriptProcessor(2048, 1, 1);
         //Listener 
         node.onaudioprocess = function () {
             
             let chunks = new Uint8Array(analyzer.frequencyBinCount);
             analyzer.getByteFrequencyData(chunks);            
             updateVolumeView(Math.floor(Math.average(chunks)));
-            
+
         };
 
         //Plugging elements among them
 
         audio.connect(analyzer);
-        audio.connect(context.destination);
-        node.connect(context.destination);
+        audio.connect(audioContext.destination);
+        node.connect(audioContext.destination);
         analyzer.connect(node);
 
         //Math.average method
@@ -207,8 +207,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Updates Volume View
     function updateVolumeView(vol) {
-        volumeView.innerHTML = vol;
+        updateBar(vol);
     }
+
+
+    ///////////VUMETER UI//////////////////////
+            const vumeter = document.querySelector('#vumeter');
+            const context = vumeter.getContext("2d");
+            const cHg = vumeter.height;
+            const cWd = vumeter.width;
+
+            wd = setWidth(cWd, 50);
+
+            context.beginPath();
+            context.lineWidth = "1";
+            context.strokeStyle = "green";
+            context.fillStyle = "green";
+            context.fillRect(0, 1, wd, cHg);
+
+            function setWidth(cWd, pcent) {
+
+                let wd = Math.floor(cWd * pcent / 100);
+                return wd;
+
+            }
+
+            function clearBar(){
+              context.clearRect(0,1,cWd,cHg);
+            }
+
+
+            function updateBar(pct){
+                clearBar();
+                let wd = setWidth(cWd, pct);
+                context.fillRect(0, 1, wd, cHg);
+            }
+  
 
 });
 
