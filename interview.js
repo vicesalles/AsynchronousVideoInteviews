@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const record = document.querySelector('#record');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
-    //const volumeView = document.querySelector('#volumeView');
-
+    
     //Some button listeners
     skipQuestion.addEventListener('click', function () { confirm('Do you want skip the current question?') });
 
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(navigator.appVersion);
 
     //Getting positon.
-    navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
+    //navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
 
     //Creating audio context (VUmeter will use this for monitoring audio)
     const audioContext = new AudioContext();
@@ -244,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearBar();
         
         //Mark peaking
+        
         if (pct >= 90) {
             let wd = setWidth(cWd, pct);
             context.fillStyle = "red";

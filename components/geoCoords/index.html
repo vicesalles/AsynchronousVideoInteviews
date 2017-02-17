@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8";>
+    <title>GeoCords</title>
+</head>
+
+<body>
+
+<section id="myCoords"></section>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        const myCoords = document.querySelector('#myCoords');
+        navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
+    });
+</script>
+
+</body>
+
+    </html>

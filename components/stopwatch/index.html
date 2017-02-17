@@ -5,43 +5,56 @@
     <meta charset="UTF-8">
     <title>Stopwatch</title>
     <style>
-    #display{
-        background-color: #000;
-        color:#fff;
-        letter-spacing: 0.7em;
-        font-family: monospace;
-        font-size: 2.2em;
-        padding: 0.2em 2em 0.2em 2em;
-        text-align: center;
-    }
+        body {
+            font-family: monospace;
+        }
+        
+        #display {
+            background-color: #000;
+            color: #fff;
+            letter-spacing: 0.7em;
+            font-family: monospace;
+            font-size: 2.2em;
+            padding: 0.2em 2em 0.2em 2em;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     <article id="display"></article>
+    <a id="markBu" href="#">MARK</a>
     <a id="stopBu" href="#">STOP</a>
-    <script type="text/javascript">
+    <ul id="marksView">
 
+    </ul>
+    <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
 
             var time = 0;
             var stopwatch;
 
+            const markBu = document.querySelector('#markBu');
             const stopBu = document.querySelector('#stopBu');
+            const marksView = document.querySelector('#marksView');
 
-            stopBu.addEventListener('click',function(){stop();});
+            markBu.addEventListener('click', function () {
+                addTM('Marcar', time);
+            });
+            stopBu.addEventListener('click', function () { stop(); });
+
 
             start();
 
-            function start(){
-              stopwatch =  window.setInterval(function(){
+            function start() {
+                stopwatch = window.setInterval(function () {
                     //console.log('time: '+time);
                     time += 100;
                     updateDisplay(formatTime(time));
-                },100);
+                }, 100);
             }
 
-            function stop(){
+            function stop() {
                 console.log(time);
                 window.clearInterval(stopwatch);
             }
@@ -61,17 +74,33 @@
                 s = Math.floor(s % 3600);
                 let m = Math.floor(s / 60);
                 s = Math.floor(s % 60);
-                
-                console.log('f:'+f);
+
+                h = dummyZero(h);
+                m = dummyZero(m);
+                s = dummyZero(s);
+                f = dummyZero(f);
 
                 return "" + h + ":" + m + ":" + s + "." + f;
             }
 
+            //Adds a zero when number has 1 figure
+            function dummyZero(n) {
+                let nn = "" + n;
+                if (nn.length == 1) {
+                    nn = "0" + n;
+                }
+                return nn;
+            }
+
             //Time marks
+            //Here i'll save the timeMarks
+            const timeMarks = [];
 
             //Create timeMark
-            function addTM (description,currentTime){
-                
+            function addTM(description, currentTime) {
+                let a = new TimeMark(description, formatTime(currentTime));
+                timeMarks.push(a);
+                printTMs();
             }
 
             //This is a timeMark
@@ -82,12 +111,17 @@
                 this.tmp = tmp;
             }
 
-            //Here i'll save the timeMarks
-            const timeMarks = [];
-
             //Adding a TimeMark
             function addTimeMark(tm) {
                 timeMarks.push(tm);
+            }
+
+            //Showing TimeMarks 
+            function printTMs() {
+                marksView.innerHTML = "";
+                for (let i = 0; i < timeMarks.length; i++) {
+                    marksView.innerHTML += "<li>" + timeMarks[i].des + ": " + timeMarks[i].tmp + "</li>";
+                }
             }
 
             //Updating DOM
@@ -98,7 +132,6 @@
             }
 
         });
-
     </script>
 </body>
 
