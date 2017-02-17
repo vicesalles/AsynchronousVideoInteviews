@@ -13,8 +13,7 @@ body{
         justify-content: space-around;
         background-color: paleturquoise;
         margin-top: 0px;
-        margin-left: 0px;
-        
+        margin-left: 0px;        
     }
 
     article{
@@ -53,7 +52,7 @@ body{
     footer{
         position: absolute;
         bottom:0px;
-        font-size: 1.8em;
+        font-size: 1.2em;
         padding: 0 0 0.2em 0.2em;
     }
 
@@ -98,6 +97,11 @@ body{
 
     .question_type{
         color:green;
+    }
+
+    #questions{
+        padding-left: 0.5em;
+        padding-right: 0.5em;        
     }
 
     #questions li{

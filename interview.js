@@ -41,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(mediaSources);
         });
 
-    console.log(uMediaDevices);
+    //console.log(uMediaDevices);
 
     //Getting Media Devices supported constrains
     const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
-    console.log(mdConstraints);
+    //console.log(mdConstraints);
 
     //The getUserMedia is a promise, if it's succesful, we'll get a MediaStream object.
     navigator.mediaDevices.getUserMedia({
@@ -115,8 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
             //Stopping the media recorder;
             mr.stop();
 
+            //Stoping stream (not sure if works or if I need to stop its tracks)
+            stream.stop();
+
             //Closing audio Context
-            audioContext.close();            
+            audioContext.close();
 
             //This removes the preview section. Just trying, this is not supposed to be done here.
             main.removeChild(preview);
@@ -150,8 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     }
-    
-//---------------------------------- VUMETER here until react version ------------------------------------------//    
+
+    //---------------------------------- VUMETER here until react version ------------------------------------------//    
 
     //Audio signal analizer
     function getAudio(stream) {
@@ -172,9 +175,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const node = audioContext.createScriptProcessor(2048, 1, 1);
         //Listener 
         node.onaudioprocess = function () {
-            
+
             let chunks = new Uint8Array(analyzer.frequencyBinCount);
-            analyzer.getByteFrequencyData(chunks);            
+            analyzer.getByteFrequencyData(chunks);
             updateVolumeView(Math.floor(Math.average(chunks)));
 
         };
@@ -212,37 +215,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     ///////////VUMETER UI//////////////////////
-            const vumeter = document.querySelector('#vumeter');
-            const context = vumeter.getContext("2d");
-            const cHg = vumeter.height;
-            const cWd = vumeter.width;
+    const vumeter = document.querySelector('#vumeter');
+    const context = vumeter.getContext("2d");
+    const cHg = vumeter.height;
+    const cWd = vumeter.width;
 
-            wd = setWidth(cWd, 50);
+    wd = setWidth(cWd, 50);
 
-            context.beginPath();
-            context.lineWidth = "1";
-            context.strokeStyle = "green";
+    context.beginPath();
+    context.lineWidth = "1";
+    context.strokeStyle = "green";
+    context.fillStyle = "green";
+    context.fillRect(0, 1, wd, cHg);
+
+    function setWidth(cWd, pcent) {
+
+        let wd = Math.floor(cWd * pcent / 100);
+        return wd;
+
+    }
+
+    function clearBar() {
+        context.clearRect(0, 1, cWd, cHg);
+    }
+
+
+    function updateBar(pct) {
+        clearBar();
+        
+        //Mark peaking
+        if (pct >= 90) {
+            let wd = setWidth(cWd, pct);
+            context.fillStyle = "red";
+            context.fillRect(0, 0, wd, cHg);
+        } else {
             context.fillStyle = "green";
-            context.fillRect(0, 1, wd, cHg);
+            let wd = setWidth(cWd, pct);
+            context.fillRect(0, 0, wd, cHg);
+        }
 
-            function setWidth(cWd, pcent) {
+    }
 
-                let wd = Math.floor(cWd * pcent / 100);
-                return wd;
-
-            }
-
-            function clearBar(){
-              context.clearRect(0,1,cWd,cHg);
-            }
-
-
-            function updateBar(pct){
-                clearBar();
-                let wd = setWidth(cWd, pct);
-                context.fillRect(0, 1, wd, cHg);
-            }
-  
 
 });
 
