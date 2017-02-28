@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Checking my browser</title>
+    <style>
+        body {
+            font-family: monospace;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        li {
+            padding: 0.4em 1em 0.4em;
+        }
+        
+        li:nth-child(even) {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            //DOM
+            const navigatorList = document.querySelector('#navigatorList');
+            const batteryList = document.querySelector("#batteryList");
+
+            //Information provided by the navigator interface
+            //Navigator properties
+            const navigatorProperties = {
+                'appCodeName': navigator.appCodeName,
+                'appName': navigator.appName,
+                'appVersion': navigator.appVersion,
+                'connection': navigator.connection,
+                'language': navigator.language,
+                'languages': navigator.languages,
+                'OS': navigator.oscpu,
+                'onLine': navigator.onLine,
+                'platform': navigator.platform,
+                'plugins': navigator.plugins,
+                'product': navigator.product,
+                'productSub': navigator.productSub,
+                'userAgent': navigator.userAgent,
+                'vendor': navigator.vendor,
+                'vendorSub': navigator.vendorSub,
+                'webdriver': navigator.webdriver
+            }
+
+
+            //Battery
+            navigator.getBattery().then(function (b) {
+                populate(batteryList, b);
+            });
+
+
+            //This function populates an ul with li's comming from an array
+            function populate(target, values) {
+
+                for (key in values) {
+
+                    if (!isPrintable(values[key])) {
+
+                    } else {
+
+                        if (values[key] instanceof Object) {
+
+                            target.innerHTML += "<li><b>" + key + "</b>: " + values[key].length + "</li>";
+
+                        } else if (values[key] instanceof Array) {
+
+
+                        }
+
+                        else {
+
+                            target.innerHTML += "<li><b>" + key + "</b>: " + values[key] + "</li>";
+
+                        }
+                    }
+
+                }
+            }
+
+            //Checks if a given property is elegible for being printend
+            function isPrintable(k) {
+
+                var printable = true;
+                const noPrint = [undefined, null, "", addEventListener, removeEventListener, dispatchEvent, Infinity];
+
+                noPrint.forEach(function (np) {
+
+                    if (np === k) {
+                        printable = false;
+                    }
+
+                });
+
+                return printable;
+            }
+
+            populate(navigatorList, navigatorProperties);
+
+            //This function returns user browser
+            function getUserBrowser() {
+                const ua = navigator.userAgent;
+                const isFirefox = ua.match('Firefox');
+                const isChrome = ua.match('Chrome');
+                if (isFirefox) {
+                   return 'Firefox';
+                } else if (isChrome) {
+                    return 'Chrome';
+                } else {
+                    return 'not supported';
+                }               
+            }
+
+            console.log(getUserBrowser());
+
+        });
+    </script>
+    <header>
+        <h1>My browser</h1>
+    </header>
+    <main>
+        <h1>Navigator</h1>
+        <ul id="navigatorList">
+        </ul>
+        <h2>Battery</h2>
+        <ul id="batteryList">
+        </ul>
+    </main>
+</body>
+
+</html>

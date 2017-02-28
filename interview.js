@@ -13,14 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const record = document.querySelector('#record');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
-    
+
     //Some button listeners
     skipQuestion.addEventListener('click', function () { confirm('Do you want skip the current question?') });
 
-    //User browser info
-    console.log(navigator.appCodeName);
-    console.log(navigator.appName);
-    console.log(navigator.appVersion);
+    //Getting user Browser
+    console.log(getUserBrowser());
 
     //Getting positon.
     //navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
@@ -85,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //This function puts a video stream into a file (a Blob, actually)
     function recordVid(stream) {
 
-
-
         //A MediaRecorder Object records media streams.
         const mr = new MediaRecorder(stream, { mimeType: 'video/webm', videoBitsPerSecond: 2500000, audioBitsPerSecond: 128000 });
 
@@ -114,24 +110,41 @@ document.addEventListener('DOMContentLoaded', function () {
             //Stopping the media recorder;
             mr.stop();
 
-            //Stoping stream (not sure if works or if I need to stop its tracks)
-            stream.stop();
+            //Stoping stream 
+            stopStream(stream);
 
             //Closing audio Context
             audioContext.close();
 
             //This removes the preview section. Just trying, this is not supposed to be done here.
             main.removeChild(preview);
+
             //Saving media Blob into file for up/downloading
             toFile(data);
+
             //Updating UI state
             review.classList.toggle('invisible');
+
             //Changing Question Navigation button state
             questionControlToggle();
 
         });
 
     }
+
+
+    //This method stops a given stream
+    function stopStream(stream) {
+
+        //Getting stream video tracks
+        let tracks = stream.getVideoTracks();
+
+        tracks.forEach((t) => {
+            t.stop();
+        });
+       
+    }
+
 
     //Turns a Blob into a video file
     function toFile(b) {
@@ -150,8 +163,24 @@ document.addEventListener('DOMContentLoaded', function () {
         skipQuestion.classList.toggle('invisible');
         nextQuestion.classList.toggle('invisible');
 
-
     }
+
+    //Returns a string with user's browser: Firefox, Chrome or not supported.
+    function getUserBrowser() {
+        const ua = navigator.userAgent;
+        const isFirefox = ua.match('Firefox');
+        const isChrome = ua.match('Chrome');
+        if (isFirefox) {
+            return 'Firefox';
+        } else if (isChrome) {
+            return 'Chrome';
+        } else {
+            return 'not supported';
+        }
+    }
+
+
+
 
     //---------------------------------- VUMETER here until react version ------------------------------------------//    
 
@@ -181,8 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         };
 
-        //Plugging elements among them
-
+        //Connecting elements
         audio.connect(analyzer);
         audio.connect(audioContext.destination);
         node.connect(audioContext.destination);
@@ -241,9 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateBar(pct) {
         clearBar();
-        
+
         //Mark peaking
-        
+
         if (pct >= 90) {
             let wd = setWidth(cWd, pct);
             context.fillStyle = "red";
