@@ -4,24 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var stopwatch;
     var running = false;
 
-    //DOM buttons
-    const startBu = document.querySelector('#startBu');
-    const markBu = document.querySelector('#markBu');
-    const stopBu = document.querySelector('#stopBu');
-    const resetBu = document.querySelector('#resetBu');
-    const marksView = document.querySelector('#marksView');
+    //Initializing chrono
+    startCountDown();
+
     //DOM display
     const display = document.querySelector('#display');
-
-    startBu.addEventListener('click', function () { startCountDown(); });
-
-    markBu.addEventListener('click', function () {
-        addTM('Marcar', time);
-    });
-
-    stopBu.addEventListener('click', function () { stopCountDown(); });
-
-    resetBu.addEventListener('click', function () { resetCountDown(); });
 
     //Setting time to countdown from
     function setTime(t) {
@@ -36,30 +23,30 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!running) {
             running = true;
             stopwatch = window.setInterval(function () {
-                time -= 100;
-                updateDisplay(formatTime(time));
+                if (time > 0) {
+                    time -= 100;
+                    updateDisplay(formatTime(time));
+                }else{
+                    time = 0;
+                    stopCountDown();
+                    updateDisplay(formatTime(time));
+                }
             }, 100);
-            toggleStopReset();
         }
     }
 
     function stopCountDown() {
         if (running) {
             running = false;
-            window.clearInterval(stopwatch);
-            startBu.innerHTML = "CONTINUE";
-            toggleStopReset();
+            window.clearInterval(stopwatch);            
         }
     }
 
     //Reset stopWatch
     function resetCountDown() {
         if (!running) {
-            startBu.innerHTML = "START";
             time = 0;
             updateDisplay("00:00:00.00");
-            marksView.innerHTML = "";
-
         }
     }
 
@@ -134,15 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    //Toggle Stop/Reset buttons visibility
-    function toggleStopReset() {
-        resetBu.classList.toggle('invisible');
-        stopBu.classList.toggle('invisible');
-    }
-
 
     //SETTING INITAL TIME FOR TESTING
-    setTime(123400);
+    setTime(30000);
 
 
 });

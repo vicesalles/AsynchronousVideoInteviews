@@ -7,16 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const preview = document.querySelector('#preview');
     const review = document.querySelector("#review");
     const question = document.querySelector('#question');
-    const skipQuestion = document.querySelector('#skipQuestion');
     const nextQuestion = document.querySelector('#nextQuestion');
     const player = document.querySelector('#video');
     const record = document.querySelector('#record');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
-
-    //Some button listeners
-    skipQuestion.addEventListener('click', function () { confirm('Do you want skip the current question?') });
-
+   
     //Getting user Browser
     console.log(getUserBrowser());
 
