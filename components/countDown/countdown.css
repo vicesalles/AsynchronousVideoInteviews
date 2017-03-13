@@ -1,0 +1,40 @@
+      body {
+            font-family: monospace;
+        }
+        
+        #display {
+            background-color: #000;
+            color: #fff;
+            letter-spacing: 0.7em;
+            font-family: monospace;
+            font-size: 2.2em;
+            padding: 0.2em 2em 0.2em 2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .invisible{
+            display: none;
+        }
+
+        #butonera{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #butonera a{
+            width: 33%;
+            padding: 0.5em 2em 0.5em 2em;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: grey;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #butonera a:hover{
+            background-color: lightgrey;
+            color:grey;
+        }
