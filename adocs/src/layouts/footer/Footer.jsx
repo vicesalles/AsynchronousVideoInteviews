@@ -1,8 +1,8 @@
 import React from 'react';
-import './footer.css';
+import './Footer.css';
 
 export default class Footer extends React.Component {
     render() {
-        return (<footer>Question {this.props.cQuestion} of {this.props.nQuestions}</footer>);
+        return (<footer className="footer">Question {this.props.cQuestion} of {this.props.nQuestions}</footer>);
     }
 }
