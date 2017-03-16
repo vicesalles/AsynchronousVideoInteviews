@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0px;
+    margin-left: 0px;
+    background-color: lightcyan;
+}
+
+.App {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}

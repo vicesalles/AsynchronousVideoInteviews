@@ -15,30 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
    
     //Getting user Browser
     console.log(getUserBrowser());
-
-    //Getting positon.
-    //navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
-
+   
     //Creating audio context (VUmeter will use this for monitoring audio)
     const audioContext = new AudioContext();
 
-    //Will store all avaible media devices
-    const mediaSources = [];
-
-    //This promise, give us back the avaible Media Generating devices avaible on the user device.
-    const uMediaDevices = navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            devices.forEach(function (s) {
-                mediaSources.push(s);
-            }, this);
-            console.log(mediaSources);
-        });
-
-    //console.log(uMediaDevices);
-
     //Getting Media Devices supported constrains
     const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
-    //console.log(mdConstraints);
+    console.log(mdConstraints);
 
     //The getUserMedia is a promise, if it's succesful, we'll get a MediaStream object.
     navigator.mediaDevices.getUserMedia({
@@ -48,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         video: {
 
             //Video may take several properties:
-            width: { ideal: 1920, min: 1280, max: 1920 },
-            height: { ideal: 1080, min: 720, max: 1080 }
+            width: { ideal: 1920, min: 1280 },
+            height: { ideal: 1080, min: 720 }
 
         }
     })
@@ -128,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-
     //This method stops a given stream
     function stopStream(stream) {
 
@@ -140,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
        
     }
-
 
     //Turns a Blob into a video file
     function toFile(b) {

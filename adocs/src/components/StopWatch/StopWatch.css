@@ -1,0 +1,13 @@
+
+#stopwatch {
+    width: 40%;
+    direction: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: monospace;
+    background-color: #000;
+    color: #fff;
+    letter-spacing: 0.7em;
+    text-align: center;
+    font-weight: bold;
+}
