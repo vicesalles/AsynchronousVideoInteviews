@@ -1,0 +1,8 @@
+1-Funcionalitat captació vídeo.
+2-Funcionalitat server:
+	-Login Admin
+	-Creació de formularis.
+	-Creació d'usuaris.
+	-Creació d'entrevistes.
+	-Login entrevistats.
+3-NOVA UI

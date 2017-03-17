@@ -47,9 +47,9 @@ main {
     display: flex;
     width: 100%;
     flex-direction: row;
+    margin-top:4em;
     justify-content: space-around;
     background-color: paleturquoise;
-    margin-top: 4em;
     margin-left: 0px;
 }
 
