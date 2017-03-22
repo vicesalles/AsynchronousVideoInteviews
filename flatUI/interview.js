@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Getting audio channel info
         const audioTrack = stream.getAudioTracks()[0];
-        console.log(audioTrack);
+        //console.log(audioTrack);
 
         //Adding stream to the Audio Context
         const audio = audioContext.createMediaStreamSource(stream);
@@ -208,9 +208,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Connecting elements
         audio.connect(analyzer);
-        audio.connect(audioContext.destination);
-        node.connect(audioContext.destination);
+       // audio.connect(audioContext.destination);
+       // node.connect(audioContext.destination);
         analyzer.connect(node);
+        
 
         //Math.average method
         Math.average = function (array) {
