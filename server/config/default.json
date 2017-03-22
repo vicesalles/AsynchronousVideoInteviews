@@ -1,0 +1,19 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "nedb": "../data/",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "TfRE5bZVVFM799tpvc8GiDV2+06D0aI7KTsHe8k2iyX+CGc7pSM/mE7a3FlAwf3dQQA82sgJ3khBJMh11xYFcg=="
+    },
+    "local": {},
+    "linkedin": {
+      "clientID": "your linkedin client id",
+      "clientSecret": "your linkedin client secret",
+      "permissions": {
+        "scope": ["r_emailaddress","r_basicprofile"]
+      }
+    }
+  }
+}
