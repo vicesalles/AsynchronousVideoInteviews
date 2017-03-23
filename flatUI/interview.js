@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const question = document.querySelector('#question');
     const nextQuestion = document.querySelector('#nextQuestion');
     const player = document.querySelector('#video');
-    const record = document.querySelector('#record');
+    const record = document.querySelector('#recordedClip');
     const recBu = document.querySelector('#recBu');
     const dwnBu = document.querySelector('#dwnBu');
    
@@ -113,16 +113,13 @@ document.addEventListener('DOMContentLoaded', function () {
             audioContext.close();
 
             //This removes the preview section. Just trying, this is not supposed to be done here.
-            main.removeChild(preview);
-
+            document.body.removeChild(preview);
+            
             //Saving media Blob into file for up/downloading
             toFile(data);
 
             //Updating UI state
             review.classList.toggle('invisible');
-
-            //Changing Question Navigation button state
-            questionControlToggle();
 
         });
 
@@ -153,13 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    //Skip to next 
-    function questionControlToggle() {
-
-        skipQuestion.classList.toggle('invisible');
-        nextQuestion.classList.toggle('invisible');
-
-    }
 
     //Returns a string with user's browser: Firefox, Chrome or not supported.
     function getUserBrowser() {
@@ -208,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Connecting elements
         audio.connect(analyzer);
+        //Keep audioContext clean for avoiding overdrive
        // audio.connect(audioContext.destination);
        // node.connect(audioContext.destination);
         analyzer.connect(node);
