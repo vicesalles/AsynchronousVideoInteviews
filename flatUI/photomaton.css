@@ -1,0 +1,131 @@
+/*BUTTONS*/
+
+body {
+    font-family: sans-serif;
+}
+
+#countDown {
+    z-index: 33;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 60vh;
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+
+#capturer{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+
+#preview{
+    display: flex;
+    direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#previewPics {
+    z-index: 22;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#picsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+#picsContainer img {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+#liveCam {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+#shootContainer{
+    position: fixed;
+    z-index:44;
+    text-align: center;
+    width: 100%;
+    bottom:0px;
+    padding-bottom: 2em;
+}
+
+.invisible {
+    visibility: hidden;
+    display: none;
+}
+
+
+/*BUTTONS*/
+
+#shoot {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 1s, background-color 0.5s, padding 0.5s;
+}
+
+#shoot:hover{
+    color:yellow;
+    background-color: firebrick;
+    padding: 0.6em 2.5em 0.6em 2.5em;
+}
+
+#repBu {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#dwnBu {
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    width: 100%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    cursor: pointer;
+}
