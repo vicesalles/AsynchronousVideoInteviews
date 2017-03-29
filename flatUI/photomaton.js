@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const repBu = document.querySelector('#repBu');
     const prevPic = document.querySelector('#prevPic');
     const previewPics = document.querySelector('#previewPics');
+    const picsContainer = document.querySelector('#picsContainer');
     const liveCam = document.querySelector('#liveCam');
     const shootContainer = document.querySelector('#shootContainer');
     const shoot = document.querySelector('#shoot');
@@ -17,29 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const picBuffer = [];
 
     shoot.addEventListener('click', function () {
-        //countDown(3,bufferPic(takePic));
-        countDown(3, buu);
-        /*    setTimeout(function(){
-                buu();
-            },8000);*/
+      
+     countDown(3,launch);
 
     });
 
-    function buu() {
-        console.log('bu en marxa');
-        bufferPic(takePic());
-        setTimeout(function () {
-            bufferPic(takePic());
-            setTimeout(function () {
-                bufferPic(takePic());
-                showPics();
-                removePreview();
-            }, 200);
-        }, 200);
-
-
+    function launch(){
+        burst(takePic, 3, 300, showPics)
     }
-
+   
     //DECLARING ALL FUNCTIONS
     //Getting user media
     navigator.mediaDevices.getUserMedia({
@@ -101,14 +88,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
-    //It does f n times in a lapse of m mseconds
-    function burst(f, n, m) {
-        setTimeout(function () {
-            if (n != 0) {
+    //It does f n times in a lapse of m mseconds. then, callback
+    function burst(f, n, m, c) {
+        setTimeout(() => {
+            if (n !== 0) {
                 f();
                 --n;
-                burst(f, n, m);
+                burst(f, n, m, c);
+            } else if (c !== undefined) {
+                c();
             }
         }, m);
     }
@@ -127,21 +115,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     //------------------- ALL THE PHOTO STUFF STARTS HERE ------------------------------------
+
     function takePic() {
+        bufferPic(capturePic());
+    }
+
+    function capturePic() {
         let context = capturer.getContext('2d');
         context.drawImage(liveCam, 0, 0, capturer.width, capturer.height);
         let data = capturer.toDataURL('image/png');
-        console.log('took pic');
         return data;
     }
 
     function bufferPic(p) {
-        picBuffer.push(p);
+        picBuffer.push(p);        
     }
 
-    function printPic(p, t) { // t is target, p is pic data
+
+
+    function printPic(p, t) { // t is target name, p is pic data
         let n = document.querySelector('#' + t);
         n.setAttribute('src', p);
+        n.setAttribute('alt',t);
     }
 
     function shootBurst() {
@@ -155,11 +150,12 @@ document.addEventListener('DOMContentLoaded', function () {
             let t = 'pic' + i;
             console.log(t);
             printPic(p, t);
-            
+
 
         });
 
         getPreview();
+        removePreview();
     }
 
 
