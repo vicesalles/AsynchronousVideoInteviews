@@ -18,16 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const picBuffer = [];
 
     shoot.addEventListener('click', function () {
-      
-     countDown(3,launch);
+
+        countDown(3, launch);
 
     });
 
-    function launch(){
+    function launch() {
         burst(takePic, 3, 300, showPics)
     }
-   
-    //DECLARING ALL FUNCTIONS
+
     //Getting user media
     navigator.mediaDevices.getUserMedia({
 
@@ -87,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
     //It does f n times in a lapse of m mseconds. then, callback
     function burst(f, n, m, c) {
         setTimeout(() => {
@@ -128,22 +126,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function bufferPic(p) {
-        picBuffer.push(p);        
+        picBuffer.push(p);
     }
-
-
 
     function printPic(p, t) { // t is target name, p is pic data
         let n = document.querySelector('#' + t);
         n.setAttribute('src', p);
-        n.setAttribute('alt',t);
+        n.setAttribute('alt', t);
     }
-
-    function shootBurst() {
-        burst(bufferPic(takePic), 3, 200);
-    }
-
-
+  
     function showPics() {
         picBuffer.map((p, i) => {
 
@@ -157,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
         getPreview();
         removePreview();
     }
-
 
 
 });
