@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const dwnBu = document.querySelector('#dwnBu');
     const repBu = document.querySelector('#repBu');
     const prevPic = document.querySelector('#prevPic');
+    const previewPics = document.querySelector('#previewPics');
     const liveCam = document.querySelector('#liveCam');
     const shootContainer = document.querySelector('#shootContainer');
     const shoot = document.querySelector('#shoot');
@@ -16,9 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const picBuffer = [];
 
     shoot.addEventListener('click', function () {
-        countDown(3,bufferPic(takePic));
-        
+        //countDown(3,bufferPic(takePic));
+        countDown(3, buu);
+        /*    setTimeout(function(){
+                buu();
+            },8000);*/
+
     });
+
+    function buu() {
+        console.log('bu en marxa');
+        bufferPic(takePic());
+        setTimeout(function () {
+            bufferPic(takePic());
+            setTimeout(function () {
+                bufferPic(takePic());
+                showPics();
+                removePreview();
+            }, 200);
+        }, 200);
+
+
+    }
 
     //DECLARING ALL FUNCTIONS
     //Getting user media
@@ -58,27 +78,29 @@ document.addEventListener('DOMContentLoaded', function () {
     //Countdown for launching whatever after n times
     function countDown(n, w) {
 
-        setTimeout(function () {
+        setTimeout(() => {
             n = updateCountDown(n);
             if (n != 0) {
-                countDown(n);
+                countDown(n, w);
             } else {
-                setTimeout(function () {
+                setTimeout(() => {
                     countDownNumbers.innerHTML = "";
-                    if (w) {
+                    if (w !== undefined) {
                         w();
                     }
                 }, 1000);
             }
         }, 1000);
+
+        function updateCountDown(x) {
+
+            countDownNumbers.innerHTML = x;
+            return --x;
+
+        }
     }
 
-    function updateCountDown(x) {
 
-        countDownNumbers.innerHTML = x;
-        return --x;
-
-    }
 
     //It does f n times in a lapse of m mseconds
     function burst(f, n, m) {
@@ -93,8 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //See preview pictures
     function getPreview() {
-        preview.classList.toggle('invisible');
+        previewPics.classList.toggle('invisible');
     }
+
+    //This removes the video preview from the DOM
+    function removePreview() {
+        main.removeChild(liveCam);
+        main.removeChild(capturer);
+    }
+
+
 
     //------------------- ALL THE PHOTO STUFF STARTS HERE ------------------------------------
     function takePic() {
@@ -110,7 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function printPic(p, t) { // t is target, p is pic data
-        t.setAttribute('src', p);
+        let n = document.querySelector('#' + t);
+        n.setAttribute('src', p);
     }
 
     function shootBurst() {
@@ -118,19 +149,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function showPics(){
-        picBuffer.map((p,i)=>{
+    function showPics() {
+        picBuffer.map((p, i) => {
 
-            let t = 'pic'+i;
+            let t = 'pic' + i;
             console.log(t);
-            printPic(p,t);
-            getPreview();
+            printPic(p, t);
+            
 
         });
 
-        picBuffer.map()
+        getPreview();
     }
-
 
 
 
