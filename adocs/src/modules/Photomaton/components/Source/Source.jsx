@@ -30,7 +30,7 @@ export default class Source extends Component{
     }
 
     launch() {
-        this.burst(this.takePic, 3, 500, this.passPics);
+        this.burst(this.takePic, this.props.pics, 500, this.passPics);
     }
 
     //It does f n times in a lapse of m mseconds. then, callback
@@ -48,9 +48,10 @@ export default class Source extends Component{
 
     takePic() {
         this.bufferPic(this.capturePic());
-        console.log('took pic');
+        console.log('took a pic');
     }
 
+    //The canvas will capture some frames
     capturePic() {
         let capturer = this.refs.capturer;
         let context = capturer.getContext('2d');
@@ -58,7 +59,7 @@ export default class Source extends Component{
         let data = capturer.toDataURL('image/png');
         return data;
     }
-
+    //The img data is pushed to the state 'bufferPic' array;
     bufferPic(p){
         let bf = this.state.bufferPic;
         bf.push(p);

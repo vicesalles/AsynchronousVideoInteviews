@@ -4,7 +4,7 @@ import './Countdown.css';
 export default class Countdown extends Component{
     constructor(props){
         super(props);
-        this.state = {'count':this.props.count};
+        this.state = {'count':'ready?'};
         this.countDown = this.countDown.bind(this);
         this.updateCountDown = this.updateCountDown.bind(this);
         
@@ -15,7 +15,7 @@ export default class Countdown extends Component{
     }
 
     componentDidMount(){
-        this.countDown(this.state.count,this.props.mission);
+        this.countDown(this.props.count,this.props.mission);
     }
     //Countdown for launching whatever after n times
     countDown(n, w) {

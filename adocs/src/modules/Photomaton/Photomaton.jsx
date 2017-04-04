@@ -28,7 +28,7 @@ export default class Photomaton extends Component {
             if (this.state.state === 'shooting') {
                 return (<article id="Photomaton">
                     <Countdown count={this.props.count} mission={this.shot} />
-                    <Source ref="Source" media={this.props.media} shot={this.state.shot} mission={this.passPics} done={this.toPreview} />
+                    <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toPreview} />
                 </article>
                 );
             } else if(this.state.state === 'preview') {
