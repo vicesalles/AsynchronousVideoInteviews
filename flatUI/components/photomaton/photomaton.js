@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function launch() {
-        burst(takePic, 3, 300, showPics)
+        burst(takePic, 3, 500, showPics);
     }
 
     //Getting user media

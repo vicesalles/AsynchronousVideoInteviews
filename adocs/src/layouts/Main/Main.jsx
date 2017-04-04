@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Main.css';
-import Question from '../../components/Question/Question';
-import Preview from '../../components/Preview/Preview';
+import Message from '../../components/Message/Message';
+import Photomaton from '../../modules/Photomaton/Photomaton';
 
-export default class Main extends React.Component{
-    render(){
-        return (<main id="main">
-            <Preview/>
-            <Question/>
-            <article id="review" className="invisible">
-                <h1>Your Answer</h1>
-                <video id="record" controls>
+export default class Main extends Component {
 
-                </video>
-                <section className="buttons">
-                    <a id="dwnBu">Download you answer</a>
-                </section>
-            </article>
-            <button id="nextQuestion">Next Question</button>
-        </main>);
+    
+
+    render() {
+        
+        switch(this.props.mode){
+            case 'welcome':
+                return (<main id="main">
+                            <Message message={this.props.message}/>
+                        </main>);
+            break;
+             case 'photomaton':
+             console.log(this.props.stream);
+                return (<main id="main">
+                   <Photomaton media={this.props.stream} count="5" pics="3"/>
+               </main>);
+            break;
+
+            
+
+            default:
+             return (<main id="main">
+                            <Message message={this.props.message}/>
+                        </main>);
+        }
+
+        
     }
-}
 
-//Must turn #review into bye bye component
+
+}

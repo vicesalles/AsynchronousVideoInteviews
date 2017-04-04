@@ -1,0 +1,34 @@
+#shootContainer{
+    position: fixed;
+    z-index:44;
+    text-align: center;
+    width: 100%;
+    bottom:0px;
+    padding-bottom: 2em;
+}
+
+.invisible {
+    visibility: hidden;
+    display: none;
+}
+
+
+#shoot {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 1s, background-color 0.5s, padding 0.5s;
+}
+
+#shoot:hover{
+    color:yellow;
+    background-color: firebrick;
+    padding: 0.6em 2.5em 0.6em 2.5em;
+}

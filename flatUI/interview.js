@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const dwnBu = document.querySelector('#dwnBu');
 
     //Getting user Browser
-    console.log(getUserBrowser());
+    //console.log(getUserBrowser());
 
     //Getting positon.
     //navigator.geolocation.getCurrentPosition(function (pos) { console.log(pos.cords) });
@@ -26,19 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const mediaSources = [];
 
     //This promise, give us back the avaible Media Generating devices avaible on the user device.
-    const uMediaDevices = navigator.mediaDevices.enumerateDevices()
+    /*const uMediaDevices = navigator.mediaDevices.enumerateDevices()
         .then(devices => {
             devices.forEach(function (s) {
                 mediaSources.push(s);
             }, this);
-            console.log(mediaSources);
-        });
+            console.log('Media Sources: ' + mediaSources);
+        });*/
 
     //console.log(uMediaDevices);
 
     //Getting Media Devices supported constrains
-    const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
-    //console.log(mdConstraints);
+    /*const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
+    console.log('Avaible constraints: ' + JSON.stringify(mdConstraints));*/
+
+
 
     //The getUserMedia is a promise, if it's succesful, we'll get a MediaStream object.
     navigator.mediaDevices.getUserMedia({
@@ -68,10 +70,15 @@ document.addEventListener('DOMContentLoaded', function () {
             player.play();
             player.muted = true; //Avoiding the audio feedback is the reason why
 
+            //Getting video Track settings
+            /* const vTrack = stream.getVideoTracks();
+            console.log(vTrack[0].getSettings());*/
+
             //Getting Timecode
             /*player.addEventListener('timeupdate', function () {
                 console.log(player.currentTime);
             });*/
+
             //Getting audio signal and passing it to the VUMETER
             getAudio(stream);
 
@@ -156,11 +163,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const blob = new Blob(b, {
             type: 'video/webm; codecs="vp9"'
         });
+
         const obj = URL.createObjectURL(blob);
         record.src = obj;
         dwnBu.href = obj;
         dwnBu.download = "clip.webm";
-
+        return obj;
     }
 
 
@@ -188,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Getting audio channel info
         const audioTrack = stream.getAudioTracks()[0];
-        console.log(audioTrack);
+        //console.log(audioTrack);
 
         //Adding stream to the Audio Context
         const audio = audioContext.createMediaStreamSource(stream);
