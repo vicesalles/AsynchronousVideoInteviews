@@ -20,6 +20,7 @@ export default class Photomaton extends Component {
         this.shot = this.shot.bind(this);
         this.passPics = this.passPics.bind(this);
         this.toPreview = this.toPreview.bind(this);
+        this.getPic = this.getPic.bind(this);
 
     }
     render() {
@@ -32,7 +33,7 @@ export default class Photomaton extends Component {
                 </article>
                 );
             } else if(this.state.state === 'preview') {
-                return(<Preview pics={this.state.picBuffer} />);
+                return(<Preview getPic={this.getPic} pics={this.state.picBuffer} />);
             }
 
         } else {
@@ -81,6 +82,10 @@ export default class Photomaton extends Component {
         this.setState({'state':'preview'});
     }
 
-
+    //Gets the index of the chosen pic from the Preview child
+    getPic(p){
+        
+        this.props.poster(p);
+    }
 }
 

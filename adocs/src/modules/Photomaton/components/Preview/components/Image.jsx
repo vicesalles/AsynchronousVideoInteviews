@@ -7,12 +7,12 @@ export default class Image extends Component{
     }
     render(){
 
-        return(<img src={this.props.src} onClick={this.handleClick} />);
+        return(<img id={this.props.id} src={this.props.src} onClick={this.handleClick} />);
     
     }
 
     handleClick(e){
-
+        this.props.getPic(e.target.src);
     }
 
 }

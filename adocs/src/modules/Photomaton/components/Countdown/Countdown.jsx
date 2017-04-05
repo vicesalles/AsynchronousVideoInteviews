@@ -27,7 +27,7 @@ export default class Countdown extends Component{
                 setTimeout(() => {
                     this.setState({'count': ""});
                     if (w !== undefined) {
-                        w('fet');
+                        w();
                     }
                 }, 1000);
             }

@@ -16,9 +16,8 @@ export default class Main extends Component {
                         </main>);
             break;
              case 'photomaton':
-             console.log(this.props.stream);
                 return (<main id="main">
-                   <Photomaton media={this.props.stream} count="5" pics="3"/>
+                   <Photomaton poster={this.props.poster} media={this.props.stream} count="3" pics="3"/>
                </main>);
             break;
 
