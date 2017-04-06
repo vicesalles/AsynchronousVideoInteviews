@@ -17,6 +17,7 @@ export default class Countdown extends Component{
     componentDidMount(){
         this.countDown(this.props.count,this.props.mission);
     }
+    
     //Countdown for launching whatever after n times
     countDown(n, w) {
         setTimeout(() => {

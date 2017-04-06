@@ -10,6 +10,12 @@
     padding: 1em 1em 1em 1em;
 }
 
+h1{
+    text-align: center;
+    font-size: 2em;
+    color: #4c4c4c;
+}
+
 #info {
     width: 66%;
     color: white;
@@ -34,6 +40,7 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    transition: background-color;
     
 }
 

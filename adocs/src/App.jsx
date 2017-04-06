@@ -9,10 +9,11 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
     //STATE
     this.state = {
       state: 'welcome', // Kind of router
+      currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: null,
       questions: { '0': 'First question first' }, //The actual questions
@@ -24,13 +25,16 @@ class App extends Component {
       videoFile: null //ObjectURL
 
     };
- 
-    this.screens = ['welcome','photomaton','interview','thanks'];
+    this.stream = null;
+    this.screens = ['welcome', 'photomaton', 'interview', 'thanks'];
 
     //METHODS
     this.nextQuestion = this.nextQuestion.bind(this);
     this.getMediaSources = this.getMediaSources.bind(this);
     this.getPoster = this.getPoster.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.test = this.test.bind(this);
+    this.nextState = this.nextState.bind(this);
   }
 
   //RENDER
@@ -42,18 +46,17 @@ class App extends Component {
       case 'welcome':
         return (
           <div className="App">
-            <Main mode={this.state.state} message="Thanks for showing up" />
+            <Main mode={this.state.state} mission={this.nextState} message="Thanks for showing up" />
           </div>
         );
-
+      
       case 'photomaton':
         return (
           <div className="App">
-            <Main poster={this.getPoster} stream={this.getMediaSources()} mode={this.state.state} />
+            <Main poster={this.getPoster} mission={this.nextState} stream={this.getMediaSources()} mode={this.state.state} />
           </div>
         );
-        break;
-
+      
       case 'interview':
         return (
           <div className="App">
@@ -61,7 +64,10 @@ class App extends Component {
             <Preview stream={this.getMediaSources()} />
           </div>
         );
-        break;
+       
+      case 'review':
+        return(<Main message="we're done"/>);
+     
 
       case 'thanks':
         return (
@@ -69,8 +75,7 @@ class App extends Component {
             <Main mode={this.state.state} />
           </div>
         );
-        break;
-
+       
       default:
         return (
           <div className="App">
@@ -90,7 +95,7 @@ class App extends Component {
   //this method gets user's merdia sources and returns a Stream
   getMediaSources() {
 
-    if (this.state.stream === null) {
+    if (this.stream === null) {
 
       return navigator.mediaDevices.getUserMedia({
 
@@ -113,8 +118,10 @@ class App extends Component {
         }
       })
         .then(stream => {
-          this.setState({'stream':stream});
+          
+          this.stream = stream;
           return stream;
+         
         })
         .catch(function (error) {
 
@@ -122,13 +129,63 @@ class App extends Component {
           console.error('Crap! ' + error);
 
         });
+    }else{
+      return this.stream;
     }
   }
 
-  getPoster(p) {
-    console.log('video poster: ' + p);
-    this.setState({ 'poster': p });
+
+  //Countdown for launching whatever after n times
+  countDown(n, w) {
+    setTimeout(() => {
+      n = updateCountDown(n);
+      if (n !== 0) {
+        this.countDown(n, w);
+      } else {
+        setTimeout(() => {
+          this.setState({ 'count': "" });
+          if (w !== undefined) {
+            w();
+          }
+        }, 1000);
+      }
+    }, 1000);
+
+    function updateCountDown(x) {
+
+      return --x;
+
+    }
+
   }
+  //Getting the poster for video
+  getPoster(p,c) { //c is callback
+    this.setState({ 'poster': p });
+    if(c!==undefined){
+      c();
+    }
+  }
+
+
+  //Moving the app to the next state
+  nextState(){
+    if(this.state.state!=='interview'){
+      let cState = this.state.currentState + 1;
+      this.setState({'currentState': cState, 'state':this.screens[cState]});
+    }
+  }
+
+
+
+  //BORRAM
+  test(m) {
+    if (m !== undefined) {
+      console.log(m);
+    } else {
+      console.log('TEST!');
+    }
+  }
+
 
 
 }

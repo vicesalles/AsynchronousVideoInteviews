@@ -7,7 +7,7 @@ export default class Image extends Component{
     }
     render(){
 
-        return(<img id={this.props.id} src={this.props.src} onClick={this.handleClick} />);
+        return(<img id={this.props.id} src={this.props.src} alt="that's you!!" onClick={this.handleClick} />);
     
     }
 

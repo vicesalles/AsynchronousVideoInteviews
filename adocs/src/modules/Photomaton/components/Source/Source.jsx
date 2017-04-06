@@ -21,11 +21,12 @@ export default class Source extends Component{
         this.passPics = this.passPics.bind(this);
         
     }
+    
     render(){
 
         return(<div>
             <canvas ref="capturer" id="capturer"></canvas>
-            <video ref="liveCam" id="liveCam"></video>
+            <video ref="liveCam" id="liveCam"></video>            
         </div>)
     }
 

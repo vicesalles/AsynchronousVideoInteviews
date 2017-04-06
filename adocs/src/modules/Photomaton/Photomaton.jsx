@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Photomaton.css';
 import Countdown from './components/Countdown/Countdown';
-import Source from './components/Source/Source';
-import Button from './components/Button/Button';
-import Preview from './components/Preview/Preview';
+import Source from './components/Source/Source.jsx';
+import Button from './components/Button/Button.jsx';
+import Review from './components/Review/Review.jsx';
 
 export default class Photomaton extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Photomaton extends Component {
         this.readiness = this.readiness.bind(this);
         this.shot = this.shot.bind(this);
         this.passPics = this.passPics.bind(this);
-        this.toPreview = this.toPreview.bind(this);
+        this.toReview = this.toReview.bind(this);
         this.getPic = this.getPic.bind(this);
 
     }
@@ -29,28 +29,28 @@ export default class Photomaton extends Component {
             if (this.state.state === 'shooting') {
                 return (<article id="Photomaton">
                     <Countdown count={this.props.count} mission={this.shot} />
-                    <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toPreview} />
+                    <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toReview} />
                 </article>
                 );
-            } else if(this.state.state === 'preview') {
-                return(<Preview getPic={this.getPic} pics={this.state.picBuffer} />);
+            } else if(this.state.state === 'review') {
+                return(<Review getPic={this.getPic} pics={this.state.picBuffer} redo={this.updateState} />);
             }
 
         } else {
             return (<article id="Photomaton">
-                <Button mission={this.readiness} />
-                <Source media={this.props.media} />
-            </article>
+                        <Button mission={this.readiness} />
+                        <Source media={this.props.media} />
+                    </article>
             );
         }
     }
 
-    //IT switches the state from 'shooting' to 'preview'
+    //IT switches the state from 'shooting' to 'review'
     updateState() {
 
         if (this.state.ready) {
             if (this.state.state === 'shooting') {
-                this.setState({ 'state': 'preview' });
+                this.setState({ 'state': 'review' });
             } else {
                 this.setState({ 'state': 'shooting' });
             }
@@ -78,14 +78,14 @@ export default class Photomaton extends Component {
         this.setState({ 'picBuffer': p });
     }
 
-    toPreview(){
-        this.setState({'state':'preview'});
+    //Changes the component state to 'Review' mode
+    toReview(){
+        this.setState({'state':'review'});
     }
 
     //Gets the index of the chosen pic from the Preview child
-    getPic(p){
-        
-        this.props.poster(p);
+    getPic(p){        
+        this.props.poster(p,this.props.mission); //second paramater is a callback        
     }
 }
 
