@@ -1,2 +1,26 @@
-1.Rename Preview COmponent to 'Interview';
+
+App funciona per seccions formada per moduls.
+
+INICI
+    .hola --------------> Crea modul Missatger -> mmostra [missatges] que li passes
+    .et fare una foto--->
+    .photomanton
+
+ENTREVISTA
+
+    .grava fins que shan acabat preguntes
+
+TANCAMENT
+
+    .review Material
+    .Block missatger despedida
+
+-------------------------
+
+- Interview = modul.
+
+modul inclou -Preguntes -Control (antic preview);
+
+------------------------
+
 2.estudiar l'eliminació dels layouts (main especialment, és repetitiu);

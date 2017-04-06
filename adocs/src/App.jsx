@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Main from './layouts/Main/Main';
-import Preview from './layouts/Preview/Preview';
+import Interview from './layouts/Interview/Interview';
 import './App.css';
 
 
@@ -61,7 +61,7 @@ class App extends Component {
         return (
           <div className="App">
             <Main mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
-            <Preview stream={this.getMediaSources()} />
+            <Interview stream={this.getMediaSources()} />
           </div>
         );
        

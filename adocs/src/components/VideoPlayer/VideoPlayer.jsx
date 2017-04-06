@@ -3,16 +3,6 @@ import './VideoPlayer.css';
 
 export default class VideoPlayer extends Component {
 
- constructor(props){
-        super(props);
-
-     /*   this.props.media.then(stream=>{
-            this.refs.video.srcObject = stream;
-            this.refs.video.muted = true;
-            this.refs.video.play();
-        })*/
-    }
-
     componentDidMount(){
 
         //Setting up the player

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Preview.css';
+import './Interview.css';
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import Vumeter from '../../components/Vumeter/Vumeter';
 
-export default class Preview extends Component {
+export default class Interview extends Component {
 
     render() {
         console.log(this.props.stream);
@@ -12,7 +12,7 @@ export default class Preview extends Component {
                 <VideoPlayer media={this.props.stream}/>
             
             <section id="info">
-                <Vumeter/>
+                <Vumeter media={this.props.stream}/>
                 <section id="qTracker">
                     <div>Question<span>{this.props.currentQ}</span> of <span>{this.props.totalQ}</span></div>
                 </section>
