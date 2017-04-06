@@ -1,1 +1,2 @@
+1.Rename Preview COmponent to 'Interview';
 2.estudiar l'eliminació dels layouts (main especialment, és repetitiu);
