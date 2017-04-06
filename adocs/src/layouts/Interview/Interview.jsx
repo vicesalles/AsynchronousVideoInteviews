@@ -4,9 +4,12 @@ import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import Vumeter from '../../components/Vumeter/Vumeter';
 
 export default class Interview extends Component {
-
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
     render() {
-        console.log(this.props.stream);
+        
         return (<article id="preview">
             
                 <VideoPlayer media={this.props.stream}/>
@@ -14,13 +17,17 @@ export default class Interview extends Component {
             <section id="info">
                 <Vumeter media={this.props.stream}/>
                 <section id="qTracker">
-                    <div>Question<span>{this.props.currentQ}</span> of <span>{this.props.totalQ}</span></div>
+                    <div>Question <span>{this.props.currentQ}</span> of <span>{this.props.totalQ}</span></div>
                 </section>
             </section>
             <section id="next">
-                <button id="nextQuestion">Next</button>
+                <button id="nextQuestion" onClick={this.props.next}>Next</button>
             </section>
         </article>);
+    }
+
+    handleClick(){
+        this.props.next();
     }
 
 }

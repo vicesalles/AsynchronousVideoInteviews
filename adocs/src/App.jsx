@@ -15,8 +15,8 @@ class App extends Component {
       state: 'welcome', // Kind of router
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
-      nQuestions: null,
-      questions: { '0': 'First question first' }, //The actual questions
+      nQuestions: 3,
+      questions: { '0': 'First question first', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
       timecode: {}, //Saving every user click on 'next button'
       initialTime: null, //new Date
       endTime: null, //Date
@@ -49,25 +49,25 @@ class App extends Component {
             <Main mode={this.state.state} mission={this.nextState} message="Thanks for showing up" />
           </div>
         );
-      
+
       case 'photomaton':
         return (
           <div className="App">
             <Main poster={this.getPoster} mission={this.nextState} stream={this.getMediaSources()} mode={this.state.state} />
           </div>
         );
-      
+
       case 'interview':
         return (
           <div className="App">
             <Main mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
-            <Interview stream={this.getMediaSources()} />
+            <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} next={this.nextState} />
           </div>
         );
-       
+
       case 'review':
-        return(<Main message="we're done"/>);
-     
+        return (<Main message="we're done" />);
+
 
       case 'thanks':
         return (
@@ -75,7 +75,7 @@ class App extends Component {
             <Main mode={this.state.state} />
           </div>
         );
-       
+
       default:
         return (
           <div className="App">
@@ -118,10 +118,10 @@ class App extends Component {
         }
       })
         .then(stream => {
-          
+
           this.stream = stream;
           return stream;
-         
+
         })
         .catch(function (error) {
 
@@ -129,7 +129,7 @@ class App extends Component {
           console.error('Crap! ' + error);
 
         });
-    }else{
+    } else {
       return this.stream;
     }
   }
@@ -159,19 +159,31 @@ class App extends Component {
 
   }
   //Getting the poster for video
-  getPoster(p,c) { //c is callback
+  getPoster(p, c) { //c is callback
     this.setState({ 'poster': p });
-    if(c!==undefined){
+    if (c !== undefined) {
       c();
     }
   }
 
 
   //Moving the app to the next state
-  nextState(){
-    if(this.state.state!=='interview'){
+  nextState() {
+    if (this.state.state !== 'interview') {
       let cState = this.state.currentState + 1;
-      this.setState({'currentState': cState, 'state':this.screens[cState]});
+      this.setState({ 'currentState': cState, 'state': this.screens[cState] });
+    } else {
+
+      let q = this.state.currentQuestion + 1;
+
+      if (q < this.state.nQuestions) {
+        this.setState({ 'currentQuestion': q });
+      } else {
+        let cState = this.state.currentState + 1;
+        this.setState({ 'currentState': cState, 'state': this.screens[cState] });
+      }
+
+
     }
   }
 

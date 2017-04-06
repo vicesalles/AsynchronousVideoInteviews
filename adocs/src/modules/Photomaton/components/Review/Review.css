@@ -52,6 +52,7 @@ h1{
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    border-radius: 3px;
     border: none;
     bottom: 1.5em;
     background-color: #4C4C4C;    
@@ -64,5 +65,5 @@ h1{
 
 .reTake:hover{
     background-color: firebrick;
-    box-shadow: 1px 1px 4px black;
+    box-shadow: 1px 1px 4px black;   
 }
