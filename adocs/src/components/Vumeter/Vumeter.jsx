@@ -7,22 +7,27 @@ export default class Vumeter extends Component {
         this.getAudio = this.getAudio.bind(this);
         this.updateVolumeView = this.updateVolumeView.bind(this);
         this.setWidth = this.setWidth.bind(this);
+        this.setUp = this.setUp.bind(this);
+        
     }
     componentDidMount() {
-        const stream = this.props.media;
-        this.vumeter = this.refs.vumeter
-        this.context = this.vumeter.getContext("2d");
-        this.cHg = this.vumeter.height;
-        this.cWd = this.vumeter.width;
 
-        this.wd = this.setWidth(this.cWd, 50);
+        
+        //Checking if input is a Promise or a MediaStream object
+        if (typeof this.props.media.then === 'function') {
 
-        this.context.beginPath();
-        this.context.lineWidth = "1";
-        this.context.strokeStyle = "green";
-        this.context.fillStyle = "green";
-        this.context.fillRect(0, 1, this.wd, this.cHg);
-        this.getAudio(stream);
+            this.props.media.then(stream => {
+
+                this.setUp(stream);
+
+            });
+
+
+        } else {
+            this.setUp(this.props.media);
+        }
+
+    
     }
     render() {
         return (
@@ -84,9 +89,9 @@ export default class Vumeter extends Component {
 
     //Updates Volume View
     updateVolumeView(vol) {
-        
+
         this.context.clearRect(0, 1, this.cWd, this.cHg);
-        
+
         if (vol >= 90) {
             let wd = this.setWidth(this.cWd, vol);
             this.context.fillStyle = "red";
@@ -102,6 +107,22 @@ export default class Vumeter extends Component {
         let wd = Math.floor(cWd * pcent / 100);
         return wd;
 
+    }
+
+    setUp(stream){
+        this.vumeter = this.refs.vumeter
+        this.context = this.vumeter.getContext("2d");
+        this.cHg = this.vumeter.height;
+        this.cWd = this.vumeter.width;
+
+        this.wd = this.setWidth(this.cWd, 50);
+
+        this.context.beginPath();
+        this.context.lineWidth = "1";
+        this.context.strokeStyle = "green";
+        this.context.fillStyle = "green";
+        this.context.fillRect(0, 1, this.wd, this.cHg);
+        this.getAudio(stream);
     }
 
 }

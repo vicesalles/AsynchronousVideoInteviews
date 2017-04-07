@@ -17,7 +17,7 @@ class App extends Component {
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: 3,
       questions: { '0': 'First question first', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
-      timecode: {}, //Saving every user click on 'next button'
+      timecode: [], //Saving every user click on 'next button'
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL
@@ -25,8 +25,10 @@ class App extends Component {
       videoFile: null //ObjectURL
 
     };
+
+    //CONSTANTS
     this.stream = null;
-    this.screens = ['welcome', 'photomaton', 'interview', 'thanks'];
+    this.screens = ['welcome', 'photomaton', 'interview','review', 'thanks'];
 
     //METHODS
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -35,6 +37,7 @@ class App extends Component {
     this.countDown = this.countDown.bind(this);
     this.test = this.test.bind(this);
     this.nextState = this.nextState.bind(this);
+    this.addTCmark = this.addTCmark.bind(this);
   }
 
   //RENDER
@@ -61,13 +64,12 @@ class App extends Component {
         return (
           <div className="App">
             <Main mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
-            <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} next={this.nextState} />
+            <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
           </div>
         );
 
       case 'review':
         return (<Main message="we're done" />);
-
 
       case 'thanks':
         return (
@@ -173,9 +175,7 @@ class App extends Component {
       let cState = this.state.currentState + 1;
       this.setState({ 'currentState': cState, 'state': this.screens[cState] });
     } else {
-
       let q = this.state.currentQuestion + 1;
-
       if (q < this.state.nQuestions) {
         this.setState({ 'currentQuestion': q });
       } else {
@@ -187,6 +187,14 @@ class App extends Component {
     }
   }
 
+  //Adding new entry to the TC Control
+  addTCmark(t) {
+    console.log('addTC launched!');
+    let tc = this.state.timecode;
+    tc.push(t);
+    this.setState({ 'timecode': tc });
+    console.log(this.state.timecode);
+  }
 
 
   //BORRAM

@@ -4,15 +4,18 @@ import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import Vumeter from '../../components/Vumeter/Vumeter';
 
 export default class Interview extends Component {
+   
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.getTC = this.getTC.bind(this);
     }
+
     render() {
         
         return (<article id="preview">
             
-                <VideoPlayer media={this.props.stream}/>
+                <VideoPlayer ref="video" media={this.props.stream}/>
             
             <section id="info">
                 <Vumeter media={this.props.stream}/>
@@ -21,12 +24,17 @@ export default class Interview extends Component {
                 </section>
             </section>
             <section id="next">
-                <button id="nextQuestion" onClick={this.props.next}>Next</button>
+                <button id="nextQuestion" onClick={this.handleClick}>Next</button>
             </section>
         </article>);
     }
 
-    handleClick(){
+    getTC(){
+        return this.refs.video.getTC();
+    }
+
+    handleClick(){    
+        this.props.tc(this.getTC()); 
         this.props.next();
     }
 
