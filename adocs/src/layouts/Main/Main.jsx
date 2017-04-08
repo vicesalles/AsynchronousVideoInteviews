@@ -10,18 +10,21 @@ export default class Main extends Component {
 
         switch (this.props.mode) {
             case 'welcome':
-                return (<Welcome message={this.props.message} mission={this.props.mission}/>);
-                
+                return (<Welcome message={this.props.message} mission={this.props.mission} />);
+
+
             case 'photomaton':
                 return (<main id="main">
                             <Photomaton poster={this.props.poster} mission={this.props.mission} media={this.props.stream} count="3" pics="3" />
                         </main>);
-               
-
+            case 'thanks':
+                return (<main id="main">
+                            <Message message={this.props.message} />
+                        </main>);
 
             default:
                 return (<main id="main">
-                           <Message message={this.props.message} />
+                            <Message message={this.props.message} />
                         </main>);
         }
 

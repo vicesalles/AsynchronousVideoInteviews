@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Main from './layouts/Main/Main';
 import Interview from './layouts/Interview/Interview';
+import Review from './components/Review/Review.jsx';
+import Welcome from './components/Welcome/Welcome.jsx';
 import './App.css';
 
 
@@ -16,7 +18,7 @@ class App extends Component {
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: 3,
-      questions: { '0': 'First question first', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
+      questions: { '0': 'Do you like ninjas?', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
       timecode: [], //Saving every user click on 'next button'
       initialTime: null, //new Date
       endTime: null, //Date
@@ -28,7 +30,7 @@ class App extends Component {
 
     //CONSTANTS
     this.stream = null;
-    this.screens = ['welcome', 'photomaton', 'interview','review', 'thanks'];
+    this.screens = ['welcome','ready','photomaton','beforeInterview','interview','review','thanks'];
 
     //METHODS
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -53,10 +55,24 @@ class App extends Component {
           </div>
         );
 
+      case 'ready':
+        return (
+          <div className="App">
+            <Welcome mission={this.nextState} message="Now we'll take a picture of yours" />
+          </div>
+        );
+
       case 'photomaton':
         return (
           <div className="App">
             <Main poster={this.getPoster} mission={this.nextState} stream={this.getMediaSources()} mode={this.state.state} />
+          </div>
+        );    
+
+       case 'beforeInterview':
+        return (
+          <div className="App">
+            <Welcome mission={this.nextState} message="Great, now let's get started with the interview." />
           </div>
         );
 
@@ -69,12 +85,12 @@ class App extends Component {
         );
 
       case 'review':
-        return (<Main message="we're done" />);
+        return (<Review download={true} review={false} message="Wait while we're uploading your interview" mission={this.nextState} />);
 
       case 'thanks':
         return (
           <div className="App">
-            <Main mode={this.state.state} />
+            <Main mode={this.state.state} message="We're done! Thanks for your time." />
           </div>
         );
 

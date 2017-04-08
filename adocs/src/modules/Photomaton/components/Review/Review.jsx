@@ -19,7 +19,7 @@ export default class Review extends Component {
                         {this.showPics()}
                         </div>                        
                     </div>
-                    <button className="reTake" onClick={this.redo}>wanna repeat?</button>
+                    <button className="reTake" onClick={this.redo}>re-take pics</button>
                 </div>);
     }
 

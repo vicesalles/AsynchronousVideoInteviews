@@ -26,6 +26,7 @@ export default class VideoPlayer extends Component {
             this.refs.video.srcObject = this.props.media;
             this.refs.video.muted = true;
             this.refs.video.play();
+            
         }
     }
 

@@ -23,4 +23,5 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
-2.estudiar l'eliminació dels layouts (main especialment, és repetitiu);
+1.Gravació del vídeo.
+2.eliminació dels layouts (main especialment, és repetitiu);

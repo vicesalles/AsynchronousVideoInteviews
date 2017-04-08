@@ -1,0 +1,46 @@
+#main {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#title {
+    top: 2em;
+    width: 100%;
+    height: 22%;
+    text-align: center;
+    font-size: 2em;
+    color: #4c4c4c;
+    position: relative;
+}
+
+#ContentReview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 78%;
+} 
+
+#ContentReview div{
+    
+    display: flex;
+    justify-content: center;
+    
+}
+
+#dwnBu {
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    width: 33%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    cursor: pointer;
+}
