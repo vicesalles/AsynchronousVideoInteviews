@@ -15,7 +15,7 @@ export default class Interview extends Component {
         
         return (<article id="preview">
             
-                <VideoPlayer ref="video" media={this.props.stream}/>
+                <VideoPlayer mode="interview" ref="video" media={this.props.stream}/>
             
             <section id="info">
                 <Vumeter media={this.props.stream}/>

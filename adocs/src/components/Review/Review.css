@@ -10,7 +10,6 @@
 #title {
     top: 2em;
     width: 100%;
-    height: 22%;
     text-align: center;
     font-size: 2em;
     color: #4c4c4c;
@@ -21,16 +20,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: relative;
+    top:0px;      
     width: 100%;
-    height: 78%;
+    height: 44vh;
 } 
 
 #ContentReview div{
-    
     display: flex;
     justify-content: center;
-    
+    align-items: center;
+    width: 55%;
+    padding-top:1em;
+    padding-bottom:1em;
+
 }
 
 #dwnBu {

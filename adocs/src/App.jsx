@@ -22,24 +22,31 @@ class App extends Component {
       timecode: [], //Saving every user click on 'next button'
       initialTime: null, //new Date
       endTime: null, //Date
-      poster: null,//ObjectURL
-      stream: null,//MediaStream Object
+      poster: null,//ObjectURL     
       videoFile: null //ObjectURL
-
     };
 
-    //CONSTANTS
-    this.stream = null;
-    this.screens = ['welcome','ready','photomaton','beforeInterview','interview','review','thanks'];
+    //NON UI RELATED VARIABLES
+    this.mr = null; //MediaRecorder
+    this.videoData = [];
+    this.stream = null; //MediaStream
+    this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview', 'interview', 'review', 'thanks'];
 
     //METHODS
     this.nextQuestion = this.nextQuestion.bind(this);
     this.getMediaSources = this.getMediaSources.bind(this);
     this.getPoster = this.getPoster.bind(this);
     this.countDown = this.countDown.bind(this);
-    this.test = this.test.bind(this);
     this.nextState = this.nextState.bind(this);
     this.addTCmark = this.addTCmark.bind(this);
+    this.setBegin = this.setBegin.bind(this);
+    this.setEnd = this.setEnd.bind(this);
+    this.createMediaRecorder = this.createMediaRecorder.bind(this);
+    this.startRecording = this.startRecording.bind(this);
+    this.stopMedia = this.stopMedia.bind(this);
+    this.stopStream = this.stopStream.bind(this);
+    this.toFile = this.toFile.bind(this);
+
   }
 
   //RENDER
@@ -67,12 +74,12 @@ class App extends Component {
           <div className="App">
             <Main poster={this.getPoster} mission={this.nextState} stream={this.getMediaSources()} mode={this.state.state} />
           </div>
-        );    
+        );
 
-       case 'beforeInterview':
+      case 'beforeInterview':
         return (
           <div className="App">
-            <Welcome mission={this.nextState} message="Great, now let's get started with the interview." />
+            <Welcome mission={this.startRecording} message="Great, now let's get started with the interview." />
           </div>
         );
 
@@ -85,7 +92,7 @@ class App extends Component {
         );
 
       case 'review':
-        return (<Review download={true} review={false} message="Wait while we're uploading your interview" mission={this.nextState} />);
+        return (<Review download={true} review={true} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
 
       case 'thanks':
         return (
@@ -102,7 +109,6 @@ class App extends Component {
         );
 
     }
-
 
   }
 
@@ -152,7 +158,6 @@ class App extends Component {
     }
   }
 
-
   //Countdown for launching whatever after n times
   countDown(n, w) {
     setTimeout(() => {
@@ -184,44 +189,115 @@ class App extends Component {
     }
   }
 
-
   //Moving the app to the next state
   nextState() {
+
+    if (this.state.state === 'welcome') {
+      //Start session timer
+      this.setBegin();
+    }
+
+
     if (this.state.state !== 'interview') {
       let cState = this.state.currentState + 1;
       this.setState({ 'currentState': cState, 'state': this.screens[cState] });
     } else {
+      //When we are in 'interview' state...
       let q = this.state.currentQuestion + 1;
       if (q < this.state.nQuestions) {
+        //Pass to the next Question.
         this.setState({ 'currentQuestion': q });
       } else {
+        //When we're done with all the questions...
+        this.stopMedia(this.stream);
+        this.setEnd();
+        this.toFile(this.videoData);
         let cState = this.state.currentState + 1;
         this.setState({ 'currentState': cState, 'state': this.screens[cState] });
       }
-
-
     }
   }
 
   //Adding new entry to the TC Control
   addTCmark(t) {
-    console.log('addTC launched!');
     let tc = this.state.timecode;
     tc.push(t);
-    this.setState({ 'timecode': tc });
-    console.log(this.state.timecode);
+    this.setState({ 'timecode': tc });    
   }
 
-
-  //BORRAM
-  test(m) {
-    if (m !== undefined) {
-      console.log(m);
-    } else {
-      console.log('TEST!');
+  setBegin() {
+    if (this.state.initialTime === null) {
+      let start = new Date();
+      this.setState({ 'initialTime': start });
+    }
+  }
+  setEnd() {
+    if (this.state.endTime === null) {
+      let end = new Date();
+      this.setState({ 'endTime': end });
     }
   }
 
+  //MEDIARECORDING MATTERS
+
+  startRecording(){
+    this.nextState();
+    this.createMediaRecorder(this.stream);
+    //this.createMediaRecorder(this.getMediaSources());
+  }
+
+
+  createMediaRecorder(stream) {
+
+    console.log(this.mr);
+    //Creating the Media Recorder
+    this.mr = new MediaRecorder(stream, {
+      mimeType: 'video/webm',
+      videoBitsPerSecond: 5000000,
+      audioBitsPerSecond: 128000
+    });
+
+    //Start recording
+    this.mr.start(500);
+
+    //Adding a listener to the MR that saves media chunks to the State
+    this.mr.addEventListener('dataavailable', (e) => {
+      console.log('gravant');
+      this.videoData.push(e.data);
+    });
+  }
+
+  //This stops the Media stream and the recording.
+  stopMedia() {
+    this.mr.stop();
+    this.stopStream(this.stream);
+  };
+
+  //Saves video data into webm file.
+  toFile(b) {
+
+    console.log(b);
+    const blob = new Blob(b, {
+      type: 'video/webm; codecs="vp9"'
+    });
+    console.log(blob);
+    const obj =URL.createObjectURL(blob);
+    const file = new File([b], "interview.webm", { type: "video/webm", lastModified: Date.now() });
+    this.setState({ 'videoFile': obj });
+
+  }
+
+  //This method stops a given stream
+  stopStream(stream) {
+
+    //Getting stream video tracks
+    let tracks = stream.getVideoTracks();
+
+    tracks.forEach((t) => {
+      t.stop();
+    });
+
+  }
 
 
 }

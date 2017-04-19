@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //A MediaRecorder Object records media streams.
         const mr = new MediaRecorder(stream, {
             mimeType: 'video/webm',
-            videoBitsPerSecond: 2500000,
+            videoBitsPerSecond: 5000000,
             audioBitsPerSecond: 128000
         });
 

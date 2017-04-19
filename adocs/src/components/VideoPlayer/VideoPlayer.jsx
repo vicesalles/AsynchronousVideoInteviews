@@ -5,7 +5,7 @@ export default class VideoPlayer extends Component {
 
     constructor(props) {
         super(props);
-        this.getTC = this.getTC.bind(this);        
+        this.getTC = this.getTC.bind(this);
     }
 
     componentDidMount() {
@@ -22,22 +22,39 @@ export default class VideoPlayer extends Component {
             })
 
         } else {
-            
-            this.refs.video.srcObject = this.props.media;
-            this.refs.video.muted = true;
-            this.refs.video.play();
-            
+
+            //Check if we're getting a MediaStream...
+            if (this.props.media instanceof (MediaStream)) {
+                this.refs.video.srcObject = this.props.media;
+                //Or a file...
+            } else {
+                this.refs.video.src = this.props.media;
+            }
+
+            if (this.props.mode === "interview") {
+                this.refs.video.muted = true;
+                this.refs.video.play();
+            }
         }
     }
 
     render() {
 
-        return (<section id="player">
-            <video ref="video" id="video">The stream is not ready</video>
-        </section>);
+        if (this.props.mode === "interview") {
+
+            return (<section className="interviewContainer">
+                <video poster={this.props.poster} ref="video" className="interview">The stream is not ready</video>
+            </section>);
+
+        } else if (this.props.mode === "review") {
+            return (<section className="reviewContainer">
+                <video poster={this.props.poster} ref="video" className="review" preload="auto" controls>The stream is not ready</video>
+            </section>);
+
+        }
     }
-    
-    getTC() {        
+
+    getTC() {
         return this.refs.video.currentTime;
     }
 

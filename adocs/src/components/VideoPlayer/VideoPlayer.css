@@ -1,8 +1,21 @@
-#player {
+.interviewContainer {
     height: 60px;
 }
 
-#video{
+.interview {
     height: 70px;
     margin-right: 5px;
+}
+
+.reviewContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+
+.review {
+    height: 100%;
+    width: 100%;
 }
