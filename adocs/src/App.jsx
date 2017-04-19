@@ -127,18 +127,18 @@ class App extends Component {
         audio: true,
         video: {
 
-          //Video may take several properties:
-          width: {
-            ideal: 1920,
-            min: 1280,
-            max: 1920
-          },
-          height: {
-            ideal: 1080,
-            min: 720,
-            max: 1080
-          }
-
+          //Video may take several properties:          
+            width: {
+              ideal: 1920,
+              min: 1280,
+              max: 1920
+            },
+            height: {
+              ideal: 1080,
+              min: 720,
+              max: 1080
+            }
+          
         }
       })
         .then(stream => {
@@ -220,7 +220,7 @@ class App extends Component {
 
   //Adding new entry to the TC Control
   addTCmark(t) {
-    this.timeCode.push(t);      
+    this.timeCode.push(t);
   }
 
   setBegin() {
@@ -238,14 +238,14 @@ class App extends Component {
 
   //MEDIARECORDING MATTERS
 
-  startRecording(){
+  startRecording() {
     this.nextState();
-    this.createMediaRecorder(this.stream);   
+    this.createMediaRecorder(this.stream);
   }
 
 
   createMediaRecorder(stream) {
-    
+
     //Creating the Media Recorder
     this.mr = new MediaRecorder(stream, {
       mimeType: 'video/webm',
@@ -276,7 +276,7 @@ class App extends Component {
       type: 'video/webm; codecs="vp9"'
     });
     console.log(blob);
-    const obj =URL.createObjectURL(blob);
+    const obj = URL.createObjectURL(blob);
     const file = new File([b], "interview.webm", { type: "video/webm", lastModified: Date.now() });
     this.setState({ 'videoFile': obj });
 

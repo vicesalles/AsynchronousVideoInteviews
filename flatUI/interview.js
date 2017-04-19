@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //console.log(uMediaDevices);
 
     //Getting Media Devices supported constrains
-    /*const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
-    console.log('Avaible constraints: ' + JSON.stringify(mdConstraints));*/
+    const mdConstraints = navigator.mediaDevices.getSupportedConstraints();
+    console.log('Avaible constraints: ' + JSON.stringify(mdConstraints));
 
 
 
@@ -59,11 +59,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     ideal: 1080,
                     min: 720,
                     max: 1080
-                }
+                }                
 
             }
         })
         .then(stream => {
+
+            //Getting stream settings
+            let vsts = stream.getVideoTracks()[0].getSettings();
+            console.log(vsts);
+
+            let asts = stream.getAudioTracks()[0].getSettings();
+            console.log(asts);
 
             //If the promise is acomplished i'll display the stream on the user browser
             player.srcObject = stream;

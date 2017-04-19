@@ -6,8 +6,9 @@ export default class Source extends Component{
         super(props);
 
         this.state = {'bufferPic':[]};
-
+        this.stream = null;
         this.props.media.then(stream=>{
+            this.stream = stream;
             this.refs.liveCam.srcObject = stream;
             this.refs.liveCam.muted = true;
             this.refs.liveCam.play();
@@ -19,6 +20,7 @@ export default class Source extends Component{
         this.capturePic = this.capturePic.bind(this);
         this.bufferPic = this.bufferPic.bind(this);
         this.passPics = this.passPics.bind(this);
+        this.takePhoto = this.takePhoto.bind(this);
         
     }
     
@@ -49,7 +51,15 @@ export default class Source extends Component{
 
     takePic() {
         this.bufferPic(this.capturePic());
+        // this.bufferPic(this.takePhoto());
         console.log('took a pic');
+    }
+
+
+    takePhoto(){
+        console.log(this.stream.getVideoTracks());
+        let source = this.stream.getVideoTracks()[0];
+        return source.takePhoto();
     }
 
     //The canvas will capture some frames
