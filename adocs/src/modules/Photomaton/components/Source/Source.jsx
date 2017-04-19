@@ -65,8 +65,12 @@ export default class Source extends Component{
     //The canvas will capture some frames
     capturePic() {
         let capturer = this.refs.capturer;
+        capturer.height = window.innerHeight;
+        capturer.width = window.innerWidth;
         let context = capturer.getContext('2d');
+        console.log('capturer size: '+capturer.width+', '+ capturer.height);
         context.drawImage(this.refs.liveCam, 0, 0, capturer.width, capturer.height);
+        //context.drawImage(this.refs.liveCam, 0, 0, window.innerWidth, window.innerHeight);
         let data = capturer.toDataURL('image/png');
         return data;
     }
