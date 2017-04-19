@@ -19,7 +19,6 @@ class App extends Component {
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: 3,
       questions: { '0': 'Do you like ninjas?', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
-      timecode: [], //Saving every user click on 'next button'
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
@@ -29,6 +28,7 @@ class App extends Component {
     //NON UI RELATED VARIABLES
     this.mr = null; //MediaRecorder
     this.videoData = [];
+    this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
     this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview', 'interview', 'review', 'thanks'];
 
@@ -220,9 +220,7 @@ class App extends Component {
 
   //Adding new entry to the TC Control
   addTCmark(t) {
-    let tc = this.state.timecode;
-    tc.push(t);
-    this.setState({ 'timecode': tc });    
+    this.timeCode.push(t);      
   }
 
   setBegin() {
@@ -242,14 +240,12 @@ class App extends Component {
 
   startRecording(){
     this.nextState();
-    this.createMediaRecorder(this.stream);
-    //this.createMediaRecorder(this.getMediaSources());
+    this.createMediaRecorder(this.stream);   
   }
 
 
   createMediaRecorder(stream) {
-
-    console.log(this.mr);
+    
     //Creating the Media Recorder
     this.mr = new MediaRecorder(stream, {
       mimeType: 'video/webm',
@@ -262,7 +258,6 @@ class App extends Component {
 
     //Adding a listener to the MR that saves media chunks to the State
     this.mr.addEventListener('dataavailable', (e) => {
-      console.log('gravant');
       this.videoData.push(e.data);
     });
   }

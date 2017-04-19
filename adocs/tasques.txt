@@ -23,8 +23,8 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
-5.Modificar VideoPlayer pq respongui a diferents casuístiques
 6.Optimitzar MediaConstrains: So i Foto
 3.Utilitzar el mètode takePhoto() de MediaStreamTrack
+7.Creació d'un únic objecte on guardar totes les variables generals.
 4.Eliminació de tots els states mal aplicats.
 2.eliminació dels layouts (main especialment, és repetitiu);
