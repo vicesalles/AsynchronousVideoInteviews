@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Main from './layouts/Main/Main';
-import Interview from './layouts/Interview/Interview';
+import SingleMessages from './components/SingleMessages/SingleMessages.jsx';
+import Interview from './modules/Interview/Interview';
 import Review from './components/Review/Review.jsx';
 import Welcome from './components/Welcome/Welcome.jsx';
+import Photomaton from './modules/Photomaton/Photomaton.jsx';
 import './App.css';
 
 
@@ -58,7 +59,7 @@ class App extends Component {
       case 'welcome':
         return (
           <div className="App">
-            <Main mode={this.state.state} mission={this.nextState} message="Thanks for showing up" />
+            <Welcome mission={this.nextState} message="Thanks for showing up" />
           </div>
         );
 
@@ -72,7 +73,7 @@ class App extends Component {
       case 'photomaton':
         return (
           <div className="App">
-            <Main poster={this.getPoster} mission={this.nextState} stream={this.getMediaSources()} mode={this.state.state} />
+            <Photomaton poster={this.getPoster} mission={this.nextState} media={this.getMediaSources()} count="3" pics="3" />
           </div>
         );
 
@@ -86,7 +87,7 @@ class App extends Component {
       case 'interview':
         return (
           <div className="App">
-            <Main mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
+            <SingleMessages mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
             <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
           </div>
         );
@@ -97,14 +98,14 @@ class App extends Component {
       case 'thanks':
         return (
           <div className="App">
-            <Main mode={this.state.state} message="We're done! Thanks for your time." />
+            <SingleMessages mode={this.state.state} message="We're done! Thanks for your time." />
           </div>
         );
 
       default:
         return (
           <div className="App">
-            <Main mode={this.state.state} message="How awesome MASS INTERVIEW can be?" />
+            <SingleMessages mode={this.state.state} message="How awesome MASS INTERVIEW can be?" />
           </div>
         );
 

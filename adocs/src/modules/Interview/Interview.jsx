@@ -13,7 +13,7 @@ export default class Interview extends Component {
 
     render() {
         
-        return (<article id="preview">
+        return (<article id="recPreview">
             
                 <VideoPlayer mode="interview" ref="video" media={this.props.stream}/>
             

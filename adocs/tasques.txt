@@ -23,7 +23,9 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
+9.avís pregunta # abans de les pregutnes.
 3.Utilitzar el mètode takePhoto() de MediaStreamTrack
 7.Creació d'un únic objecte on guardar totes les variables generals.
 4.Eliminació de tots els states mal aplicats.
-2.eliminació dels layouts (main especialment, és repetitiu);
+2.repassar estructura de carpetes
+8.So pel countdown

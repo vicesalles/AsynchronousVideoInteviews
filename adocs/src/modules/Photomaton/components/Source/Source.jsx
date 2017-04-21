@@ -108,7 +108,6 @@ export default class Source extends Component {
     //Shows the shutter mask
     shutterMask() {
         if (this.state.shooting) {
-            let sm = this.refs.shutterMask;
             setTimeout(() => { this.setState({ shooting: false }); }, this.pInterval - (this.pInterval / 4));
             return (<div id="shutterMask" ref="shutterMask"></div>);
         }
