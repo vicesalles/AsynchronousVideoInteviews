@@ -39,10 +39,7 @@ export default class Vumeter extends Component {
     getAudio(stream) {
 
         const audioContext = new AudioContext();
-
-        //Getting audio channel info
-        const audioTrack = stream.getAudioTracks()[0];
-
+        
         //Adding stream to the Audio Context
         const audio = audioContext.createMediaStreamSource(stream);
 

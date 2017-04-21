@@ -278,7 +278,6 @@ class App extends Component {
     });
     console.log(blob);
     const obj = URL.createObjectURL(blob);
-    const file = new File([b], "interview.webm", { type: "video/webm", lastModified: Date.now() });
     this.setState({ 'videoFile': obj });
 
   }

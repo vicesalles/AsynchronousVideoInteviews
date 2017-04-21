@@ -23,7 +23,10 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
-9.avís pregunta # abans de les pregutnes.
+11.nextBu interview: a la dreta de la pantalla.
+12.Concsistència botó 'take pictures'
+9.avís pregunta # abans de les pregutnes. (refactoritzar component Missatge amb modes i tal)
+
 3.Utilitzar el mètode takePhoto() de MediaStreamTrack
 7.Creació d'un únic objecte on guardar totes les variables generals.
 4.Eliminació de tots els states mal aplicats.

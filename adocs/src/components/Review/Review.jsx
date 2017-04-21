@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Review.css';
-import Message from '../Message/Message.jsx';
 import VideoPlayer from '../VideoPlayer/VideoPlayer.jsx';
 
 export default class Review extends Component {
