@@ -87,5 +87,7 @@ export default class Photomaton extends Component {
     getPic(p){        
         this.props.poster(p,this.props.mission); //second paramater is a callback        
     }
+
+ 
 }
 

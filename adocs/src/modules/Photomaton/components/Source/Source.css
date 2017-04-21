@@ -1,7 +1,7 @@
-#capturer{
+#capturer {
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     min-width: 1280px;
     min-height: 720px;
@@ -15,4 +15,37 @@
     top: 0;
     left: 0;
     object-fit: cover;
+}
+
+#shutterMask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: 33;
+    animation: fadeIn 0.2s 1;
+    background-color: #4C4C4C;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacitiy: 0;
+    }
+    50% {
+        opacitiy: 1;
+    }
+    65% {
+        opacitiy: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut{
+    from{opacity: 1;}
+    to{opacity: 1;}
 }

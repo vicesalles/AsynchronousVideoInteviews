@@ -15,7 +15,7 @@
 
 #shoot {
     text-decoration: none;
-    background-color: red;
+    background-color: #4C4C4C;
     color: white;
     width: 100%;
     text-align: center;
@@ -28,7 +28,7 @@
 }
 
 #shoot:hover{
-    color:yellow;
+    color:#4C4C4C;
     background-color: firebrick;
     padding: 0.6em 2.5em 0.6em 2.5em;
 }

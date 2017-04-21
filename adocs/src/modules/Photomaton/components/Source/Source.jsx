@@ -1,13 +1,17 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import './Source.css';
+import sound from '../../media/shutter.mp3';
 
-export default class Source extends Component{
-     constructor(props){
+export default class Source extends Component {
+    constructor(props) {
         super(props);
 
-        this.state = {'bufferPic':[]};
+        this.state = {
+            'bufferPic': [],
+            'shooting': false,
+        };
         this.stream = null;
-        this.props.media.then(stream=>{
+        this.props.media.then(stream => {
             this.stream = stream;
             this.refs.liveCam.srcObject = stream;
             this.refs.liveCam.muted = true;
@@ -21,19 +25,29 @@ export default class Source extends Component{
         this.bufferPic = this.bufferPic.bind(this);
         this.passPics = this.passPics.bind(this);
         this.takePhoto = this.takePhoto.bind(this);
-        
-    }
-    
-    render(){
+        this.sSounds = this.sSounds.bind(this);
+        this.shutterMask = this.shutterMask.bind(this);
 
-        return(<div>
+        this.shutterSound = new Audio(sound);
+
+        this.pInterval = 600;
+
+    }
+    componentDidMount() {
+        this.shutterSound.load();
+    }
+
+    render() {
+
+        return (<div>
             <canvas ref="capturer" id="capturer"></canvas>
-            <video ref="liveCam" id="liveCam"></video>            
+            {this.shutterMask()}
+            <video ref="liveCam" id="liveCam"></video>
         </div>)
     }
 
     launch() {
-        this.burst(this.takePic, this.props.pics, 500, this.passPics);
+        this.burst(this.takePic, this.props.pics, this.pInterval, this.passPics);
     }
 
     //It does f n times in a lapse of m mseconds. then, callback
@@ -50,13 +64,15 @@ export default class Source extends Component{
     }
 
     takePic() {
+        this.setState({ shooting: true });
         this.bufferPic(this.capturePic());
-        // this.bufferPic(this.takePhoto());
-        console.log('took a pic');
+        this.sSounds(this.shutterSound);
+        this.shutterMask();
     }
 
 
-    takePhoto(){
+    //Try using MediaStreamTrack.takePhoto(); won't work :(
+    takePhoto() {
         console.log(this.stream.getVideoTracks());
         let source = this.stream.getVideoTracks()[0];
         return source.takePhoto();
@@ -68,23 +84,40 @@ export default class Source extends Component{
         capturer.height = window.innerHeight;
         capturer.width = window.innerWidth;
         let context = capturer.getContext('2d');
-        console.log('capturer size: '+capturer.width+', '+ capturer.height);
         context.drawImage(this.refs.liveCam, 0, 0, capturer.width, capturer.height);
-        //context.drawImage(this.refs.liveCam, 0, 0, window.innerWidth, window.innerHeight);
         let data = capturer.toDataURL('image/png');
         return data;
     }
+
     //The img data is pushed to the state 'bufferPic' array;
-    bufferPic(p){
+    bufferPic(p) {
         let bf = this.state.bufferPic;
         bf.push(p);
-        this.setState({'bufferPic':bf});
+        this.setState({ 'bufferPic': bf });
     }
 
-    passPics(){
+    //Passing back the collected pictures
+    passPics() {
         this.props.done();
         this.props.mission(this.state.bufferPic);
-        
+    }
+
+
+    //SHUTTER STUFF
+
+    //Shows the shutter mask
+    shutterMask() {
+        if (this.state.shooting) {
+            let sm = this.refs.shutterMask;
+            setTimeout(() => { this.setState({ shooting: false }); }, this.pInterval - (this.pInterval / 4));
+            return (<div id="shutterMask" ref="shutterMask"></div>);
+        }
+    }
+
+
+    //Playing a given sound
+    sSounds(s) {
+        s.play();
     }
 
 }
