@@ -24,8 +24,6 @@ modul inclou -Preguntes -Control (antic preview);
 ------------------------
 
 
-12.Concsistència botó 'take pictures'
-
 
 9.avís pregunta # abans de les pregutnes. (refactoritzar component Missatge amb modes i tal)
 

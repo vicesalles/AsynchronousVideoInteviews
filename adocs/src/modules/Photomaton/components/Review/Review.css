@@ -61,25 +61,7 @@ h1{
     cursor:pointer;
 
 }
-/*
-.retake{
-    position: fixed; 
-    text-decoration: none;
-    text-align: center;
-    font-size:10px;
-    height: 70px;
-    width: 70px;
-    line-height: 70px;
-    color: white;
-    background-color: #4C4C4C;  
-    z-index:44;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.5s;
-}*/
 
 .reTake:hover{
-    background-color: firebrick;
-    box-shadow: 1px 1px 4px black;   
+    background-color: firebrick; 
 }

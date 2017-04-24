@@ -3,6 +3,7 @@ import SingleMessages from './components/SingleMessages/SingleMessages.jsx';
 import Interview from './modules/Interview/Interview';
 import Review from './components/Review/Review.jsx';
 import Welcome from './components/Welcome/Welcome.jsx';
+import GetReady from './components/GetReady/GetReady.jsx';
 import Photomaton from './modules/Photomaton/Photomaton.jsx';
 import './App.css';
 
@@ -31,7 +32,7 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-    this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview', 'interview', 'review', 'thanks'];
+    this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
 
     //METHODS
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -80,9 +81,15 @@ class App extends Component {
       case 'beforeInterview':
         return (
           <div className="App">
-            <Welcome mission={this.startRecording} message="Great, now let's get started with the interview." />
+            <Welcome mission={this.startRecording} message="Got it, now let's get started with the interview." />
           </div>
         );
+
+      case 'getReady':
+        return(<div className="App">
+               <GetReady message="Get ready" mission={this.nextState} time="2500"/>
+               </div>
+          );
 
       case 'interview':
         return (
@@ -91,6 +98,12 @@ class App extends Component {
             <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
           </div>
         );
+
+      case 'congrats':
+        return(<div className="App">
+               <GetReady message="Well done" mission={this.nextState} time="2500"/>
+               </div>
+          );
 
       case 'review':
         return (<Review download={true} review={true} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
