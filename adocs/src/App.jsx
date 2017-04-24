@@ -20,7 +20,12 @@ class App extends Component {
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: 3,
-      questions: { '0': 'Do you like ninjas?', '1': 'Have you ever seen a ninja?', '2': 'Have you ever felt their action?' }, //The actual questions
+      questions: { '0': 'Where are you living? With whom?',
+       '1': 'Are you studying or working? On what?',
+       '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
+       '3':'Tell me a funny memory you can recall from Breda',
+       '4':'Tell me a word in Dutch',
+       '5':'Tell me something awesome that happened to you after Breda'  }, //The actual questions
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
