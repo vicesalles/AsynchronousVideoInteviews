@@ -29,7 +29,7 @@ h1{
 #next {
     width: 33%;
 }
-
+/*
 #nextQuestion {
     display: block;
     height: 70px;
@@ -46,4 +46,26 @@ h1{
 
 #nextQuestion:hover{
     background-color: green;    
+}*/
+
+#nextQuestion{
+
+    position: fixed;
+    bottom: 2em;
+    right:2em;
+    display: block;
+    height: 70px;
+    width: 70px;
+    margin-left: 5px;
+    color: white;
+    background-color: #4C4C4C;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color;
+
+}
+
+#nextQuestion:hover{
+    background-color: green;     
 }

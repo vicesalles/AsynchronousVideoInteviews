@@ -1,10 +1,13 @@
 #shootContainer{
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index:44;
     text-align: center;
     width: 100%;
-    bottom:0px;
-    padding-bottom: 2em;
+    bottom:0px;    
 }
 
 .invisible {
@@ -12,23 +15,23 @@
     display: none;
 }
 
-
-#shoot {
+ #shoot{
+    position: relative; 
     text-decoration: none;
-    background-color: #4C4C4C;
+    display: block;
+    height: 70px;
+    width: 70px;
+    line-height: 70px;
+    margin-left: 5px;
     color: white;
-    width: 100%;
-    text-align: center;
-    line-height: 2em;
-    padding: 0.2em 2em;
-    border-radius: 3px;
-    font-weight: bold;
+    background-color: firebrick;  
+    border-radius: 50%;
+    border: none;
     cursor: pointer;
-    transition: color 1s, background-color 0.5s, padding 0.5s;
-}
+    bottom: 2em;
+    transition: background-color 0.5s;
+ }
 
 #shoot:hover{
-    color:#4C4C4C;
-    background-color: firebrick;
-    padding: 0.6em 2.5em 0.6em 2.5em;
+    background-color: #4C4C4C;   
 }

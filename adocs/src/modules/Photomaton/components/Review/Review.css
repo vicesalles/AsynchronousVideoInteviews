@@ -21,7 +21,6 @@
 
 #picsContainer {
     display: flex;
-   /* flex-direction: row;*/
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -48,20 +47,37 @@ h1{
 .reTake{
     position:fixed;
     font-size:10px;
-    padding: 0.8em 2em 0.8em 2em;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: 3px;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    line-height: 55px;
     border: none;
     bottom: 1.5em;
     background-color: #4C4C4C;    
     color: white;
-    box-shadow: 1px 1px 8px black;
     transition: background-color,box-shadow;
     cursor:pointer;
 
 }
+/*
+.retake{
+    position: fixed; 
+    text-decoration: none;
+    text-align: center;
+    font-size:10px;
+    height: 70px;
+    width: 70px;
+    line-height: 70px;
+    color: white;
+    background-color: #4C4C4C;  
+    z-index:44;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}*/
 
 .reTake:hover{
     background-color: firebrick;
