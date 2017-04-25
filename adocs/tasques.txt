@@ -23,6 +23,8 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
+1.Create checkbox list for accepting conditions before recording
+
 3.Utilitzar el mètode takePhoto() de MediaStreamTrack
 7.Creació d'un únic objecte on guardar totes les variables generals.
 4.Eliminació de tots els states mal aplicats.

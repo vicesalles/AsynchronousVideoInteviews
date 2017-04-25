@@ -1,0 +1,26 @@
+.checkbox {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-progress-appearance: none;
+    background-color: white;
+    border: 5px solid #4c4c4c;
+    padding: 9px;
+}
+
+.checkbox:checked:after {
+    content: '\2714';
+    color: green;
+    font-size:5em;
+    padding:0;
+}
+
+#main {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
