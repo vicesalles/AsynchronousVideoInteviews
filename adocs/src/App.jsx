@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SingleMessages from './components/SingleMessages/SingleMessages.jsx';
+import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
 import Interview from './modules/Interview/Interview';
 import Review from './components/Review/Review.jsx';
-import Welcome from './components/Welcome/Welcome.jsx';
-import GetReady from './components/GetReady/GetReady.jsx';
+import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
+import Alert from './components/Alert/Alert.jsx';
 import Photomaton from './modules/Photomaton/Photomaton.jsx';
 import './App.css';
 
@@ -64,14 +64,14 @@ class App extends Component {
       case 'welcome':
         return (
           <div className="App">
-            <Welcome mission={this.nextState} message="Thanks for showing up" />
+            <ActionMessage mission={this.nextState} message="Thanks for showing up" />
           </div>
         );
 
       case 'ready':
         return (
           <div className="App">
-            <Welcome mission={this.nextState} message="Now we'll take a picture of yours" />
+            <ActionMessage mission={this.nextState} message="Now we'll take a picture of yours" />
           </div>
         );
 
@@ -85,27 +85,27 @@ class App extends Component {
       case 'beforeInterview':
         return (
           <div className="App">
-            <Welcome mission={this.startRecording} message="Got it, now let's get started with the interview." />
+            <ActionMessage mission={this.startRecording} message="Got it, now let's get started with the interview." />
           </div>
         );
 
       case 'getReady':
         return(<div className="App">
-               <GetReady message="Get ready" mission={this.nextState} time="2500"/>
+               <Alert message="Get ready" mission={this.nextState} time="2500"/>
                </div>
           );
 
       case 'interview':
         return (
           <div className="App">
-            <SingleMessages mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
+            <SingleMessage mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
             <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
           </div>
         );
 
       case 'congrats':
         return(<div className="App">
-               <GetReady message="Well done" mission={this.nextState} time="2500"/>
+               <Alert message="Well done" mission={this.nextState} time="2500"/>
                </div>
           );
 
@@ -115,14 +115,14 @@ class App extends Component {
       case 'thanks':
         return (
           <div className="App">
-            <SingleMessages mode={this.state.state} message="We're done! Thanks for your time." />
+            <SingleMessage mode={this.state.state} message="We're done! Thanks for your time." />
           </div>
         );
 
       default:
         return (
           <div className="App">
-            <SingleMessages mode={this.state.state} message="How awesome MASS INTERVIEW can be?" />
+            <SingleMessage mode={this.state.state} message="How awesome MASS INTERVIEW can be?" />
           </div>
         );
 

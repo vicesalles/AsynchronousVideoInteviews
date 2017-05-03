@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './GetReady.css';
+import './Alert.css';
 
-export default class Message extends Component {
+export default class Alert extends Component {
 
     componentDidMount(){
         setTimeout(()=>{

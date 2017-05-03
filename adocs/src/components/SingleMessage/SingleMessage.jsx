@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Message from '../Message/Message.jsx';
 
-export default class SingleMessages extends Component {
+export default class SingleMessage extends Component {
 
     render() {
 

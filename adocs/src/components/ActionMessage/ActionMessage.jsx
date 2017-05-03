@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import './Welcome.css';
+import './ActionMessage.css';
 import Message from '../Message/Message.jsx';
 
-export default class Welcome extends Component{
+export default class ActionMessage extends Component{
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
