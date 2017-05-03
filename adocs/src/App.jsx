@@ -19,7 +19,7 @@ class App extends Component {
       state: 'welcome', // Kind of router
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
-      nQuestions: 3,
+      nQuestions: 6,
       questions: { '0': 'Where are you living? With whom?',
        '1': 'Are you studying or working? On what?',
        '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
@@ -40,7 +40,6 @@ class App extends Component {
     this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
 
     //METHODS
-    this.nextQuestion = this.nextQuestion.bind(this);
     this.getMediaSources = this.getMediaSources.bind(this);
     this.getPoster = this.getPoster.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -111,7 +110,7 @@ class App extends Component {
           );
 
       case 'review':
-        return (<Review download={true} review={true} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
+        return (<Review upload={false} download={true} review={true} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
 
       case 'thanks':
         return (
@@ -129,10 +128,6 @@ class App extends Component {
 
     }
 
-  }
-
-  nextQuestion() {
-    this.setState({ currentQuestion: this.state.currentQuestion + 1 });
   }
 
   //this method gets user's merdia sources and returns a Stream
