@@ -21,11 +21,11 @@ class App extends Component {
       currentQuestion: 0, //Keeping the track on questions
       nQuestions: 6,
       questions: { '0': 'Where are you living? With whom?',
-       '1': 'Are you studying or working? On what?',
-       '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
-       '3':'Tell me a funny memory you can recall from Breda',
-       '4':'Tell me a word in Dutch',
-       '5':'Tell me something awesome that happened to you after Breda'  }, //The actual questions
+       '1': 'Where are you working? On what?',
+       '2': 'Love matters: Do you have a couple? Got married? It\'s complicated? Tell us more...',
+       '3':'When did you start coding?',
+       '4':'How many languages do you speak? Which ones?',
+       '5':'Have you ever lived abroad? Where? For how long?'  }, //The actual questions
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
@@ -72,7 +72,7 @@ class App extends Component {
       case 'ready':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="Now we'll take a picture of yours" />
+            <ActionMessage mission={this.nextState} message="First, we'll take a picture of yours" />
           </div>
         );
 
@@ -313,3 +313,13 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+preguntes breda
+'0': 'Where are you living? With whom?',
+       '1': 'Are you studying or working? On what?',
+       '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
+       '3':'Tell me a funny memory you can recall from Breda',
+       '4':'Tell me a word in Dutch',
+       '5':'Tell me something awesome that happened to you after Breda'
+ */
