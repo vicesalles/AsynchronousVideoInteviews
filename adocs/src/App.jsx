@@ -65,7 +65,7 @@ class App extends Component {
       case 'welcome':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="Thanks for showing up" />
+            <ActionMessage mission={this.nextState} message="Thanks for showing up, this is an interview." />
           </div>
         );
 
@@ -86,13 +86,13 @@ class App extends Component {
       case 'beforeInterview':
         return (
           <div className="App">
-            <ActionMessage mission={this.startRecording} message="Got it, now let's get started with the interview." />
+            <ActionMessage mission={this.startRecording} message="Got it, now let's get started with the questions." />
           </div>
         );
 
       case 'getReady':
         return(<div className="App">
-               <Alert message="Get ready" mission={this.nextState} time="2500"/>
+               <Alert message="Answer" mission={this.nextState} time="2500"/>
                </div>
           );
 
