@@ -23,6 +23,9 @@ modul inclou -Preguntes -Control (antic preview);
 
 ------------------------
 
+0.Normalitzar We o I en els textos
+9.Css Chrome
+
 1.Create checkbox list for accepting conditions before recording
 
 3.Utilitzar el mètode takePhoto() de MediaStreamTrack

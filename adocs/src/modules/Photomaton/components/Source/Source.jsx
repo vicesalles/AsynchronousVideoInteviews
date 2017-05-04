@@ -11,13 +11,7 @@ export default class Source extends Component {
             'shooting': false,
         };
         this.stream = null;
-        this.props.media.then(stream => {
-            this.stream = stream;
-            this.refs.liveCam.srcObject = stream;
-            this.refs.liveCam.muted = true;
-            this.refs.liveCam.play();
-        })
-
+        
         this.launch = this.launch.bind(this);
         this.burst = this.burst.bind(this);
         this.takePic = this.takePic.bind(this);
@@ -35,6 +29,25 @@ export default class Source extends Component {
     }
     componentDidMount() {
         this.shutterSound.load();
+         //Checking if Getting a Promise or a MediasStream Object;
+        if (typeof this.props.media.then === 'function') {
+
+            this.props.media.then(stream => {
+                this.stream = stream;
+                this.refs.liveCam.srcObject = stream;
+                this.refs.liveCam.muted = true;
+                this.refs.liveCam.play();
+            })
+
+        }else{
+
+            this.stream = this.props.media;
+            this.refs.liveCam.srcObject = this.stream;
+            this.refs.liveCam.muted = true;
+            this.refs.liveCam.play();
+
+        }
+       
     }
 
     render() {
@@ -73,7 +86,6 @@ export default class Source extends Component {
 
     //Try using MediaStreamTrack.takePhoto(); won't work :(
     takePhoto() {
-        console.log(this.stream.getVideoTracks());
         let source = this.stream.getVideoTracks()[0];
         return source.takePhoto();
     }

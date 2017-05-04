@@ -29,7 +29,8 @@ class App extends Component {
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
-      videoFile: null //ObjectURL
+      videoFile: null, //ObjectURL
+      permissionGranted:false //Do I have camera access?
     };
 
     //NON UI RELATED VARIABLES
@@ -78,7 +79,7 @@ class App extends Component {
       case 'photomaton':
         return (
           <div className="App">
-            <Photomaton poster={this.getPoster} mission={this.nextState} media={this.getMediaSources()} count="3" pics="3" />
+            <Photomaton poster={this.getPoster} permission={this.state.permissionGranted} mission={this.nextState} media={this.getMediaSources()} count="3" pics="3" />
           </div>
         );
 
@@ -156,8 +157,9 @@ class App extends Component {
         }
       })
         .then(stream => {
-
+          
           this.stream = stream;
+          this.setState({'permissionGranted':true});
           return stream;
 
         })

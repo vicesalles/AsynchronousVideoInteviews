@@ -4,6 +4,7 @@ import Countdown from './components/Countdown/Countdown';
 import Source from './components/Source/Source.jsx';
 import Button from './components/Button/Button.jsx';
 import Review from './components/Review/Review.jsx';
+import SingleMessage from '../../components/SingleMessage/SingleMessage.jsx';
 
 export default class Photomaton extends Component {
     constructor(props) {
@@ -24,24 +25,31 @@ export default class Photomaton extends Component {
 
     }
     render() {
+        
+        if(this.props.permission){
 
-        if (this.state.ready) {
-            if (this.state.state === 'shooting') {
-                return (<article id="Photomaton">
-                    <Countdown count={this.props.count} mission={this.shot} />
-                    <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toReview} />
-                </article>
-                );
-            } else if(this.state.state === 'review') {
-                return(<Review getPic={this.getPic} pics={this.state.picBuffer} redo={this.updateState} />);
-            }
-
-        } else {
-            return (<article id="Photomaton">
-                        <Button mission={this.readiness} />
-                        <Source media={this.props.media} />
+            if (this.state.ready) {
+                if (this.state.state === 'shooting') {
+                    return (<article id="Photomaton">
+                        <Countdown count={this.props.count} mission={this.shot} />
+                        <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toReview} />
                     </article>
-            );
+                    );
+                } else if(this.state.state === 'review') {
+                    return(<Review getPic={this.getPic} pics={this.state.picBuffer} redo={this.updateState} />);
+                }
+
+            } else {
+                return (<article id="Photomaton">
+                            <Button mission={this.readiness} />
+                            <Source media={this.props.media} />
+                        </article>
+                );
+            }
+        }else{
+
+            return(<SingleMessage message="I need you to allow me to use your camera"/>);
+
         }
     }
 
@@ -74,7 +82,6 @@ export default class Photomaton extends Component {
 
     //Passing preview Pics
     passPics(p) {
-        console.log('got new pics on the photomaton state');
         this.setState({ 'picBuffer': p });
     }
 
