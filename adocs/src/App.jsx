@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
-import Interview from './modules/Interview/Interview';
+import Interview from './components/Interview/Interview';
 import Review from './components/Review/Review.jsx';
 import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
@@ -286,12 +286,10 @@ class App extends Component {
 
   //Saves video data into webm file.
   toFile(b) {
-
-    console.log(b);
+    
     const blob = new Blob(b, {
       type: 'video/webm; codecs="vp9"'
     });
-    console.log(blob);
     const obj = URL.createObjectURL(blob);
     this.setState({ 'videoFile': obj });
 
@@ -308,7 +306,6 @@ class App extends Component {
     });
 
   }
-
 
 }
 

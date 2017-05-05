@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Interview.css';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
-import Vumeter from '../../components/Vumeter/Vumeter';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Vumeter from '../Vumeter/Vumeter';
 
 export default class Interview extends Component {
    
