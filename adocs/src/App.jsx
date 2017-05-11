@@ -19,13 +19,12 @@ class App extends Component {
       state: 'welcome', // Kind of router
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
-      nQuestions: 6,
-      questions: { '0': 'Where are you living? With whom?',
-       '1': 'Where are you working? On what?',
-       '2': 'Love matters: Do you have a couple? Got married? It\'s complicated? Tell us more...',
-       '3':'When did you start coding?',
-       '4':'How many languages do you speak? Which ones?',
-       '5':'Have you ever lived abroad? Where? For how long?'  }, //The actual questions
+      nQuestions: 5,
+      questions: {'0': 'Where are you living? With whom?',
+       '1': 'Are you studying or working? On what?',      
+       '2':'Tell me a word in Dutch',
+       '3':'Tell me something awesome that happened to you after Breda',
+       '4':'Greet all our Breda mates in your own language'}, //The actual questions
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
@@ -72,7 +71,7 @@ class App extends Component {
       case 'ready':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="First, we'll take a picture of yours" />
+            <ActionMessage mission={this.nextState} message="First, I'll take a picture of yours" />
           </div>
         );
 
@@ -111,12 +110,12 @@ class App extends Component {
           );
 
       case 'review':
-        return (<Review upload={false} download={true} review={true} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
+        return (<Review upload={false} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
 
       case 'thanks':
         return (
           <div className="App">
-            <SingleMessage mode={this.state.state} message="We're done! Thanks for your time." />
+            <SingleMessage mode={this.state.state} message="Gorgeous! Thanks for your time." />
           </div>
         );
 
@@ -313,10 +312,11 @@ export default App;
 
 /*
 preguntes breda
-'0': 'Where are you living? With whom?',
+       '0': 'Where are you living? With whom?',
        '1': 'Are you studying or working? On what?',
        '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
        '3':'Tell me a funny memory you can recall from Breda',
        '4':'Tell me a word in Dutch',
-       '5':'Tell me something awesome that happened to you after Breda'
+       '5':'Tell me something awesome that happened to you after Breda',
+       '6':'Greet all our Breda mates with your own language'
  */

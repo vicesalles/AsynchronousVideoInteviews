@@ -48,7 +48,7 @@ export default class Photomaton extends Component {
             }
         }else{
 
-            return(<SingleMessage message="We need you to allow us to use your camera"/>);
+            return(<SingleMessage message="I need you to allow me to use your camera"/>);
 
         }
     }

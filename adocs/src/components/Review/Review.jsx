@@ -14,8 +14,14 @@ export default class Review extends Component {
     render() {
         return (<main id="main">
             <div id="ContentReview">
-                <div id="title">Answer Review</div>
-                {this.canReview()}
+                <div id="title">We're almost done</div>
+                {this.canReview()}                
+                <p>As this is a testing project, most of the features are not ready yet. Hence, I need your help:</p>
+               <ol>
+                <li>Download the interview by clicking the download button.</li>
+                <li>Send it to me at vicenc.salles@gmail.com via <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">wetransfer</a></li>
+                <li>Wait a couple of weeks to see all our Breda friends in an awesome asynchronously and worldwide recorded video ;-D</li>
+               </ol>
                 {this.canDownLoad()}
                 <div>
                     <button onClick={this.handleClick} href={this.props.file} className="nextButton">End</button>
@@ -29,7 +35,7 @@ export default class Review extends Component {
         if (this.props.download === true) {
             console.log(this.props.file);
 
-            return (<div><a id="dwnBu" ref="dwnBu" href={this.props.file} download="interview.webm">Download you answer</a></div>);
+            return (<div><a id="dwnBu" ref="dwnBu" href={this.props.file} download="interview.webm">Download your interview</a></div>);
         }
     }
 
