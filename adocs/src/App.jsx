@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BrowserCheck from './components/BrowserCheck/BrowserCheck.jsx';
 import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
 import Interview from './components/Interview/Interview';
 import Review from './components/Review/Review.jsx';
@@ -37,7 +38,7 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-    this.screens = ['welcome', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
+    this.screens = ['browserCheck','welcome', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
 
     //METHODS
     this.getMediaSources = this.getMediaSources.bind(this);
@@ -90,9 +91,10 @@ class App extends Component {
         );
 
       case 'getReady':
-        return(<div className="App">
-               <Alert message="Answer" mission={this.nextState} time="2500"/>
-               </div>
+        return(
+              <div className="App">
+                 <Alert message="Answer" mission={this.nextState} time="2500"/>
+              </div>
           );
 
       case 'interview':

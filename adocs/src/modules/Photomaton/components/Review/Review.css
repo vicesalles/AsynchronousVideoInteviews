@@ -1,6 +1,10 @@
 #review{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     width: 100%;
     height: 100%;
@@ -9,8 +13,15 @@
 #reviewPics {
     z-index: 22;
     position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     top: -3em;
     left: 0;
@@ -20,8 +31,13 @@
 }
 
 #picsContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
@@ -29,11 +45,14 @@
     margin-left: 2em;
     margin-right: 2em;
     margin-top: 2em;
+    -webkit-box-shadow: 1px 1px 8px black;
     box-shadow: 1px 1px 8px black;
+    -webkit-transition: all;
     transition: all;
 }
 
 #picsContainer img:hover{
+    -webkit-box-shadow: 1px 1px 4px black;
     box-shadow: 1px 1px 4px black;
     cursor: pointer;
 }
@@ -57,7 +76,10 @@ h1{
     bottom: 1.5em;
     background-color: #4C4C4C;    
     color: white;
+    -webkit-transition: background-color,-webkit-box-shadow;
+    transition: background-color,-webkit-box-shadow;
     transition: background-color,box-shadow;
+    transition: background-color,box-shadow,-webkit-box-shadow;
     cursor:pointer;
 
 }

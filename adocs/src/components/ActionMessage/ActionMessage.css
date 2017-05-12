@@ -12,6 +12,7 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
+    -webkit-transition: background-color;
     transition: background-color;
 
 }
