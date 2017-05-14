@@ -11,9 +11,12 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-sass": "^3.1.0",
+    "node-sass-chokidar": "0.0.1",
     "react-scripts": "0.9.5"
   },
   "scripts": {
+    "build-css":"node-sass-chokidar src/ -o src/",
+    "watch-css":"npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

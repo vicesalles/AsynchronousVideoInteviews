@@ -38,7 +38,7 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-    this.screens = ['browserCheck','welcome', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
+    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
 
     //METHODS
     this.getMediaSources = this.getMediaSources.bind(this);
@@ -68,6 +68,11 @@ class App extends Component {
             <ActionMessage mission={this.nextState} message="Thanks for showing up, this is an interview." />
           </div>
         );
+
+      case 'browserCheck':
+        return(
+          <BrowserCheck mission={this.nextState}/>
+        )
 
       case 'ready':
         return (

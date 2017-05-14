@@ -2,3 +2,6 @@
   background-color: white; }
   #uploader p {
     color: #4c4c4c; }
+  #uploader a {
+    text-decoration: none;
+    color: #4c4c4c; }
