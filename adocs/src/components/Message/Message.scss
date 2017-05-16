@@ -1,0 +1,14 @@
+@import '../../partials/colors';
+@import '../../partials/mixins';
+#question{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    font-size: 2em;
+    color: $main-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include flex-center();
+    top: -2em;
+}

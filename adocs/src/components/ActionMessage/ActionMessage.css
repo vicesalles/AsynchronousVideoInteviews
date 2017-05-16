@@ -1,22 +1,18 @@
-.nextButton{
+.nextButton {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  display: block;
+  height: 70px;
+  width: 70px;
+  margin-left: 5px;
+  color: white;
+  background-color: #4c4c4c;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: background-color;
+  transition: background-color; }
 
-    position: fixed;
-    bottom: 2em;
-    right:2em;
-    display: block;
-    height: 70px;
-    width: 70px;
-    margin-left: 5px;
-    color: white;
-    background-color: #4C4C4C;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    -webkit-transition: background-color;
-    transition: background-color;
-
-}
-
-.nextButton:hover{
-    background-color: green;     
-}
+.nextButton:hover {
+  background-color: green; }

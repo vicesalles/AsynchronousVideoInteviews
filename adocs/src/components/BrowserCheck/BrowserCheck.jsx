@@ -21,9 +21,21 @@ export default class BrowserCheck extends Component {
             .checkBrowser
             .bind(this);
 
-        //Minimum supported versions:
-        this.minChrome = 57; //57 real
-        this.minFirefox = 54; //54 és l'última ara mateix
+        //Minimum supported versions:  Must check this out at caniuse.com
+        this.minChrome = 56; //57 real
+        this.minFirefox = 52; //54 és l'última ara mateix
+        
+        /*
+        CANIUSE FEATURES
+
+        getUserMedia:
+            fx:52,
+            ch:57
+        mediaRecorder:
+            fx: 52,
+            ch: 49
+        
+         */
 
     }
 

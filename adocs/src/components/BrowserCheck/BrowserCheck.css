@@ -6,16 +6,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  align-items: center; }
   .mainBr div {
     color: #4c4c4c;
     margin-bottom: 2em;
@@ -24,8 +18,8 @@
 .dwnBtnsBx {
   text-align: center;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   align-items: center; }
 
 .dwnBrw {

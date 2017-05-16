@@ -1,0 +1,68 @@
+@import '../../partials/colors';
+@import '../../partials/mixins';
+#recPreview {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 12;
+    width: 50vw;
+    height: 70px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 1em 1em 1em 1em;
+}
+
+h1{
+    text-align: center;
+    font-size: 2em;
+    color:$main-color;
+}
+
+#info {
+    width: 66%;
+    color: white;
+    text-align: center;    
+    display: -webkit-box;    
+    display: -ms-flexbox;    
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-right: 5px;
+}
+
+#next {
+    width: 33%;
+}
+
+#nextQuestion{
+
+    position: fixed;
+    bottom: 2em;
+    right:2em;
+    display: block;
+    height: 70px;
+    width: 70px;
+    margin-left: 5px;
+    color: white;
+    background-color: $main-color;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: background-color;
+    transition: background-color;
+
+}
+
+#nextQuestion:hover{
+    background-color: $ok-color;     
+}

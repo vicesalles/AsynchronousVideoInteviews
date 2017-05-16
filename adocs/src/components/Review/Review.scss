@@ -1,0 +1,45 @@
+@import '../../partials/colors';
+@import '../../partials/mixins';
+
+#main {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    @include flex-center();
+}
+
+#title {
+    top: 0.5em;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    color: $main-color;
+    position: relative;
+}
+
+#ContentReview {
+    @include flex-center();
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    div {
+        @include flex-center();
+        width: 55%;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+}
+
+#dwnBu {
+    text-decoration: none;
+    background-color:$ok-color;
+    color: white;
+    width: 33%;
+    text-align: center;
+    line-height: 2em;
+    padding: 0.2em 2em;
+    border-radius: 3px;
+    cursor: pointer;
+}

@@ -1,0 +1,57 @@
+@import '../../partials/colors';
+@import '../../partials/mixins';
+#alert{
+    width:100%;
+    height: 100%;
+    text-align: center;
+    font-size: 6em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    position: fixed;
+    @include flex-center();
+    top: 0;
+    left: 0;   
+    top: -0.5em;
+ 
+}
+
+#getReady{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    @include flex-center();
+    background-color: $main-color;
+    -webkit-animation: bkgAppear 0.5s forwards;
+    animation: bkgAppear 0.5s forwards;
+}
+
+.grmessage{
+    -webkit-animation: appear 2s 0.5s forwards;
+    animation: appear 2s 0.5s forwards;
+}
+
+.disappear{
+    -webkit-animation: disappear 2s;
+    animation: disappear 2s;
+}
+
+@-webkit-keyframes bkgAppear{
+    from{background-color:white;}        
+    to{background-color:$main-color;}
+}
+
+@keyframes bkgAppear{
+    from{background-color:white;}        
+    to{background-color:$main-color;}
+}
+
+@-webkit-keyframes disappear{
+    from{background-color:$main-color; }
+    to{background-color:white;}
+}
+
+@keyframes disappear{
+    from{background-color:$main-color; }
+    to{background-color:white;}
+}

@@ -1,0 +1,6 @@
+@mixin flex-center($orientation:column){
+    display: flex;
+    justify-content: center;
+    flex-direction: $orientation;
+    align-items: center;
+}

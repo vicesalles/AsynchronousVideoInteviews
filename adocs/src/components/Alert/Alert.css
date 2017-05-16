@@ -1,76 +1,60 @@
-#alert{
-    width:100%;
-    height: 100%;
-    text-align: center;
-    font-size: 6em;
-    font-weight: bold;
-    color: white;
-    text-transform: uppercase;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    top: -0.5em;
- 
-}
+#alert {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 6em;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 0;
+  top: -0.5em; }
 
-#getReady{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #4c4c4c;
-    -webkit-animation: bkgAppear 0.5s forwards;
-    animation: bkgAppear 0.5s forwards;
-}
+#getReady {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #4c4c4c;
+  -webkit-animation: bkgAppear 0.5s forwards;
+  animation: bkgAppear 0.5s forwards; }
 
-.grmessage{
-    -webkit-animation: appear 2s 0.5s forwards;
-    animation: appear 2s 0.5s forwards;
-}
+.grmessage {
+  -webkit-animation: appear 2s 0.5s forwards;
+  animation: appear 2s 0.5s forwards; }
 
-.disappear{
-    -webkit-animation: disappear 2s;
-    animation: disappear 2s;
-}
+.disappear {
+  -webkit-animation: disappear 2s;
+  animation: disappear 2s; }
 
-@-webkit-keyframes bkgAppear{
-    from{background-color:white;}        
-    to{background-color:#4c4c4c;}
-}
+@-webkit-keyframes bkgAppear {
+  from {
+    background-color: white; }
+  to {
+    background-color: #4c4c4c; } }
 
-@keyframes bkgAppear{
-    from{background-color:white;}        
-    to{background-color:#4c4c4c;}
-}
+@keyframes bkgAppear {
+  from {
+    background-color: white; }
+  to {
+    background-color: #4c4c4c; } }
 
-@-webkit-keyframes disappear{
-    from{background-color:#4c4c4c; }
-    to{background-color:white;}
-}
+@-webkit-keyframes disappear {
+  from {
+    background-color: #4c4c4c; }
+  to {
+    background-color: white; } }
 
-@keyframes disappear{
-    from{background-color:#4c4c4c; }
-    to{background-color:white;}
-}
+@keyframes disappear {
+  from {
+    background-color: #4c4c4c; }
+  to {
+    background-color: white; } }
