@@ -6,6 +6,7 @@ import Review from './components/Review/Review.jsx';
 import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
 import Photomaton from './modules/Photomaton/Photomaton.jsx';
+import Uploader from './components/Uploader/Uploader.jsx';
 import './App.css';
 
 
@@ -38,7 +39,10 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'review', 'thanks'];
+   // this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'upload', 'thanks']; //review al lloc de upload
+    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'upload', 'thanks']; //review al lloc de upload
+
+
 
     //METHODS
     this.getMediaSources = this.getMediaSources.bind(this);
@@ -118,6 +122,10 @@ class App extends Component {
 
       case 'review':
         return (<Review upload={false} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
+
+      case 'upload':
+
+      return(<Uploader file={this.videoData}/>);
 
       case 'thanks':
         return (
@@ -297,8 +305,10 @@ class App extends Component {
       type: 'video/webm; codecs="vp9"'
     });
     const obj = URL.createObjectURL(blob);
+    let date = new Date().valueOf();
+    let name = date+"_interview.webm";
+    //const file = new File([blob], name,{type:'video/webm',lastModified:date});
     this.setState({ 'videoFile': obj });
-
   }
 
   //This method stops a given stream

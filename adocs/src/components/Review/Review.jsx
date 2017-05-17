@@ -19,12 +19,12 @@ export default class Review extends Component {
                 <p>As this is a testing project, most of the features are not ready yet. Hence, I need your help:</p>
                <ol>
                 <li>Download the interview by clicking the download button.</li>
-                <li>Send it to me at vicenc.salles@gmail.com via <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">wetransfer</a></li>
+                <li><b>Upload it</b> <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">here</a></li>
                 <li>Wait a couple of weeks to see all our Breda friends in an awesome asynchronously and worldwide recorded video ;-D</li>
                </ol>
                 {this.canDownLoad()}
                 <div>
-                    <button onClick={this.handleClick} href={this.props.file} className="nextButton">End</button>
+                    <button onClick={this.handleClick} className="nextButton">End</button>
                 </div>
             </div>
         </main>);
