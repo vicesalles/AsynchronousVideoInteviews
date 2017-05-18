@@ -1,7 +1,65 @@
 #uploader {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #4c4c4c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  top: -2em;
   background-color: white; }
+  #uploader h1 {
+    font-size: 2.5em;
+    letter-spacing: 0.1em;
+    line-height: 1em;
+    margin-bottom: 0.2em; }
+    #uploader h1 span {
+      animation-name: lletra;
+      animation-iteration-count: infinite; }
+      #uploader h1 span:nth-child(1) {
+        animation-delay: 1s;
+        animation-duration: 1s; }
+      #uploader h1 span:nth-child(2) {
+        animation-delay: 2s;
+        animation-duration: 2s; }
+      #uploader h1 span:nth-child(3) {
+        animation-delay: 3s;
+        animation-duration: 3s; }
+      #uploader h1 span:nth-child(4) {
+        animation-delay: 4s;
+        animation-duration: 4s; }
+      #uploader h1 span:nth-child(5) {
+        animation-delay: 5s;
+        animation-duration: 5s; }
+      #uploader h1 span:nth-child(6) {
+        animation-delay: 6s;
+        animation-duration: 6s; }
+      #uploader h1 span:nth-child(7) {
+        animation-duration: 7s;
+        animation-delay: 7s; }
+      #uploader h1 span:nth-child(8) {
+        animation-delay: 1s; }
+      #uploader h1 span:nth-child(9) {
+        animation-duration: 8s;
+        animation-delay: 8s; }
+      #uploader h1 span:nth-child(10) {
+        animation-duration: 9s;
+        animation-delay: 9s; }
   #uploader p {
-    color: #4c4c4c; }
+    color: #4c4c4c;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8em; }
   #uploader a {
     text-decoration: none;
     color: #4c4c4c; }
+
+@keyframes lletra {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0.2; } }

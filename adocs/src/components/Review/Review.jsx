@@ -12,11 +12,27 @@ export default class Review extends Component {
     }
 
     render() {
+
+        if(this.props.uploaded){
+
+             return (<main id="main">
+            <div id="ContentReview">
+                <div id="title">We're done</div>
+                {this.canReview()}    
+                {this.canDownLoad()}
+                <div>
+                    <button onClick={this.handleClick} className="nextButton">End</button>
+                </div>
+            </div>
+        </main>);
+           
+        }else{
+
         return (<main id="main">
             <div id="ContentReview">
-                <div id="title">We're almost done</div>
+                <div id="title">Damn! Something went wrong</div>
                 {this.canReview()}                
-                <p>As this is a testing project, most of the features are not ready yet. Hence, I need your help:</p>
+                <p>As this is a testing project, I need your help:</p>
                <ol>
                 <li>Download the interview by clicking the download button.</li>
                 <li><b>Upload it</b> <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">here</a></li>
@@ -28,6 +44,7 @@ export default class Review extends Component {
                 </div>
             </div>
         </main>);
+    }
     }
 
 

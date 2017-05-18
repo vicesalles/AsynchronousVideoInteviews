@@ -31,7 +31,8 @@ class App extends Component {
       endTime: null, //Date
       poster: null,//ObjectURL     
       videoFile: null, //ObjectURL
-      permissionGranted:false //Do I have camera access?
+      permissionGranted:false, //Do I have camera access?
+      uploaded: false
     };
 
     //NON UI RELATED VARIABLES
@@ -39,10 +40,7 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-   // this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'upload', 'thanks']; //review al lloc de upload
-    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats', 'upload', 'thanks']; //review al lloc de upload
-
-
+    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats','upload','review','thanks']; //review al lloc de upload
 
     //METHODS
     this.getMediaSources = this.getMediaSources.bind(this);
@@ -57,6 +55,7 @@ class App extends Component {
     this.stopMedia = this.stopMedia.bind(this);
     this.stopStream = this.stopStream.bind(this);
     this.toFile = this.toFile.bind(this);
+    this.gotUploaded = this.gotUploaded.bind(this);
 
   }
 
@@ -121,11 +120,11 @@ class App extends Component {
           );
 
       case 'review':
-        return (<Review upload={false} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
+        return (<Review upload={false} uploaded={this.state.uploaded} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
 
       case 'upload':
 
-      return(<Uploader file={this.videoData}/>);
+      return(<Uploader file={this.videoData} mission={this.nextState} success={this.gotUploaded}/>);
 
       case 'thanks':
         return (
@@ -321,6 +320,11 @@ class App extends Component {
       t.stop();
     });
 
+  }
+
+  //Confirm a succesful upload
+  gotUploaded(){
+    this.setState({'uploaded':true});
   }
 
 }
