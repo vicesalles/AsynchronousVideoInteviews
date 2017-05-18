@@ -55,16 +55,15 @@ export default class Uploader extends Component {
                 ACL: 'public-read'
             }, function (err, data) {
                 if (err) {
-                    console.log(err);
-                    console.log('error accio:');
+                    nxt();
+                }else if(data){
+                    succ();
                     nxt();
                 }
-                succ();
-                nxt();
             });
         }
 
-        uploadVideo(this.props.file,this.props.success(),this.props.mission());
+        uploadVideo(this.props.file,this.props.success,this.props.mission);
 
     }
     render() {

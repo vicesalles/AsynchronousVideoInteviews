@@ -12,8 +12,8 @@ export default class Review extends Component {
     }
 
     render() {
-
-        if(this.props.uploaded){
+        console.log(this.props.uploaded);
+        if(this.props.uploaded===true){
 
              return (<main id="main">
             <div id="ContentReview">
