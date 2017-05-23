@@ -6,20 +6,20 @@ export default class Review extends Component {
 
     constructor(props) {
         super(props);
-        this.canDownLoad = this.canDownLoad.bind(this);
+        this.canDownload = this.canDownload.bind(this);
         this.canReview = this.canReview.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
     render() {
-        console.log(this.props.uploaded);
+        
         if(this.props.uploaded===true){
 
              return (<main id="main">
             <div id="ContentReview">
                 <div id="title">We're done</div>
                 {this.canReview()}    
-                {this.canDownLoad()}
+                {this.canDownload()}
                 <div>
                     <button onClick={this.handleClick} className="nextButton">End</button>
                 </div>
@@ -38,7 +38,7 @@ export default class Review extends Component {
                 <li><b>Upload it</b> <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">here</a></li>
                 <li>Wait a couple of weeks to see all our Breda friends in an awesome asynchronously and worldwide recorded video ;-D</li>
                </ol>
-                {this.canDownLoad()}
+                {this.canDownload()}
                 <div>
                     <button onClick={this.handleClick} className="nextButton">End</button>
                 </div>
@@ -48,7 +48,7 @@ export default class Review extends Component {
     }
 
 
-    canDownLoad() {
+    canDownload() {
         if (this.props.download === true) {
             console.log(this.props.file);
 
