@@ -21,17 +21,17 @@ class App extends Component {
       state: 'welcome', // Kind of router
       currentState: 0,
       currentQuestion: 0, //Keeping the track on questions
-      nQuestions: 5,
-      questions: {'0': 'Where are you living? With whom?',
-       '1': 'Are you studying or working? On what?',      
-       '2':'Tell me a word in Dutch',
-       '3':'Tell me something awesome that happened to you after Breda',
-       '4':'Greet all our Breda mates in your own language'}, //The actual questions
+      nQuestions: 3,
+      questions: {
+        '0': 'Digues com et dius i de quina població ets',
+        '1': 'Diga\'m un lloc bonic prop de la teva població on anar d\'excursió',
+        '2': 'Digues un lloc on t\'agradaria perdre\'t'
+      }, //The actual questions
       initialTime: null, //new Date
       endTime: null, //Date
       poster: null,//ObjectURL     
       videoFile: null, //ObjectURL
-      permissionGranted:false, //Do I have camera access?
+      permissionGranted: false, //Do I have camera access?
       uploaded: false
     };
 
@@ -40,7 +40,7 @@ class App extends Component {
     this.videoData = [];
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
-    this.screens = ['welcome','browserCheck', 'ready', 'photomaton', 'beforeInterview','getReady', 'interview','congrats','upload','review','thanks']; //review al lloc de upload
+    this.screens = ['welcome', 'browserCheck', 'ready', 'photomaton', 'beforeInterview', 'getReady', 'interview', 'congrats', 'upload', 'review', 'thanks']; //review al lloc de upload
 
     //METHODS
     this.getMediaSources = this.getMediaSources.bind(this);
@@ -68,19 +68,19 @@ class App extends Component {
       case 'welcome':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="Thanks for showing up, this is an interview." />
+            <ActionMessage mission={this.nextState} message="Gràcies per venir, això és una entrevista." />
           </div>
         );
 
       case 'browserCheck':
-        return(
-          <BrowserCheck mission={this.nextState}/>
+        return (
+          <BrowserCheck mission={this.nextState} />
         )
 
       case 'ready':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="First, I'll take a picture of yours" />
+            <ActionMessage mission={this.nextState} message="Primer de tot, et faré una foto." />
           </div>
         );
 
@@ -94,16 +94,16 @@ class App extends Component {
       case 'beforeInterview':
         return (
           <div className="App">
-            <ActionMessage mission={this.startRecording} message="Got it, now let's get started with the questions." />
+            <ActionMessage mission={this.startRecording} message="Genial, ara anem a per les preguntes." />
           </div>
         );
 
       case 'getReady':
-        return(
-              <div className="App">
-                 <Alert message="Answer" mission={this.nextState} time="2500"/>
-              </div>
-          );
+        return (
+          <div className="App">
+            <Alert message="Respon" mission={this.nextState} time="2500" />
+          </div>
+        );
 
       case 'interview':
         return (
@@ -114,22 +114,22 @@ class App extends Component {
         );
 
       case 'congrats':
-        return(<div className="App">
-               <Alert message="Well done" mission={this.nextState} time="2500"/>
-               </div>
-          );
+        return (<div className="App">
+          <Alert message="Molt bé!" mission={this.nextState} time="2500" />
+        </div>
+        );
 
       case 'review':
-        return (<Review upload={false} uploaded={this.state.uploaded} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Wait while we're uploading your interview" mission={this.nextState} />);
+        return (<Review upload={false} uploaded={this.state.uploaded} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Espera't mentre es penja la teva entrevista" mission={this.nextState} />);
 
       case 'upload':
 
-      return(<Uploader file={this.videoData} mission={this.nextState} success={this.gotUploaded}/>);
+        return (<Uploader file={this.videoData} mission={this.nextState} success={this.gotUploaded} />);
 
       case 'thanks':
         return (
           <div className="App">
-            <SingleMessage mode={this.state.state} message="Gorgeous! Thanks for your time." />
+            <SingleMessage mode={this.state.state} message="Espatarrant! Moltes gràcies pel teu temps." />
           </div>
         );
 
@@ -156,23 +156,23 @@ class App extends Component {
         video: {
 
           //Video may take several properties:          
-            width: {
-              ideal: 1920,
-              min: 1280,
-              max: 1920
-            },
-            height: {
-              ideal: 1080,
-              min: 720,
-              max: 1080
-            }
-          
+          width: {
+            ideal: 1920,
+            min: 1280,
+            max: 1920
+          },
+          height: {
+            ideal: 1080,
+            min: 720,
+            max: 1080
+          }
+
         }
       })
         .then(stream => {
-          
+
           this.stream = stream;
-          this.setState({'permissionGranted':true});
+          this.setState({ 'permissionGranted': true });
           return stream;
 
         })
@@ -299,13 +299,13 @@ class App extends Component {
 
   //Saves video data into webm file.
   toFile(b) {
-    
+
     const blob = new Blob(b, {
       type: 'video/webm; codecs="vp9"'
     });
     const obj = URL.createObjectURL(blob);
     let date = new Date().valueOf();
-    let name = date+"_interview.webm";
+    let name = date + "_interview.webm";
     //const file = new File([blob], name,{type:'video/webm',lastModified:date});
     this.setState({ 'videoFile': obj });
   }
@@ -323,8 +323,8 @@ class App extends Component {
   }
 
   //Confirm a succesful upload
-  gotUploaded(){
-    this.setState({'uploaded':true});
+  gotUploaded() {
+    this.setState({ 'uploaded': true });
   }
 
 }
@@ -340,4 +340,12 @@ preguntes breda
        '4':'Tell me a word in Dutch',
        '5':'Tell me something awesome that happened to you after Breda',
        '6':'Greet all our Breda mates with your own language'
+
+'0': 'Where are you living? With whom?',
+       '1': 'Are you studying or working? On what?',      
+       '2':'Tell me a word in Dutch',
+       '3':'Tell me something awesome that happened to you after Breda',
+       '4':'Greet all our Breda mates in your own language'
+
+
  */

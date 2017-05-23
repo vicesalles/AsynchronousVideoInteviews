@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Message from '../Message/Message.jsx';
 import './BrowserCheck.css';
 
@@ -24,7 +24,7 @@ export default class BrowserCheck extends Component {
         //Minimum supported versions:  Must check this out at caniuse.com
         this.minChrome = 56; //57 real
         this.minFirefox = 52; //54 és l'última ara mateix
-        
+
         /*
         CANIUSE FEATURES
 
@@ -43,7 +43,7 @@ export default class BrowserCheck extends Component {
 
         let browser = this.getUserBrowser();
         if (browser === "not supported") {
-            this.setState({'state': 'not supported'});
+            this.setState({ 'state': 'not supported' });
         } else {
             let version = this.getVersion(browser);
             this.checkBrowser(browser, version);
@@ -55,12 +55,12 @@ export default class BrowserCheck extends Component {
 
             case 'checking':
 
-                return (<Message message="checking your browser's compatibility"/>);
+                return (<Message message="Estic comprovant el teu navegador" />);
                 break;
             case 'gotBrowser':
 
                 return (<Message
-                    message={"You're using " + this.state.browser + " " + this.state.version}/>);
+                    message={"Estàs fent servir " + this.state.browser + " " + this.state.version} />);
                 break;
             case 'ok':
 
@@ -74,13 +74,13 @@ export default class BrowserCheck extends Component {
                     return (
                         <main className="mainBr">
                             <div className="message">
-                                 {"Your " + this.state.browser + " version is too old"}
+                                {"La versió del teu " + this.state.browser + " és massa vella"}
                             </div>
                             <div className="dwnBtnsBx">
                                 <a
                                     className="dwnBrw"
                                     href="https://google.com/search?q=Google+Chrome"
-                                    target="_blank">Download the lastest Google Chrome version from Google</a>
+                                    target="_blank">Descarrega't l'última versió del Google Chrome</a>
                             </div>
                         </main>
                     );
@@ -94,7 +94,7 @@ export default class BrowserCheck extends Component {
                                 <a
                                     className="dwnBrw"
                                     href="https://google.com/search?q=Mozilla+Firefox"
-                                    target="_blank">Download the lastest Mozilla Firefox version from Mozilla</a>
+                                    target="_blank">Descarrega't l'última versió del Mozilla Firefox</a>
                             </div>
                         </main>
                     );
@@ -104,19 +104,19 @@ export default class BrowserCheck extends Component {
                 return (
                     <main className="mainBr">
                         <div className="message">
-                               Damn.. your browser is not supported. Get either Firefox or Chrome.
+                            Caram.. el teu navegador no funciona amb aquesta aplicació. Baixa't el Firefox o el Chrome.
                             </div>
-                     
+
                         <div className="dwnBtnsBx">
                             <a
                                 className="dwnBrw"
                                 href="https://google.com/search?q=Mozilla+Firefox"
-                                target="_blank">Download the lastest Mozilla Firefox version from Mozilla</a>
+                                target="_blank">Descarrega't l'última versió del Mozilla Firefox</a>
                             <a
                                 className="dwnBrw"
                                 href="https://google.com/search?q=Google+Chrome"
-                                target="_blank">Download the lastest Google Chrome version from Google</a>
-                        </div>       
+                                target="_blank">Descarrega't l'última versió del Google Chrome</a>
+                        </div>
                     </main>
                 );
                 break;
@@ -145,7 +145,7 @@ export default class BrowserCheck extends Component {
             return 'Chrome';
         } else if (isEdge) {
             return 'not supported';
-        }else {
+        } else {
             return 'not supported';
         }
     }
@@ -161,7 +161,7 @@ export default class BrowserCheck extends Component {
         switch (b) {
             case 'Firefox':
                 if (v < this.minFirefox) {
-                    this.setState({'browser': 'Firefox', 'state': 'obsolete'});
+                    this.setState({ 'browser': 'Firefox', 'state': 'obsolete' });
                 } else {
                     this
                         .props
@@ -170,7 +170,7 @@ export default class BrowserCheck extends Component {
                 break;
             case 'Chrome':
                 if (v < this.minChrome) {
-                    this.setState({'browser': 'Chrome', 'state': 'obsolete'});
+                    this.setState({ 'browser': 'Chrome', 'state': 'obsolete' });
                 } else {
                     this
                         .props
@@ -179,7 +179,7 @@ export default class BrowserCheck extends Component {
                 break;
             case 'Safari':
                 console.log('saf');
-                this.setState({'state': 'not supported'});
+                this.setState({ 'state': 'not supported' });
                 break;
             default:
         }

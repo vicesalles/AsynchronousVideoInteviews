@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Uploader.css';
 import AWS from 'aws-sdk';
 
@@ -8,7 +8,7 @@ import AWS from 'aws-sdk';
  */
 
 export default class Uploader extends Component {
-  
+
     componentDidMount() {
 
         // Code from:
@@ -18,13 +18,13 @@ export default class Uploader extends Component {
         const albumBucketName = 'legitvoice';
         const bucketRegion = 'eu-central-1';
         const IdentityPoolId = 'eu-central-1:58bba4d9-6b1c-4580-a4cc-d63e6377820b';
-        
+
 
         AWS
             .config
             .update({
                 region: bucketRegion,
-                credentials: new AWS.CognitoIdentityCredentials({IdentityPoolId: IdentityPoolId})
+                credentials: new AWS.CognitoIdentityCredentials({ IdentityPoolId: IdentityPoolId })
             });
 
         const s3 = new AWS.S3({
@@ -33,7 +33,7 @@ export default class Uploader extends Component {
                 Bucket: albumBucketName
             }
         });
-        
+
         /**
          * Simple function for uploading data to s3 without individual autentication
          * @param {array} videodata video chunks
@@ -41,14 +41,14 @@ export default class Uploader extends Component {
          * @param {function} nxt callback
          */
 
-        function uploadVideo(videodata,succ,nxt) {
+        function uploadVideo(videodata, succ, nxt) {
 
-            const blob = new Blob(videodata, {type: 'video/webm; codecs="vp9"'});
-          
+            const blob = new Blob(videodata, { type: 'video/webm; codecs="vp9"' });
+
             //Constructing an unique name for each video.
             let date = new Date().valueOf();
             let name = date + "_interview.webm";
-            
+
             s3.upload({
                 Key: name,
                 Body: blob,
@@ -56,18 +56,18 @@ export default class Uploader extends Component {
             }, function (err, data) {
                 if (err) {
                     nxt();
-                }else if(data){
+                } else if (data) {
                     succ();
                     nxt();
                 }
             });
         }
 
-        uploadVideo(this.props.file,this.props.success,this.props.mission);
+        uploadVideo(this.props.file, this.props.success, this.props.mission);
 
     }
     render() {
-        
+
         return (
             <div id="uploader">
                 <h1>
@@ -85,7 +85,7 @@ export default class Uploader extends Component {
             </div>
         );
 
-    }     
+    }
 
-        
+
 }

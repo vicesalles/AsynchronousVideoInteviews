@@ -12,39 +12,39 @@ export default class Review extends Component {
     }
 
     render() {
-        
-        if(this.props.uploaded===true){
 
-             return (<main id="main">
-            <div id="ContentReview">
-                <div id="title">We're done</div>
-                {this.canReview()}    
-                {this.canDownload()}
-                <div>
-                    <button onClick={this.handleClick} className="nextButton">End</button>
-                </div>
-            </div>
-        </main>);
-           
-        }else{
+        if (this.props.uploaded === true) {
 
-        return (<main id="main">
-            <div id="ContentReview">
-                <div id="title">Damn! Something went wrong</div>
-                {this.canReview()}                
-                <p>As this is a testing project, I need your help:</p>
-               <ol>
-                <li>Download the interview by clicking the download button.</li>
-                <li><b>Upload it</b> <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">here</a></li>
-                <li>Wait a couple of weeks to see all our Breda friends in an awesome asynchronously and worldwide recorded video ;-D</li>
-               </ol>
-                {this.canDownload()}
-                <div>
-                    <button onClick={this.handleClick} className="nextButton">End</button>
+            return (<main id="main">
+                <div id="ContentReview">
+                    <div id="title">Ja hem fet</div>
+                    {this.canReview()}
+                    {this.canDownload()}
+                    <div>
+                        <button onClick={this.handleClick} className="nextButton">End</button>
+                    </div>
                 </div>
-            </div>
-        </main>);
-    }
+            </main>);
+
+        } else {
+
+            return (<main id="main">
+                <div id="ContentReview">
+                    <div id="title">Cago'n l'ós pedrer! Sembla que alguna cosa no va bé</div>
+                    {this.canReview()}
+                    <p>Aquest projecte està en proves i necessito un cop de mà:</p>
+                    <ol>
+                        <li>Descarrega't l'entrevista bo i clicant el botó de descàrrega.</li>
+                        <li><b>Penja-me'l</b> <a href="https://wetransfer.com/?to=vicenc.salles@gmail.com" target="_blank">aquí</a> (clica a 'take me to free')</li>
+                        <li>Gràcies pel cop de mà ;-D</li>
+                    </ol>
+                    {this.canDownload()}
+                    <div>
+                        <button onClick={this.handleClick} className="nextButton">Fi</button>
+                    </div>
+                </div>
+            </main>);
+        }
     }
 
 
@@ -52,7 +52,7 @@ export default class Review extends Component {
         if (this.props.download === true) {
             console.log(this.props.file);
 
-            return (<div><a id="dwnBu" ref="dwnBu" href={this.props.file} download="interview.webm">Download your interview</a></div>);
+            return (<div><a id="dwnBu" ref="dwnBu" href={this.props.file} download="interview.webm">Descarrega't l'entrevista</a></div>);
         }
     }
 

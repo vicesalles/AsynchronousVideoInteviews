@@ -9,7 +9,7 @@ export default class Button extends Component {
     render() {
 
         return (<div id="shootContainer">
-                    <a href="#" onClick={this.handleClick} id="shoot">Shoot</a>
+                    <a href="#" onClick={this.handleClick} id="shoot">Foto</a>
                 </div>)
 
     }

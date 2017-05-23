@@ -14,12 +14,12 @@ export default class Review extends Component {
         return (<div id="review">
                     
                     <div id="reviewPics">      
-                        <h1>Select the pic you fancy</h1>                  
+                        <h1>Tria la que t'agradi més</h1>                  
                         <div id="picsContainer">
                         {this.showPics()}
                         </div>                        
                     </div>
-                    <button className="reTake" onClick={this.redo}>Repeat</button>
+                    <button className="reTake" onClick={this.redo}>Repetir</button>
                 </div>);
     }
 

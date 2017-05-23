@@ -43,12 +43,12 @@ export default class VideoPlayer extends Component {
         if (this.props.mode === "interview") {
 
             return (<section className="interviewContainer">
-                <video poster={this.props.poster} ref="video" className="interview">The stream is not ready</video>
+                <video poster={this.props.poster} ref="video" className="interview">El vídeo no està apunt</video>
             </section>);
 
         } else if (this.props.mode === "review") {
             return (<section className="reviewContainer">
-                <video poster={this.props.poster} ref="video" className="review" preload="auto" controls>The stream is not ready</video>
+                <video poster={this.props.poster} ref="video" className="review" preload="auto" controls>El vídeo no està apunt</video>
             </section>);
 
         }

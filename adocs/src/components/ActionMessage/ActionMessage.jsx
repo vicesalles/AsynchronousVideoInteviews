@@ -11,7 +11,7 @@ export default class ActionMessage extends Component{
         return(<main id="main">
                <Message message={this.props.message}/>
                <div>
-                   <button onClick={this.handleClick} className="nextButton">Next</button>
+                   <button onClick={this.handleClick} className="nextButton">Següent</button>
                </div>
                </main>);
     }

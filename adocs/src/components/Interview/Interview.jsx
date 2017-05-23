@@ -20,11 +20,11 @@ export default class Interview extends Component {
             <section id="info">
                 <Vumeter media={this.props.stream}/>
                 <section id="qTracker">
-                    <div>Question <span>{this.props.currentQ}</span> of <span>{this.props.totalQ}</span></div>
+                    <div>Pregunta <span>{this.props.currentQ}</span> de <span>{this.props.totalQ}</span></div>
                 </section>
             </section>
             <section id="next">
-                <button id="nextQuestion" onClick={this.handleClick}>Next</button>
+                <button id="nextQuestion" onClick={this.handleClick}>Següent</button>
             </section>
         </article>);
     }
