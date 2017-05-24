@@ -4,7 +4,7 @@ import './Countdown.css';
 export default class Countdown extends Component{
     constructor(props){
         super(props);
-        this.state = {'count':'ready?'};
+        this.state = {'count':'llestos?'};
         this.countDown = this.countDown.bind(this);
         this.updateCountDown = this.updateCountDown.bind(this);
         

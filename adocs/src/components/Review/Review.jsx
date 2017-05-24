@@ -21,7 +21,7 @@ export default class Review extends Component {
                     {this.canReview()}
                     {this.canDownload()}
                     <div>
-                        <button onClick={this.handleClick} className="nextButton">End</button>
+                        <button onClick={this.handleClick} className="nextButton">Fi</button>
                     </div>
                 </div>
             </main>);

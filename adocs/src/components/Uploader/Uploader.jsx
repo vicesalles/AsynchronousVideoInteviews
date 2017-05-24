@@ -71,17 +71,17 @@ export default class Uploader extends Component {
         return (
             <div id="uploader">
                 <h1>
-                    <span>U</span>
-                    <span>P</span>
-                    <span>L</span>
-                    <span>O</span>
+                    <span>C</span>
                     <span>A</span>
-                    <span>D</span>
-                    <span>I</span>
-                    <span>N</span>
+                    <span>R</span>
+                    <span>R</span>
+                    <span>E</span>
                     <span>G</span>
+                    <span>A</span>
+                    <span>N</span>
+                    <span>T</span>
                 </h1>
-                <p>please, <b>do not</b> close this window</p>
+                <p>si us plau, <b>no</b> tanquis aquesta finestra</p>
             </div>
         );
 
