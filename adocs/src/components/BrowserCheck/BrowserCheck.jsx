@@ -11,19 +11,13 @@ export default class BrowserCheck extends Component {
             'supported': null,
             'state': 'checking'
         }
-        this.getUserBrowser = this
-            .getUserBrowser
-            .bind(this);
-        this.getVersion = this
-            .getVersion
-            .bind(this);
-        this.checkBrowser = this
-            .checkBrowser
-            .bind(this);
+        this.getUserBrowser = this.getUserBrowser.bind(this);
+        this.getVersion = this.getVersion.bind(this);
+        this.checkBrowser = this.checkBrowser.bind(this);
 
         //Minimum supported versions:  Must check this out at caniuse.com
         this.minChrome = 56; //57 real
-        this.minFirefox = 52; //54 és l'última ara mateix
+        this.minFirefox = 53; //54 és l'última ara mateix
 
         /*
         CANIUSE FEATURES
@@ -63,10 +57,7 @@ export default class BrowserCheck extends Component {
                     message={"Estàs fent servir " + this.state.browser + " " + this.state.version} />);
                 break;
             case 'ok':
-
-                this
-                    .props
-                    .mission();
+                this.props.mission();
                 break;
             case 'obsolete':
 
@@ -105,7 +96,7 @@ export default class BrowserCheck extends Component {
                     <main className="mainBr">
                         <div className="message">
                             Caram.. el teu navegador no funciona amb aquesta aplicació. Baixa't el Firefox o el Chrome.
-                            </div>
+                        </div>
 
                         <div className="dwnBtnsBx">
                             <a
@@ -151,7 +142,8 @@ export default class BrowserCheck extends Component {
     }
 
     /**
-     * @param b string browser
+     * This method checks the user's browser compatibility with my system
+     * @param b string browser name
      * @param v string version of browser
      * @returns boolean
      */
@@ -163,22 +155,17 @@ export default class BrowserCheck extends Component {
                 if (v < this.minFirefox) {
                     this.setState({ 'browser': 'Firefox', 'state': 'obsolete' });
                 } else {
-                    this
-                        .props
-                        .mission();
+                    this.props.mission();
                 }
                 break;
             case 'Chrome':
                 if (v < this.minChrome) {
                     this.setState({ 'browser': 'Chrome', 'state': 'obsolete' });
                 } else {
-                    this
-                        .props
-                        .mission();
+                    this.props.mission();
                 }
                 break;
             case 'Safari':
-                console.log('saf');
                 this.setState({ 'state': 'not supported' });
                 break;
             default:

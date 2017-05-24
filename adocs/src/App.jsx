@@ -158,12 +158,12 @@ class App extends Component {
           //Video may take several properties:          
           width: {
             ideal: 1920,
-            min: 1280,
+           // min: 1280,
             max: 1920
           },
           height: {
             ideal: 1080,
-            min: 720,
+           // min: 720,
             max: 1080
           }
 
@@ -178,6 +178,7 @@ class App extends Component {
         })
         .catch(function (error) {
 
+          alert('sembla que hi ha problemes');
           //If not, i'll cry ashamed
           console.error('Crap! ' + error);
 
