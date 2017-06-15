@@ -15,6 +15,8 @@ export default class Uploader extends Component {
         // http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-ph
         // oto-album.html
 
+        //Those credentials are not working anymore:
+
         const albumBucketName = 'legitvoice';
         const bucketRegion = 'eu-central-1';
         const IdentityPoolId = 'eu-central-1:58bba4d9-6b1c-4580-a4cc-d63e6377820b';
