@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import './Vumeter.css';
 
 export default class Vumeter extends Component {
-    constructor(props) {
-        super(props);
-        this.getAudio = this.getAudio.bind(this);
-        this.updateVolumeView = this.updateVolumeView.bind(this);
-        this.setWidth = this.setWidth.bind(this);
-        this.setUp = this.setUp.bind(this);
-        
-    }
+   
     componentDidMount() {
-
         
         //Checking if input is a Promise or a MediaStream object
         if (typeof this.props.media.then === 'function') {
@@ -22,13 +14,12 @@ export default class Vumeter extends Component {
 
             });
 
-
         } else {
             this.setUp(this.props.media);
         }
-
     
     }
+
     render() {
         return (
             <canvas ref="vumeter" id="vumeter"></canvas>
@@ -36,8 +27,9 @@ export default class Vumeter extends Component {
     }
 
     //Audio signal analizer
-    getAudio(stream) {
+    getAudio=(stream)=> {
 
+        //Creating an Audio Context
         const audioContext = new AudioContext();
         
         //Adding stream to the Audio Context
@@ -45,11 +37,14 @@ export default class Vumeter extends Component {
 
         //Creating an Analyzer node.
         const analyzer = audioContext.createAnalyser();
+        
         //Setting up the Analyzer
         analyzer.fftSize = 1024;
         analyzer.smoothingTimeConstant = 0.3;
+        
         //Setting up processor node
         const node = audioContext.createScriptProcessor(2048, 1, 1);
+        
         //Listener 
         node.onaudioprocess = function () {
 
@@ -63,7 +58,6 @@ export default class Vumeter extends Component {
         audio.connect(analyzer);
         node.connect(audioContext.destination);
         analyzer.connect(node);
-
 
         //Math.average method
         Math.average = function (array) {
@@ -85,7 +79,7 @@ export default class Vumeter extends Component {
     }
 
     //Updates Volume View
-    updateVolumeView(vol) {
+    updateVolumeView=(vol)=> {
 
         this.context.clearRect(0, 1, this.cWd, this.cHg);
 
@@ -100,13 +94,13 @@ export default class Vumeter extends Component {
         }
     }
 
-    setWidth(cWd, pcent) {
+    setWidth=(cWd, pcent)=> {
         let wd = Math.floor(cWd * pcent / 100);
         return wd;
 
     }
 
-    setUp(stream){
+    setUp=(stream)=>{
         this.vumeter = this.refs.vumeter
         this.context = this.vumeter.getContext("2d");
         this.cHg = this.vumeter.height;
