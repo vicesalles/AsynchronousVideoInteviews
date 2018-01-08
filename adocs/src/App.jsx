@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BrowserCheck from './components/BrowserCheck/BrowserCheck.jsx';
 import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
 import Interview from './components/Interview/Interview';
+import Tally from './components/Tally/Tally';
 import Review from './components/Review/Review.jsx';
 import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
@@ -41,21 +42,6 @@ class App extends Component {
     this.timeCode = [];//Saving every user click on 'next button'
     this.stream = null; //MediaStream
     this.screens = ['welcome', 'browserCheck', 'ready', 'photomaton', 'beforeInterview', 'getReady', 'interview', 'congrats', 'upload', 'review', 'thanks']; //review al lloc de upload
-
-    //METHODS
-    this.getMediaSources = this.getMediaSources.bind(this);
-    this.getPoster = this.getPoster.bind(this);
-    this.countDown = this.countDown.bind(this);
-    this.nextState = this.nextState.bind(this);
-    this.addTCmark = this.addTCmark.bind(this);
-    this.setBegin = this.setBegin.bind(this);
-    this.setEnd = this.setEnd.bind(this);
-    this.createMediaRecorder = this.createMediaRecorder.bind(this);
-    this.startRecording = this.startRecording.bind(this);
-    this.stopMedia = this.stopMedia.bind(this);
-    this.stopStream = this.stopStream.bind(this);
-    this.toFile = this.toFile.bind(this);
-    this.gotUploaded = this.gotUploaded.bind(this);
 
   }
 
@@ -108,6 +94,7 @@ class App extends Component {
       case 'interview':
         return (
           <div className="App">
+            <Tally/>
             <SingleMessage mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
             <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
           </div>
@@ -145,7 +132,7 @@ class App extends Component {
   }
 
   //this method gets user's merdia sources and returns a Stream
-  getMediaSources() {
+  getMediaSources=()=> {
 
     if (this.stream === null) {
 
@@ -189,7 +176,7 @@ class App extends Component {
   }
 
   //Countdown for launching whatever after n times
-  countDown(n, w) {
+  countDown=(n, w)=> {
     setTimeout(() => {
       n = updateCountDown(n);
       if (n !== 0) {
@@ -212,7 +199,7 @@ class App extends Component {
 
   }
   //Getting the poster for video
-  getPoster(p, c) { //c is callback
+  getPoster=(p, c)=> { //c is callback
     this.setState({ 'poster': p });
     if (c !== undefined) {
       c();
@@ -220,7 +207,7 @@ class App extends Component {
   }
 
   //Moving the app to the next state
-  nextState() {
+  nextState=()=> {
 
     if (this.state.state === 'welcome') {
       //Start session timer
@@ -249,17 +236,17 @@ class App extends Component {
   }
 
   //Adding new entry to the TC Control
-  addTCmark(t) {
+  addTCmark=(t)=> {
     this.timeCode.push(t);
   }
 
-  setBegin() {
+  setBegin=()=> {
     if (this.state.initialTime === null) {
       let start = new Date();
       this.setState({ 'initialTime': start });
     }
   }
-  setEnd() {
+  setEnd=()=> {
     if (this.state.endTime === null) {
       let end = new Date();
       this.setState({ 'endTime': end });
@@ -268,13 +255,13 @@ class App extends Component {
 
   //MEDIARECORDING MATTERS
 
-  startRecording() {
+  startRecording=()=> {
     this.nextState();
     this.createMediaRecorder(this.stream);
   }
 
 
-  createMediaRecorder(stream) {
+  createMediaRecorder=(stream)=> {
 
     //Creating the Media Recorder
     this.mr = new MediaRecorder(stream, {
@@ -293,13 +280,13 @@ class App extends Component {
   }
 
   //This stops the Media stream and the recording.
-  stopMedia() {
+  stopMedia=()=> {
     this.mr.stop();
     this.stopStream(this.stream);
   };
 
   //Saves video data into webm file.
-  toFile(b) {
+  toFile=(b)=> {
 
     const blob = new Blob(b, {
       type: 'video/webm; codecs="vp9"'
@@ -312,7 +299,7 @@ class App extends Component {
   }
 
   //This method stops a given stream
-  stopStream(stream) {
+  stopStream=(stream)=> {
 
     //Getting stream video tracks
     let tracks = stream.getVideoTracks();
@@ -324,7 +311,7 @@ class App extends Component {
   }
 
   //Confirm a succesful upload
-  gotUploaded() {
+  gotUploaded=()=> {
     this.setState({ 'uploaded': true });
   }
 
@@ -348,5 +335,15 @@ preguntes breda
        '3':'Tell me something awesome that happened to you after Breda',
        '4':'Greet all our Breda mates in your own language'
 
+
+preguntes:
+
+Académics
+entrada:
+  '0': ¿Cómo cree que será una aula universitaria dentro de 5 años?
+  '1': ¿Cómo cree que será una aula universitaria dentro de 10 años?
+
+ Internet Stars
+entrada:
 
  */
