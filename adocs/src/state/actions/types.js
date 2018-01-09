@@ -1,0 +1,4 @@
+const NEXT_VIEW = "NEXT_VIEW";
+const SET_BEGIN = "SET_BEGIN";
+const SET_END = "SET_END";
+const ADD_TC_MARK = "ADD_TC_MARK";

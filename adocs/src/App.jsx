@@ -243,6 +243,7 @@ class App extends Component {
   setBegin=()=> {
     if (this.state.initialTime === null) {
       let start = new Date();
+      console.log('Begin',start);
       this.setState({ 'initialTime': start });
     }
   }
@@ -335,15 +336,20 @@ preguntes breda
        '3':'Tell me something awesome that happened to you after Breda',
        '4':'Greet all our Breda mates in your own language'
 
-
 preguntes:
 
 Académics
 entrada:
-  '0': ¿Cómo cree que será una aula universitaria dentro de 5 años?
-  '1': ¿Cómo cree que será una aula universitaria dentro de 10 años?
+  '0': ¿Cual és tú ámbito de estudio?
+  '1': ¿Cómo cree que será una aula universitaria dentro de 5 años?
+  '2': ¿Cómo cree que será una aula universitaria dentro de 10 años?
+  '3': ¿Pueden los professionales de udemy competir con las universidades?
 
  Internet Stars
-entrada:
-
+entrada: Has formado miles de personas
+  '0': ¿Fuíste a la Universidad? (cual, etc.)
+  '1':¿Cuando eras estudiante hubieses querido que alguien te ofreciera lo que hoy ofreces tu?
+  '2': ¿Crees que la formación tradicional se está quedando atrás?
+  '2': ¿Como crees que será la formación en 5 años?
+  '3': ¿y en diez?
  */
