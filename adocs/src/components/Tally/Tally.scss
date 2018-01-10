@@ -1,19 +1,19 @@
 @import '../../partials/colors';
-.recording {
+.tally {
 
     padding: 2em 2em;
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    .recBall {
+    .tallyBall {
         background-color: $ko-color;
         border-radius: 50%;
         width: 18px;
         height: 18px;
         animation: blink 1s alternate infinite;
     }
-    .recText {
+    .tallyText {
         color: $ko-color;
         padding-left:0.5em;
         font-weight: bold;

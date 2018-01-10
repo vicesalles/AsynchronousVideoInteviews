@@ -1,6 +1,6 @@
 import React from 'react';
-import './Recording.css';
+import './Tally.css';
 
 export default function Tally(props){
-    return (<div className="recording"><div className="recBall"></div> <span className="recText">Recording</span></div>);
+    return (<div className="tally"><div className="tallyBall"></div> <span className="tallyText">Recording</span></div>);
 }

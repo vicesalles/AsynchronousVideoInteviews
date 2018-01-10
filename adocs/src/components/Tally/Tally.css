@@ -1,15 +1,15 @@
-.recording {
+.tally {
   padding: 2em 2em;
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .recording .recBall {
+  .tally .tallyBall {
     background-color: red;
     border-radius: 50%;
     width: 18px;
     height: 18px;
     animation: blink 1s alternate infinite; }
-  .recording .recText {
+  .tally .tallyText {
     color: red;
     padding-left: 0.5em;
     font-weight: bold;

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import Welcome from './layouts/Welcome/Welcome';
 import BrowserCheck from './components/BrowserCheck/BrowserCheck.jsx';
 import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
 import Interview from './components/Interview/Interview';
@@ -8,8 +10,8 @@ import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
 import Photomaton from './modules/Photomaton/Photomaton.jsx';
 import Uploader from './components/Uploader/Uploader.jsx';
+import {nextView} from './state/actions';
 import './App.css';
-
 
 //MASS INTERVIEW MAIN APP
 
@@ -45,35 +47,38 @@ class App extends Component {
 
   }
 
+  //NEXT VIEW: Action for getting the next view
+  next = () =>{
+    this.props.dispatch(nextView());
+  }
+
   //RENDER
 
   render() {
 
-    switch (this.state.state) {
+    switch (this.props.view) {
 
       case 'welcome':
         return (
-          <div className="App">
-            <ActionMessage mission={this.nextState} message="Gràcies per venir, això és una entrevista." />
-          </div>
+          <Welcome message="Gràcies per venir, això és una entrevista."/>
         );
 
       case 'browserCheck':
         return (
-          <BrowserCheck mission={this.nextState} />
+          <BrowserCheck mission={this.next} />
         )
 
       case 'ready':
         return (
           <div className="App">
-            <ActionMessage mission={this.nextState} message="Primer de tot, et faré una foto." />
+            <ActionMessage mission={()=>this.next} message="Primer de tot, et faré una foto." />
           </div>
         );
 
       case 'photomaton':
         return (
           <div className="App">
-            <Photomaton poster={this.getPoster} permission={this.state.permissionGranted} mission={this.nextState} media={this.getMediaSources()} count="3" pics="3" />
+            <Photomaton poster={this.getPoster} permission={this.state.permissionGranted} mission={this.next} media={this.getMediaSources()} count="3" pics="3" />
           </div>
         );
 
@@ -87,7 +92,7 @@ class App extends Component {
       case 'getReady':
         return (
           <div className="App">
-            <Alert message="Respon" mission={this.nextState} time="2500" />
+            <Alert message="Respon" mission={this.next} time="2500" />
           </div>
         );
 
@@ -96,22 +101,22 @@ class App extends Component {
           <div className="App">
             <Tally/>
             <SingleMessage mode={this.state.state} message={this.state.questions[this.state.currentQuestion]} />
-            <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.nextState} />
+            <Interview stream={this.getMediaSources()} currentQ={this.state.currentQuestion + 1} totalQ={this.state.nQuestions} tc={this.addTCmark} next={this.next} />
           </div>
         );
 
       case 'congrats':
         return (<div className="App">
-          <Alert message="Molt bé!" mission={this.nextState} time="2500" />
+          <Alert message="Molt bé!" mission={this.next} time="2500" />
         </div>
         );
 
       case 'review':
-        return (<Review upload={false} uploaded={this.state.uploaded} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Espera't mentre es penja la teva entrevista" mission={this.nextState} />);
+        return (<Review upload={false} uploaded={this.state.uploaded} download={true} review={false} poster={this.state.poster} file={this.state.videoFile} message="Espera't mentre es penja la teva entrevista" mission={this.next} />);
 
       case 'upload':
 
-        return (<Uploader file={this.videoData} mission={this.nextState} success={this.gotUploaded} />);
+        return (<Uploader file={this.videoData} mission={this.next} success={this.gotUploaded} />);
 
       case 'thanks':
         return (
@@ -214,7 +219,6 @@ class App extends Component {
       this.setBegin();
     }
 
-
     if (this.state.state !== 'interview') {
       let cState = this.state.currentState + 1;
       this.setState({ 'currentState': cState, 'state': this.screens[cState] });
@@ -240,14 +244,14 @@ class App extends Component {
     this.timeCode.push(t);
   }
 
-  setBegin=()=> {
+  setBegin=()=> { //ACTION FETA
     if (this.state.initialTime === null) {
       let start = new Date();
       console.log('Begin',start);
       this.setState({ 'initialTime': start });
     }
   }
-  setEnd=()=> {
+  setEnd=()=> {//ACTION FETA
     if (this.state.endTime === null) {
       let end = new Date();
       this.setState({ 'endTime': end });
@@ -260,7 +264,6 @@ class App extends Component {
     this.nextState();
     this.createMediaRecorder(this.stream);
   }
-
 
   createMediaRecorder=(stream)=> {
 
@@ -318,7 +321,11 @@ class App extends Component {
 
 }
 
-export default App;
+function mapStateToProps(state){
+  return state;
+}
+
+export default connect(mapStateToProps)(App);
 
 /*
 preguntes breda
