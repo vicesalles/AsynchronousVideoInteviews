@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Photomaton.css';
 import Countdown from './components/Countdown/Countdown';
-import Source from './components/Source/Source.jsx';
+import Source from './components/Source/Source';
 import Button from './components/Button/Button.jsx';
 import Review from './components/Review/Review.jsx';
 import SingleMessage from '../../components/SingleMessage/SingleMessage.jsx';
@@ -16,14 +16,8 @@ export default class Photomaton extends Component {
             'shot': false
         }
 
-        this.updateState = this.updateState.bind(this);
-        this.readiness = this.readiness.bind(this);
-        this.shot = this.shot.bind(this);
-        this.passPics = this.passPics.bind(this);
-        this.toReview = this.toReview.bind(this);
-        this.getPic = this.getPic.bind(this);
-
     }
+    
     render() {
         
         if(this.props.permission){
@@ -54,7 +48,7 @@ export default class Photomaton extends Component {
     }
 
     //IT switches the state from 'shooting' to 'review'
-    updateState() {
+    updateState=()=> {
 
         if (this.state.ready) {
             if (this.state.state === 'shooting') {
@@ -67,12 +61,12 @@ export default class Photomaton extends Component {
     }
 
     //Triggers the shooting by toggling the shot state
-    shot() {
+    shot=()=> {
        this.refs.Source.launch();
     }
 
     //IT switches the readiness of the Photomaton
-    readiness() {
+    readiness=()=> {
         if (this.state.ready) {
             this.setState({ 'ready': false });
         } else {
@@ -81,17 +75,17 @@ export default class Photomaton extends Component {
     }
 
     //Passing preview Pics
-    passPics(p) {
+    passPics=(p)=> {
         this.setState({ 'picBuffer': p });
     }
 
     //Changes the component state to 'Review' mode
-    toReview(){
+    toReview=()=>{
         this.setState({'state':'review'});
     }
 
     //Gets the index of the chosen pic from the Preview child
-    getPic(p){        
+    getPic=(p)=>{        
         this.props.poster(p,this.props.mission); //second paramater is a callback        
     }
 

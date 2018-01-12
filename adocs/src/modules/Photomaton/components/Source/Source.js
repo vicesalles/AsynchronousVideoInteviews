@@ -11,25 +11,14 @@ export default class Source extends Component {
             'shooting': false,
         };
         this.stream = null;
-        
-        this.launch = this.launch.bind(this);
-        this.burst = this.burst.bind(this);
-        this.takePic = this.takePic.bind(this);
-        this.capturePic = this.capturePic.bind(this);
-        this.bufferPic = this.bufferPic.bind(this);
-        this.passPics = this.passPics.bind(this);
-        this.takePhoto = this.takePhoto.bind(this);
-        this.sSounds = this.sSounds.bind(this);
-        this.shutterMask = this.shutterMask.bind(this);
-
         this.shutterSound = new Audio(sound);
-
         this.pInterval = 600;
 
     }
     componentDidMount() {
         this.shutterSound.load();
-         //Checking if Getting a Promise or a MediasStream Object;
+
+        //Checking if Getting a Promise or a MediasStream Object;
         if (typeof this.props.media.then === 'function') {
 
             this.props.media.then(stream => {
@@ -39,7 +28,7 @@ export default class Source extends Component {
                 this.refs.liveCam.play();
             })
 
-        }else{
+        } else {
 
             this.stream = this.props.media;
             this.refs.liveCam.srcObject = this.stream;
@@ -47,7 +36,7 @@ export default class Source extends Component {
             this.refs.liveCam.play();
 
         }
-       
+
     }
 
     render() {
@@ -59,12 +48,12 @@ export default class Source extends Component {
         </div>)
     }
 
-    launch() {
+    launch = () => {
         this.burst(this.takePic, this.props.pics, this.pInterval, this.passPics);
     }
 
     //It does f n times in a lapse of m mseconds. then, callback
-    burst(f, n, m, c) {
+    burst = (f, n, m, c) => {
         setTimeout(() => {
             if (n !== 0) {
                 f();
@@ -76,7 +65,7 @@ export default class Source extends Component {
         }, m);
     }
 
-    takePic() {
+    takePic = () => {
         this.setState({ shooting: true });
         this.bufferPic(this.capturePic());
         this.sSounds(this.shutterSound);
@@ -85,13 +74,13 @@ export default class Source extends Component {
 
 
     //Try using MediaStreamTrack.takePhoto(); won't work :(
-    takePhoto() {
+    takePhoto = () => {
         let source = this.stream.getVideoTracks()[0];
         return source.takePhoto();
     }
 
     //The canvas will capture some frames
-    capturePic() {
+    capturePic = () => {
         let capturer = this.refs.capturer;
         capturer.height = window.innerHeight;
         capturer.width = window.innerWidth;
@@ -102,14 +91,14 @@ export default class Source extends Component {
     }
 
     //The img data is pushed to the state 'bufferPic' array;
-    bufferPic(p) {
+    bufferPic = (p) => {
         let bf = this.state.bufferPic;
         bf.push(p);
         this.setState({ 'bufferPic': bf });
     }
 
     //Passing back the collected pictures
-    passPics() {
+    passPics = () => {
         this.props.done();
         this.props.mission(this.state.bufferPic);
     }
@@ -118,7 +107,7 @@ export default class Source extends Component {
     //SHUTTER STUFF
 
     //Shows the shutter mask
-    shutterMask() {
+    shutterMask = () => {
         if (this.state.shooting) {
             setTimeout(() => { this.setState({ shooting: false }); }, this.pInterval - (this.pInterval / 4));
             return (<div id="shutterMask" ref="shutterMask"></div>);
@@ -127,7 +116,7 @@ export default class Source extends Component {
 
 
     //Playing a given sound
-    sSounds(s) {
+    sSounds = (s) => {
         s.play();
     }
 

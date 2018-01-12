@@ -8,7 +8,7 @@ import Tally from './components/Tally/Tally';
 import Review from './components/Review/Review.jsx';
 import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
-import Photomaton from './modules/Photomaton/Photomaton.jsx';
+import Photomaton from './modules/Photomaton/Photomaton';
 import Uploader from './components/Uploader/Uploader.jsx';
 import {nextView} from './state/actions';
 import './App.css';
@@ -71,7 +71,7 @@ class App extends Component {
       case 'ready':
         return (
           <div className="App">
-            <ActionMessage mission={()=>this.next} message="Primer de tot, et faré una foto." />
+            <ActionMessage mission={this.next} message="Primer de tot, et faré una foto." />
           </div>
         );
 
