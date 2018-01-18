@@ -10,7 +10,7 @@ import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
 import Photomaton from './modules/Photomaton/Photomaton';
 import Uploader from './components/Uploader/Uploader.jsx';
-import {nextView} from './state/actions';
+import {nextView,grantPermission} from './state/actions';
 import './App.css';
 
 //MASS INTERVIEW MAIN APP
@@ -78,7 +78,7 @@ class App extends Component {
       case 'photomaton':
         return (
           <div className="App">
-            <Photomaton poster={this.getPoster} permission={this.state.permissionGranted} mission={this.next} media={this.getMediaSources()} count="3" pics="3" />
+            <Photomaton permission={this.state.permissionGranted} mission={this.next} media={this.getMediaSources()} count="3" pics="3" />
           </div>
         );
 
@@ -164,13 +164,13 @@ class App extends Component {
         .then(stream => {
 
           this.stream = stream;
-          this.setState({ 'permissionGranted': true });
+          this.setState({permissionGranted:true});
+          this.props.dispatch(grantPermission());
           return stream;
 
         })
         .catch(function (error) {
 
-          alert('sembla que hi ha problemes');
           //If not, i'll cry ashamed
           console.error('Crap! ' + error);
 
@@ -203,13 +203,7 @@ class App extends Component {
     }
 
   }
-  //Getting the poster for video
-  getPoster=(p, c)=> { //c is callback
-    this.setState({ 'poster': p });
-    if (c !== undefined) {
-      c();
-    }
-  }
+  
 
   //Moving the app to the next state
   nextState=()=> {
@@ -244,13 +238,7 @@ class App extends Component {
     this.timeCode.push(t);
   }
 
-  setBegin=()=> { //ACTION FETA
-    if (this.state.initialTime === null) {
-      let start = new Date();
-      console.log('Begin',start);
-      this.setState({ 'initialTime': start });
-    }
-  }
+
   setEnd=()=> {//ACTION FETA
     if (this.state.endTime === null) {
       let end = new Date();

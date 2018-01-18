@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Source.css';
 import sound from '../../media/shutter.mp3';
 
-export default class Source extends Component {
+class Source extends Component {
     constructor(props) {
         super(props);
 
@@ -49,7 +49,7 @@ export default class Source extends Component {
     }
 
     launch = () => {
-        this.burst(this.takePic, this.props.pics, this.pInterval, this.passPics);
+        this.burst(this.takePic, 3, this.pInterval, this.passPics);
     }
 
     //It does f n times in a lapse of m mseconds. then, callback
@@ -71,7 +71,6 @@ export default class Source extends Component {
         this.sSounds(this.shutterSound);
         this.shutterMask();
     }
-
 
     //Try using MediaStreamTrack.takePhoto(); won't work :(
     takePhoto = () => {
@@ -100,9 +99,8 @@ export default class Source extends Component {
     //Passing back the collected pictures
     passPics = () => {
         this.props.done();
-        this.props.mission(this.state.bufferPic);
+        this.props.mission(this.state.bufferPic);        
     }
-
 
     //SHUTTER STUFF
 
@@ -114,10 +112,11 @@ export default class Source extends Component {
         }
     }
 
-
     //Playing a given sound
     sSounds = (s) => {
         s.play();
     }
 
 }
+
+export default Source;

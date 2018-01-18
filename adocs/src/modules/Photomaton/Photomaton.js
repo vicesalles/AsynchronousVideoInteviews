@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import './Photomaton.css';
 import Countdown from './components/Countdown/Countdown';
 import Source from './components/Source/Source';
 import Button from './components/Button/Button.jsx';
-import Review from './components/Review/Review.jsx';
+import Review from './components/Review/Review';
 import SingleMessage from '../../components/SingleMessage/SingleMessage.jsx';
+import {savePicturres, savePictures} from '../../state/actions';
 
-export default class Photomaton extends Component {
+class Photomaton extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +19,7 @@ export default class Photomaton extends Component {
         }
 
     }
-    
+
     render() {
         
         if(this.props.permission){
@@ -26,11 +28,11 @@ export default class Photomaton extends Component {
                 if (this.state.state === 'shooting') {
                     return (<article id="Photomaton">
                         <Countdown count={this.props.count} mission={this.shot} />
-                        <Source ref="Source" media={this.props.media} shot={this.state.shot} pics={this.props.pics} mission={this.passPics} done={this.toReview} />
+                        <Source ref="Source" media={this.props.media} shot={this.state.shot} mission={this.passPics} done={this.toReview} />
                     </article>
                     );
                 } else if(this.state.state === 'review') {
-                    return(<Review getPic={this.getPic} pics={this.state.picBuffer} redo={this.updateState} />);
+                    return(<Review redo={this.updateState} />);
                 }
 
             } else {
@@ -76,19 +78,19 @@ export default class Photomaton extends Component {
 
     //Passing preview Pics
     passPics=(p)=> {
-        this.setState({ 'picBuffer': p });
+        this.props.dispatch(savePictures(p));
     }
 
     //Changes the component state to 'Review' mode
     toReview=()=>{
         this.setState({'state':'review'});
     }
-
-    //Gets the index of the chosen pic from the Preview child
-    getPic=(p)=>{        
-        this.props.poster(p,this.props.mission); //second paramater is a callback        
-    }
-
+ 
  
 }
 
+function mapStateToProps(state){
+    return state;
+}
+
+export default connect(mapStateToProps)(Photomaton);

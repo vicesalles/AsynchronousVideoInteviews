@@ -1,7 +1,10 @@
 import {
     NEXT_VIEW,
     SET_BEGIN,
-    SET_END
+    SET_END,
+    GRANT_PERMISSION,
+    SAVE_PICTURES,
+    SET_POSTER
 } from '../actions/types';
 
 //INITIAL STATE
@@ -18,6 +21,7 @@ const initialState = {
     }, //The actual questions
     initialTime: null, //new Date
     endTime: null, //Date
+    pics: [],
     poster: null, //ObjectURL     
     videoFile: null, //ObjectURL
     permissionGranted: false, //Do I have camera access?
@@ -45,7 +49,6 @@ function doc(state = initialState, action) {
 
         case NEXT_VIEW:
 
-            console.log('REDUCER: NEXT_VIEW');
             const viewIndex = currentView + 1;
             const newView = views[viewIndex];
 
@@ -56,7 +59,7 @@ function doc(state = initialState, action) {
             }
 
         case SET_BEGIN:
-            console.log('REDUCER: SET_BEGIN');
+            
             return {
                 ...state,
                 initialTime: begin
@@ -69,9 +72,31 @@ function doc(state = initialState, action) {
                 endTime: end
             }
 
+        case GRANT_PERMISSION:
+
+            return {
+                ...state,
+                permissionGranted: true
+            }
+
+        case SAVE_PICTURES:
+            
+            return{
+                ...state,
+                pics:action.pics
+            }
+
+        case SET_POSTER:
+
+            return {
+                ...state,
+                poster: action.poster
+            }
+
         default:
             return state;
     }
 }
 
 export default doc;
+
