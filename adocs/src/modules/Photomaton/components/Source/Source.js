@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Source.css';
 import sound from '../../media/shutter.mp3';
+import {connect} from 'react-redux';
 
 class Source extends Component {
     constructor(props) {
@@ -118,5 +119,6 @@ class Source extends Component {
     }
 
 }
+
 
 export default Source;

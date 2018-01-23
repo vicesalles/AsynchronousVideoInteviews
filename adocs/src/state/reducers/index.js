@@ -4,7 +4,12 @@ import {
     SET_END,
     GRANT_PERMISSION,
     SAVE_PICTURES,
-    SET_POSTER
+    SET_POSTER,
+    ADD_TC_MARK,
+    NEXT_QUESTION,
+    SET_STREAM,
+    STOP_STREAM,
+    SAVE_TO_FILE
 } from '../actions/types';
 
 //INITIAL STATE
@@ -28,7 +33,7 @@ const initialState = {
     uploaded: false,
     mr: null, //MediaRecorder
     videoData: [],
-    timeCode: [], //Saving every user click on 'next button'
+    timeCode: [], //Saving tc for questions
     stream: null //MediaStream
 };
 
@@ -59,10 +64,26 @@ function doc(state = initialState, action) {
             }
 
         case SET_BEGIN:
-            
+
             return {
                 ...state,
                 initialTime: begin
+            }
+
+        case ADD_TC_MARK:
+
+            let q = state.currentQuestion;
+            let mark = action.mark;
+            let newMark = {
+                'Question': q,
+                'tc': mark
+            };
+            let tc = state.timeCode;
+            let newTC = tc.concat([newMark]);
+
+            return {
+                ...state,
+                timeCode: newTC
             }
 
         case SET_END:
@@ -80,10 +101,10 @@ function doc(state = initialState, action) {
             }
 
         case SAVE_PICTURES:
-            
-            return{
+
+            return {
                 ...state,
-                pics:action.pics
+                pics: action.pics
             }
 
         case SET_POSTER:
@@ -93,10 +114,37 @@ function doc(state = initialState, action) {
                 poster: action.poster
             }
 
+        case NEXT_QUESTION:
+
+            const newQuestion = state.currentQuestion + 1;
+
+            return {
+                ...state,
+                currentQuestion: newQuestion
+            }
+   
+        case SET_STREAM:
+
+            return{
+                ...state,
+                stream: action.stream
+            }
+
+        case STOP_STREAM:
+            return {
+                ...state,
+                stream: null
+            }
+
+        case SAVE_TO_FILE:
+            return {
+                ...state,
+                videoFile: action.file
+            }
+
         default:
             return state;
     }
 }
 
 export default doc;
-

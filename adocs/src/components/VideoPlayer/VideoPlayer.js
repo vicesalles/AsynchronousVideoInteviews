@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import './VideoPlayer.css';
 
 export default class VideoPlayer extends Component {
-
-    constructor(props) {
-        super(props);
-        this.getTC = this.getTC.bind(this);
-    }
-
+   
     componentDidMount() {
 
         //Setting up the player
@@ -54,7 +49,7 @@ export default class VideoPlayer extends Component {
         }
     }
 
-    getTC() {
+    getTC=()=> {
         return this.refs.video.currentTime;
     }
 

@@ -6,7 +6,7 @@ import Source from './components/Source/Source';
 import Button from './components/Button/Button.jsx';
 import Review from './components/Review/Review';
 import SingleMessage from '../../components/SingleMessage/SingleMessage.jsx';
-import {savePicturres, savePictures} from '../../state/actions';
+import {savePictures} from '../../state/actions';
 
 class Photomaton extends Component {
     constructor(props) {
