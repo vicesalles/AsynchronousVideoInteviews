@@ -4,7 +4,7 @@ import Welcome from './layouts/Welcome/Welcome';
 import BrowserCheck from './components/BrowserCheck/BrowserCheck.jsx';
 import SingleMessage from './components/SingleMessage/SingleMessage.jsx';
 
-import Review from './components/Review/Review.jsx';
+import Review from './components/Review/Review';
 import ActionMessage from './components/ActionMessage/ActionMessage.jsx';
 import Alert from './components/Alert/Alert.jsx';
 import Interview from './layouts/Interview/Interview';
@@ -156,7 +156,7 @@ class App extends Component {
         }
       })
         .then(stream => {
-          console.log('stream no existia, stream és:',stream);
+          
           this.stream = stream;
           this.setState({permissionGranted:true});
           this.props.dispatch(grantPermission());
@@ -176,33 +176,9 @@ class App extends Component {
     }
   }
 
-  //Countdown for launching whatever after n times
-  countDown=(n, w)=> {
-    setTimeout(() => {
-      n = updateCountDown(n);
-      if (n !== 0) {
-        this.countDown(n, w);
-      } else {
-        setTimeout(() => {
-          this.setState({ 'count': "" });
-          if (w !== undefined) {
-            w();
-          }
-        }, 1000);
-      }
-    }, 1000);
-
-    function updateCountDown(x) {
-
-      return --x;
-
-    }
-
-  }
 
   //MEDIARECORDING MATTERS
 
- 
 
   //Confirm a succesful upload
   gotUploaded=()=> {
@@ -218,22 +194,6 @@ function mapStateToProps(state){
 export default connect(mapStateToProps)(App);
 
 /*
-preguntes breda
-       '0': 'Where are you living? With whom?',
-       '1': 'Are you studying or working? On what?',
-       '2': 'Love matters: Do you have a couple? Got married? Tell me more...',
-       '3':'Tell me a funny memory you can recall from Breda',
-       '4':'Tell me a word in Dutch',
-       '5':'Tell me something awesome that happened to you after Breda',
-       '6':'Greet all our Breda mates with your own language'
-
-'0': 'Where are you living? With whom?',
-       '1': 'Are you studying or working? On what?',      
-       '2':'Tell me a word in Dutch',
-       '3':'Tell me something awesome that happened to you after Breda',
-       '4':'Greet all our Breda mates in your own language'
-
-preguntes:
 
 Académics
 entrada:
