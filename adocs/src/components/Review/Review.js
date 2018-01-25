@@ -6,9 +6,7 @@ import VideoPlayer from '../VideoPlayer/VideoPlayer';
 class Review extends Component {
     
     render() {
-
-        console.log(this.props);
-
+       
         if (this.props.uploaded === true) {
 
             return (<main id="main">
@@ -45,8 +43,7 @@ class Review extends Component {
 
     canDownload=()=> {
         if (this.props.download === true) {
-            console.log(this.props.file);
-
+         
             return (<div><a id="dwnBu" ref="dwnBu" href={this.props.videoFile} download="interview.webm">Descarrega't l'entrevista</a></div>);
         }
     }
@@ -64,8 +61,10 @@ class Review extends Component {
 }
 
 function mapStateToProps(state){
-   
-    return state
+    
+    const {poster,videoFile} = state;
+    return {poster,videoFile}
+    
 }
 
 export default connect(mapStateToProps)(Review);
