@@ -7,10 +7,7 @@ import { nextView, addTC, nextQuestion, setEnd, saveFile, stopStream } from '../
 import * as media from '../../utils/media';
 
 class Interview extends Component {
-    state = {
-
-    }
-
+ 
     //Will store media chunks
     videoData = [];
 
@@ -82,7 +79,7 @@ class Interview extends Component {
         return (
             <div className="App">
                 <Tally />
-                <SingleMessage mode={this.state.state} message={this.props.state.questions[this.props.state.currentQuestion]} />
+                <SingleMessage message={this.props.state.questions[this.props.state.currentQuestion]} />
                 <Monitor stream={this.props.state.stream} currentQ={this.props.state.currentQuestion + 1} totalQ={this.props.state.nQuestions} tc={this.addTCmark} next={this.next} />
             </div>
         )

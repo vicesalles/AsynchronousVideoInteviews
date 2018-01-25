@@ -12,7 +12,7 @@ export default class Interview extends Component {
             <VideoPlayer mode="interview" ref="video" media={this.props.stream} />
 
             <section id="info">
-                <Vumeter media={this.props.stream} />
+                <Vumeter />
                 <section id="qTracker">
                     <div>Pregunta <span>{this.props.currentQ}</span> de <span>{this.props.totalQ}</span></div>
                 </section>

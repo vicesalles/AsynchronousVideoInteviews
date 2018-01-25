@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import './Vumeter.css';
 
-export default class Vumeter extends Component {
+class Vumeter extends Component {
    
+    context=null;
+
     componentDidMount() {
         
         //Checking if input is a Promise or a MediaStream object
-        if (typeof this.props.media.then === 'function') {
+        if (typeof this.props.stream.then === 'function') {
 
-            this.props.media.then(stream => {
+            this.props.stream.then(stream => {
 
                 this.setUp(stream);
 
             });
 
         } else {
-            this.setUp(this.props.media);
+            this.setUp(this.props.stream);
         }
     
     }
@@ -117,3 +120,10 @@ export default class Vumeter extends Component {
     }
 
 }
+
+function mapStateToProps(state){
+    const{stream} = state;
+    return {stream}
+}
+
+export default connect(mapStateToProps)(Vumeter)
